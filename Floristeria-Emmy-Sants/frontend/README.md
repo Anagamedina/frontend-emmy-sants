@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Emmy Sants E-Commerce Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Developed as the final project of our web development bootcamp at Ironhack Barcelona. It's a MERN Stack application, check the backend repository [here](link-to-backend-repo).
 
-## Available Scripts
+## About
 
-In the project directory, you can run:
+This project has been carried out by Ana Gabriela Medina and Alejandro van den Bussche, both web developers. It is a real and functional e-commerce website for a florist, Emmy Sants in Barcelona.
 
-### `npm start`
+## Deployment
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+You can check the app fully deployed [here](link-to-app-deployment). If you wish to view the API deployment instead, check [here](link-to-api-deployment).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Work Structure
 
-### `npm test`
+We developed this project used Trello to organize our workflow.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation Guide
 
-### `npm run build`
+1. Fork this repo
+2. Clone this repo
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+$ cd portfolio-front
+$ npm install
+$ npm start
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Routes
 
-### `npm run eject`
+### Authentication
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Route          | Method | Description                           |
+|----------------|--------|---------------------------------------|
+| /login         | POST   | Inicio de sesión de la propietaria/compradores.  |
+| /logout        | POST   | Cierre de sesión de la propietaria/compradores. |
+| /signup        | POST   | Registro de la propietaria/compradores.        |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Routes and Controllers for the Proprietor (Admin Interface)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Product Management:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| Route               | Method | Description                                        |
+|---------------------|--------|----------------------------------------------------|
+| /admin/productos    | GET    | Obtener una lista de productos.                   |
+| /admin/productos    | POST   | Crear un nuevo producto.                          |
+| /admin/productos/:id| GET   | Obtener un producto específico.                   |
+| /admin/productos/:id| PUT   | Actualizar un producto existente.                 |
+| /admin/productos/:id| DELETE| Eliminar un producto.                             |
 
-## Learn More
+## Components
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Navbar
+- PrivateRoute
+- Forms
+- Products Cards
+- Footer
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Any doubts? Contact us!
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
