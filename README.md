@@ -1,1 +1,1 @@
-# fronted-emmy-sants
+# frontend-emmy-sants
