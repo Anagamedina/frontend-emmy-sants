@@ -33,7 +33,7 @@
       "react-app/jest"
     ]
   },
-  "name": "Floristeria-Emmy-Sants-client",
+  "name": "floristeria-emmy-sants-client",
   "private": true,
   "scripts": {
     "build": "react-scripts build && echo '/* /index.html 200' | cat >build/_redirects",
