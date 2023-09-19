@@ -1,10 +1,28 @@
 # Emmy Sants E-Commerce Website
-
-Developed as the final project of our web development bootcamp at Ironhack Barcelona. It's a MERN Stack application, check the backend repository [here](link-to-backend-repo).
+This project has been developed by Ana Gabriela Medina and Alejandro van den Bussche, two passionate web developers with a deep commitment to excellence. Our project represents a fully functional e-commerce platform for the "Emmy Sants" florist, located in the beautiful city of Barcelona.
 
 ## About
+Our project is centered around the development of an e-commerce platform for a florist specializing in the sale of plants and bouquets. This platform is not only designed to provide buyers with a convenient shopping experience but also offers a comprehensive control panel for the florist owner.
+Owner's Control Panel
 
-This project has been carried out by Ana Gabriela Medina and Alejandro van den Bussche, both web developers. It is a real and functional e-commerce website for a florist, Emmy Sants in Barcelona.
+We've implemented a robust and user-friendly control panel for the florist owner. From this panel, she can manage all aspects of her online business:
+
+## Product Management
+    Easily add new products, update details like name, description, price, and stock, and remove products that are no longer available.
+
+## Order Management:
+    Review all received orders, mark them as delivered, and maintain a record of past orders.
+
+## Stock Control: 
+    Keep product stock up-to-date, ensuring accurate product availability at all times.
+
+## Image Management: 
+    Simplify product image uploads using the Cloudinary library, ensuring visually appealing product presentation on the website.
+
+## Secure Authentication:
+    We provide a secure authentication system, allowing the owner to log into her control panel privately and securely.
+    
+![Project Image]")
 
 ## Deployment
 
