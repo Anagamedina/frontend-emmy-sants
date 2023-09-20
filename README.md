@@ -65,6 +65,8 @@ $ npm start
 | /admin/logoutAdmin  | Private         | HomePage                              |
 | /admin/orders       | Private         | OrdersPage                            |
 | /admin/all-orders   | Private         | AllOrdersPage                         |
+| /admin/add-products   | Private         | AddProductsPage                         |
+| /admin/update-product   | Private         | UpdateProductPage                         |
 
 
 Any doubts? Contact us!
