@@ -54,7 +54,7 @@ $ npm start
 | /orders        | Public          | OrdersPage          |
 | /orders/:id    | Public          | OrderDetails        |
 
-### Routes and Controllers for the Proprietor (Admin Interface)
+### Routes and Controllers for the Owner (Admin Interface)
 
 #### Product Management:
 
