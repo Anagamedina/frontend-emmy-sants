@@ -46,11 +46,11 @@ $ npm start
 
 ### Authentication
 
-| Route          | Method | Description                           |
+| Route          | Privacy | Renders                           |
 |----------------|--------|---------------------------------------|
-| /login         | POST   | Inicio de sesión de la propietaria/compradores.  |
-| /logout        | POST   | Cierre de sesión de la propietaria/compradores. |
-| /signup        | POST   | Registro de la propietaria/compradores.        |
+| /        | Public   | HomePage.  |
+| /logout        | Public   | Cierre de sesión de la propietaria/compradores. |
+| /signup        | Public   | Registro de la propietaria/compradores.        |
 
 ### Routes and Controllers for the Proprietor (Admin Interface)
 
