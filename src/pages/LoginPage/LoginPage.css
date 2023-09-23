@@ -1,0 +1,56 @@
+.loginText {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.buttonSignup {
+    background-color:rgb(206, 139, 189); ;
+    margin-top: 20px;
+}
+::placeholder {
+    color: #d8d5d5; /* Color tenue o gris claro */
+  }
+  
+  /* Placeholder styles for specific form fields */
+  #formBasicName::placeholder {
+    color: #d8d5d5; /* Color tenue o gris claro */
+  }
+  
+  #formBasicEmail::placeholder {
+    color: #d8d5d5;/* Color tenue o gris claro */
+  }
+  
+  #formBasicPassword::placeholder {
+    color: #d8d5d5; /* Color tenue o gris claro */
+  }
+  
+  #formBasicConfirmPassword::placeholder {
+    color: #d8d5d5; /* Color tenue o gris claro */
+  }
+
+.cardLoginForm {
+    background-color: white;
+    padding: 20px 50px 20px 50px;
+    box-shadow: 3px 3px 35px rgb(212, 210, 210);
+    margin-bottom: 20px;
+
+}
+
+
+.linkSignup {
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    /* Otros estilos opcionales, como color y efectos al pasar el mouse */
+    color: #007bff; /* Cambia el color del enlace si lo deseas */
+    /* Estilo al pasar el mouse */
+    transition: color 0.3s ease; /* Cambia suavemente el color al pasar el mouse */
+  }
+  
+  .linkSignup:hover {
+    color: #0056b3; /* Cambia el color al pasar el mouse */
+    /* Puedes ajustar el color al pasar el mouse según tu preferencia */
+  }
+  
+
+  .linkSignupText {
+    margin-top: 20px;
+  }
+  

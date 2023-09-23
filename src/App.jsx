@@ -4,6 +4,8 @@ import HomePage from "./pages/HomePage/HomePage";
 import Navbar from "./components/Navbar/Navbar";
 import AddProductPage from "./pages/AdminPages/AddProductPage";
 import ProductDetailsPage from "./pages/AdminPages/ProductDetailsPage";
+import SignupPage from "./pages/SignupPage/SignupPage"
+import LoginPage from "./pages/LoginPage/LoginPage"
 
 function App() {
   return (
@@ -14,6 +16,24 @@ function App() {
         <Route path="/" element={<HomePage />} />
 
         <Route
+          path="/signup"
+          element={
+            // <IsPrivate>
+              <SignupPage />
+            // </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/login"
+          element={
+            // <IsPrivate>
+              <LoginPage />
+            // </IsPrivate>
+          }
+        />
+
+        <Route
           path="/admin/product"
           element={
             // <IsPrivate>
@@ -22,7 +42,7 @@ function App() {
           }
         />
 
-<Route
+      <Route
           path="/admin/products/:id"
           element={
             // <IsPrivate>

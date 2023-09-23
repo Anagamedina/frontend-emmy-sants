@@ -101,7 +101,7 @@ function AddProductPage() {
 
   return (
     <div>
-    <h2 className='addProduct'>Crear Producto</h2>
+    
     <div className="message-container">
         {successMessage && <Alert variant="success">{successMessage}</Alert>}
         {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
@@ -110,8 +110,9 @@ function AddProductPage() {
 
       <Container>
         <Row>
-          <Col xs={12} md={6} lg={4} className='mx-auto'>
+          <Col xs={12} md={6} lg={6} className='mx-auto'>
             <form className='formAdd' onSubmit={onSubmit}>
+            <h2 className='addProduct'>Crear Producto</h2>
               <div className="mb-3">
                 <label htmlFor="nombre" className="form-label">
                   Nombre:
@@ -176,7 +177,7 @@ function AddProductPage() {
                   onChange={(e) => setFormData({ ...formData, 'product-image': e.target.files[0] })}
                 />
               </div>
-              <button type="submit" className="btn btn-success">
+              <button type="submit" className="btn-info text-light btn ">
                 Crear Producto
               </button>
             </form>
@@ -201,7 +202,7 @@ function AddProductPage() {
                   <Card.Text className='cardText'>{product.descripcion}</Card.Text>
                   <Card.Text>Precio: {product.precio}</Card.Text>
                   <Card.Text>Categoría: {product.categoria}</Card.Text>
-                  <Link to={`/admin/products/${product._id}`} className="mr-3 btn btn-success">
+                  <Link to={`/admin/products/${product._id}`} className="mr-3 btn-info text-light btn">
                     Detalles
                   </Link>
                   <button
