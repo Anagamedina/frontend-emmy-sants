@@ -1,11 +1,9 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-
 import HomePage from "./pages/HomePage/HomePage";
-
 import Navbar from "./components/Navbar/Navbar";
-
 import AddProductPage from "./pages/AdminPages/AddProductPage";
+import ProductDetailsPage from "./pages/AdminPages/ProductDetailsPage";
 
 function App() {
   return (
@@ -20,6 +18,15 @@ function App() {
           element={
             // <IsPrivate>
               <AddProductPage />
+            // </IsPrivate>
+          }
+        />
+
+<Route
+          path="/admin/products/:id"
+          element={
+            // <IsPrivate>
+              <ProductDetailsPage />
             // </IsPrivate>
           }
         />

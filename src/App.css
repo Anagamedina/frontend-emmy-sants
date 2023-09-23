@@ -1,3 +1,54 @@
 .App {
   text-align: center;
 }
+.addProduct {
+ margin: 100px 0px 50px 0px;
+}
+
+
+.formAdd {
+  box-shadow: 3px 3px 25px rgb(240, 238, 238);
+  padding: 50px;
+}
+
+/* Estilos base */
+.form-label {
+  font-size: 18px;
+}
+
+/* Estilos para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .form-label {
+    font-size: 16px;
+  }
+}
+
+.card {
+  box-shadow: 3px 3px 25px rgb(240, 238, 238);
+  border: none !important;
+  margin-top: 10px;
+
+}
+
+.listaProductos {
+  margin: 50px;
+}
+
+.mr-3{
+  margin:5px;
+}
+
+.mb-3 {
+  margin:5px;
+}
+
+.message-container {
+  position: fixed;
+  top: 0;
+  right: 0; 
+  z-index: 10001;
+  width: 100%;
+  margin-top: 40px;
+}
+
+
