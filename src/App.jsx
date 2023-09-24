@@ -4,12 +4,17 @@ import HomePage from "./pages/HomePage/HomePage";
 import Navbar from "./components/Navbar/Navbar";
 import AddProductPage from "./pages/AdminPages/AddProductPage";
 import ProductDetailsPage from "./pages/AdminPages/ProductDetailsPage";
-
+import { CartProvider } from './context/cart.jsx'
+import { Cart } from "./components/Cart";
 function App() {
   return (
     <div className="App">
+      <CartProvider>
       <Navbar />
-
+      <br></br>
+      <br></br>
+      <br></br>
+    <Cart></Cart> 
       <Routes>
         <Route path="/" element={<HomePage />} />
 
@@ -22,15 +27,16 @@ function App() {
           }
         />
 
-<Route
-          path="/admin/products/:id"
-          element={
-            // <IsPrivate>
-              <ProductDetailsPage />
-            // </IsPrivate>
-          }
-        />
-      </Routes>
+        <Route
+            path="/admin/products/:id"
+            element={
+              // <IsPrivate>
+                <ProductDetailsPage />
+              // </IsPrivate>
+            }
+          />
+        </Routes>
+      </CartProvider>
     </div>
   );
 }

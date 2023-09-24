@@ -28,21 +28,6 @@ function Navbar() {
           </>
         )}
 
-<<<<<<< Updated upstream
-      {!isLoggedIn && (
-        <>
-          <Link to="/signup">
-            {" "}
-            <button>Sign Up</button>{" "}
-          </Link>
-          <Link to="/login">
-            {" "}
-            <button>Login</button>{" "}
-          </Link>
-        </>
-      )}
-    </nav>
-=======
         {!isLoggedIn && (
           <>
             <Link to="/signup">
@@ -61,7 +46,6 @@ function Navbar() {
         )}
       </nav>
     </div>
->>>>>>> Stashed changes
   );
 }
 

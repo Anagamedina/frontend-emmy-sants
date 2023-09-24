@@ -3,8 +3,11 @@ import axios from 'axios';
 import { Container, Card, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useCart } from '../../hooks/useCart.js'
 
 function ProductDetailsPage() {
+   
+
   const { id } = useParams();
 
   const [product, setProduct] = useState({});
@@ -77,6 +80,13 @@ function ProductDetailsPage() {
         });
     }
   };
+
+  const { addToCart, removeFromCart, cart } = useCart()
+
+  const handleAddCarritoClick=(p)=>{
+    p.id=p._id
+    addToCart(p)
+  }
 
   const handleEditImageClick = () => {
     setIsEditingImage(true);
@@ -177,6 +187,10 @@ function ProductDetailsPage() {
               <input type="file" accept="image/*" className="input-file" onChange={handleImageChange} />
             </div>
           )}
+
+            <Button variant="success" className="mb-3" onClick={()=>handleAddCarritoClick(product)}>
+              Añadir al carrito
+            </Button>
         </Card.Body>
       </Card>
     </Container>
