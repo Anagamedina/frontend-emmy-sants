@@ -11,22 +11,42 @@ function Navbar() {
   return (
     <div className="content">
       <nav className="nav">
-        <Link to="/">
-          <button>Home</button>
-        </Link>
 
-        {isLoggedIn && (
+ 
           <>
-            <button onClick={logOutUser}>Logout</button>
-
-            <Link to="/profile">
-              <button>Profile</button>
-              {/* <img src="https://picsum.photos/id/402/200/300" style={{ width: 50, height: 50, borderRadius: 25}} alt="profile" /> */}
+             <Link to="/">
+              <button>Home</button>
             </Link>
+          </>
+        
+        
 
-            <span>{user && user.name}</span>
+        { isLoggedIn && (
+          <>
+            <button onClick={logOutUser}>Logout</button>  
           </>
         )}
+
+         
+        {user && !user.isAdmin && (
+          <>
+            <Link to="/profile">
+              <button>Profile    <span>{ user.name}</span> </button>
+              {/* <img src="https://picsum.photos/id/402/200/300" style={{ width: 50, height: 50, borderRadius: 25}} alt="profile" /> */}
+            </Link>
+          </>
+        )}
+
+        {user && user.isAdmin && (
+          <>
+             <Link to="/admin/product">
+              {" "}
+              <button>admin</button>{" "}
+            </Link>
+          </>
+        )}
+            
+
 
         {!isLoggedIn && (
           <>
@@ -38,13 +58,11 @@ function Navbar() {
               {" "}
               <button>Login</button>{" "}
             </Link>
-            <Link to="/admin/product">
-              {" "}
-              <button>admin</button>{" "}
-            </Link>
+           
           </>
         )}
       </nav>
+
     </div>
   );
 }

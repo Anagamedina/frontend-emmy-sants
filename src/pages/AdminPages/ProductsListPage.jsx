@@ -124,81 +124,7 @@ function AddProductPage() {
         
       </div>
 
-      <Container>
-        <Row>
-          <Col xs={12} md={6} lg={6} className='mx-auto'>
-            <form className='formAdd' onSubmit={onSubmit}>
-            <h2 className='addProduct'>Crear Producto</h2>
-              <div className="mb-3">
-                <label htmlFor="nombre" className="form-label">
-                  Nombre:
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="nombre"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="descripcion" className="form-label">
-                  Descripción:
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="descripcion"
-                  name="descripcion"
-                  value={formData.descripcion}
-                  onChange={(e) => setFormData({ ...formData, descripcion: e.target.value })}
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="precio" className="form-label">
-                  Precio:
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="precio"
-                  name="precio"
-                  value={formData.precio}
-                  onChange={(e) => setFormData({ ...formData, precio: e.target.value })}
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="categoria" className="form-label">
-                  Categoría:
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="categoria"
-                  name="categoria"
-                  value={formData.categoria}
-                  onChange={(e) => setFormData({ ...formData, categoria: e.target.value })}
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="product-image" className="form-label">
-                  Imagen del producto:
-                </label>
-                <input
-                  type="file"
-                  className="form-control"
-                  id="product-image"
-                  name="product-image"
-                  onChange={(e) => setFormData({ ...formData, 'product-image': e.target.files[0] })}
-                />
-              </div>
-              <button type="submit" className="btn-info text-light btn ">
-                Crear Producto
-              </button>
-            </form>
-          </Col>
-        </Row>
+      <Container> 
 
         <div className='listaProductos'>
           <h2>Lista de Productos</h2>
@@ -216,8 +142,13 @@ function AddProductPage() {
           </ul>
           
           <div class="d-grid gap-2 m-3">
-               <a class="btn btn-success" href="#" role="button">Crear Producto</a>
-                <a class="btn btn-info" href="#" role="button">Ver ordenes</a>
+            <Link to={"/admin/add-product"}>
+              <a class="btn btn-success" href="#" role="button">Crear Producto</a>
+            </Link>
+            <Link to={"/admin/orders"}> 
+               <a class="btn btn-info" href="#" role="button">Ver ordenes</a>
+            </Link>
+              
         </div>
 
         </Col>

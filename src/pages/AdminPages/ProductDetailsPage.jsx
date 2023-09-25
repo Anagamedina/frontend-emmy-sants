@@ -3,11 +3,8 @@ import axios from 'axios';
 import { Container, Card, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useCart } from '../../hooks/useCart.js'
 
 function ProductDetailsPage() {
-   
-
   const { id } = useParams();
 
   const [product, setProduct] = useState({});
@@ -81,13 +78,6 @@ function ProductDetailsPage() {
     }
   };
 
-  const { addToCart, removeFromCart, cart } = useCart()
-
-  const handleAddCarritoClick=(p)=>{
-    p.id=p._id
-    addToCart(p)
-  }
-
   const handleEditImageClick = () => {
     setIsEditingImage(true);
     setIsEditing(false);
@@ -102,7 +92,7 @@ function ProductDetailsPage() {
   };
 
   return (
-    <Container className="d-flex align-items-center justify-content-center vh-100">
+    <Container className="contenedorEditor d-flex align-items-center justify-content-center vh-100">
       <Card>
         <Card.Img
           variant="top"
@@ -147,22 +137,29 @@ function ProductDetailsPage() {
           <Card.Text>Categoría: {product.categoria}</Card.Text>
           {isEditing ? (
             <div>
-              <Button variant="success" className="mr-3 mb-3" onClick={handleSaveClick}>
+              <Button className="btn-info text-light mr-3 mb-3" onClick={handleSaveClick}>
                 Guardar Cambios
               </Button>
-              <Button variant="danger" className="mb-3" onClick={handleCancelClick}>
+              <Button variant="danger" className=" mb-3" onClick={handleCancelClick}>
                 Cancelar
               </Button>
             </div>
           ) : (
             <div>
               {!isEditingImage ? (
-                <Button variant="success" className="mr-3 mb-3" onClick={handleEditClick}>
+                <div>
+                <Button  className="btn-info text-light mr-3 mb-3" onClick={handleEditClick}>
                   Editar
                 </Button>
+
+                <Button  className=" btn-info text-light mb-3" onClick={handleEditImageClick}>
+                    Cambiar Imagen
+                  </Button>
+
+                  </div>
               ) : (
                 <div className="d-flex">
-                  <Button variant="success" className="mb-3" onClick={handleImageSaveClick}>
+                  <Button  className="btn-info text-light mb-3" onClick={handleImageSaveClick}>
                     Guardar Nueva Imagen
                   </Button>
                   <Button variant="danger" className="ml-3 mb-3" onClick={handleCancelImageClick}>
@@ -172,10 +169,7 @@ function ProductDetailsPage() {
               )}
               {!isEditingImage && (
                 <div>
-                  <Button variant="success" className="mb-3" onClick={handleEditImageClick}>
-                    Cambiar Imagen
-                  </Button>
-                  <Link to={`/admin/product`} className="mb-3 btn btn-dark">
+                  <Link to={`/admin/product`} className="mb-3 btn btn-danger">
                   Volver
                   </Link>
                 </div>
@@ -187,10 +181,6 @@ function ProductDetailsPage() {
               <input type="file" accept="image/*" className="input-file" onChange={handleImageChange} />
             </div>
           )}
-
-            <Button variant="success" className="mb-3" onClick={()=>handleAddCarritoClick(product)}>
-              Añadir al carrito
-            </Button>
         </Card.Body>
       </Card>
     </Container>
