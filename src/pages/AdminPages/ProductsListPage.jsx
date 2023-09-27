@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Container, Row, Col, Card, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import  authService  from '../../services/auth.service';
 function AddProductPage() {
   const [formData, setFormData] = useState({
     nombre: '',
@@ -39,48 +38,17 @@ function AddProductPage() {
       categoria: '',
       'product-image': null,
     });
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    const backendUrl = 'http://localhost:5005';
-
-    const formDataToSend = new FormData();
-    for (const key in formData) {
-      if (formData.hasOwnProperty(key)) {
-        formDataToSend.append(key, formData[key]);
-      }
-    }
-
-    axios
-      .post(`${backendUrl}/api/products/create`, formDataToSend, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then((response) => {
-        console.log('Product created:', response.data);
-        axiosProducts();
-        clearForm();
-        setSuccessMessage('Producto creado correctamente');
-        setErrorMessage('');
-        setTimeout(() => {
-          setSuccessMessage('');
-        }, 5000);
-      })
-      .catch((error) => {
-        console.error('Error creating product:', error);
-        setSuccessMessage('');
-        setErrorMessage('Error al crear el producto');
-      });
-  };
+  }; 
 
   const axiosProducts = () => {
     const backendUrl = 'http://localhost:5005';
 
-    axios
-      .get(`${backendUrl}/api/products`)
+    authService.api
+      .get(`${backendUrl}/api/products`,{
+        // headers: {
+        //   'Authorization': `Bearer ${localStorage.getItem("authToken")}` 
+        // }
+      })
       .then((response) => {
         setProducts(response.data);
       })
@@ -92,7 +60,7 @@ function AddProductPage() {
   const handleDeleteProduct = (productId) => {
     const backendUrl = 'http://localhost:5005';
 
-    axios
+    authService.api
       .delete(`${backendUrl}/api/products/${productId}`)
       .then((response) => {
         console.log('Producto eliminado:', response.data);
@@ -142,13 +110,18 @@ function AddProductPage() {
           </ul>
           
           <div class="d-grid gap-2 m-3">
-            <Link to={"/admin/add-product"}>
-              <a class="btn btn-success" href="#" role="button">Crear Producto</a>
-            </Link>
-            <Link to={"/admin/orders"}> 
-               <a class="btn btn-info" href="#" role="button">Ver ordenes</a>
+            <div> 
+              <Link class="btn btn-success" to={"/admin/add-product"}>
+              Crear Producto  
+              </Link>
+            </div>
+            <div> 
+            
+            <Link class="btn btn-info" to={"/admin/orders"}> 
+               Ver ordenes 
             </Link>
               
+            </div>
         </div>
 
         </Col>

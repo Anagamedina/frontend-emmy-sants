@@ -27,8 +27,8 @@ function Navbar() {
           </>
         )}
 
-         
-        {user && !user.isAdmin && (
+         {/* solo si la variable user existe y si el valor de user.isAdmin es false.*/}
+        {user && !user.isAdmin && (  
           <>
             <Link to="/profile">
               <button>Profile    <span>{ user.name}</span> </button>

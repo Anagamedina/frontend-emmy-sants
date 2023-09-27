@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Card, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import  authService  from '../../services/auth.service';
 
 function AddProductPage() {
   const [formData, setFormData] = useState({
@@ -53,15 +54,14 @@ function AddProductPage() {
       }
     }
 
-    axios
+    authService.api
       .post(`${backendUrl}/api/products/create`, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
       .then((response) => {
-        console.log('Product created:', response.data);
-        axiosProducts();
+        console.log('Product created:', response.data); 
         clearForm();
         setSuccessMessage('Producto creado correctamente');
         setErrorMessage('');
@@ -75,49 +75,14 @@ function AddProductPage() {
         setErrorMessage('Error al crear el producto');
       });
   };
-
-  const axiosProducts = () => {
-    const backendUrl = 'http://localhost:5005';
-
-    axios
-      .get(`${backendUrl}/api/products`)
-      .then((response) => {
-        setProducts(response.data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  };
-
-  const handleDeleteProduct = (productId) => {
-    const backendUrl = 'http://localhost:5005';
-
-    axios
-      .delete(`${backendUrl}/api/products/${productId}`)
-      .then((response) => {
-        console.log('Producto eliminado:', response.data);
-        axiosProducts();
-        setSuccessMessage('Se ha borrado el producto exitosamente');
-        setErrorMessage('');
-        setTimeout(() => {
-          setSuccessMessage('');
-        }, 5000);
-      })
-      .catch((error) => {
-        console.error('Error al eliminar el producto:', error);
-        setSuccessMessage('');
-        setErrorMessage('Error al borrar el producto');
-      });
-  };
-
-  useEffect(() => {
-    axiosProducts();
-  }, []);
+ 
+  
+ 
 
 
   return (
     <div>
-    
+    <h2 className='addProduct'>Crear Producto</h2>
     <div className="message-container">
         {successMessage && <Alert variant="success">{successMessage}</Alert>}
         {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
@@ -128,7 +93,6 @@ function AddProductPage() {
         <Row>
           <Col xs={12} md={6} lg={6} className='mx-auto'>
             <form className='formAdd' onSubmit={onSubmit}>
-            <h2 className='addProduct'>Crear Producto</h2>
               <div className="mb-3">
                 <label htmlFor="nombre" className="form-label">
                   Nombre:
@@ -176,7 +140,7 @@ function AddProductPage() {
                   type="text"
                   className="form-control"
                   id="categoria"
-                  name="categoria"
+                  name="categoria" 
                   value={formData.categoria}
                   onChange={(e) => setFormData({ ...formData, categoria: e.target.value })}
                 />
@@ -199,60 +163,8 @@ function AddProductPage() {
             </form>
           </Col>
         </Row>
-
-        <div className='listaProductos'>
-          <h2>Lista de Productos</h2>
-        </div>
-
-        <Row>
-        <Col lg={3}>
-
-        Select Category
-
-          <ul class="list-group">
-            <li class={`list-group-item ${filterCategory === 'todas' ? 'active':''}` } onClick={()=>setFilterCategory("todas")}>Todas</li>
-            <li class={`list-group-item ${filterCategory === 'ramos' ? 'active':''}` } onClick={()=>setFilterCategory("ramos")}>Ramos</li>
-            <li class={`list-group-item ${filterCategory === 'planta' ? 'active':''}` } onClick={()=>setFilterCategory("planta")}>Plantas</li> 
-          </ul>
-          
-          <div class="d-grid gap-2 m-3">
-               <a class="btn btn-success" href="#" role="button">Crear Producto</a>
-                <a class="btn btn-info" href="#" role="button">Ver ordenes</a>
-        </div>
-
-        </Col>
-        <Col lg={9}>
-        <Row>
-          {productsFiltered().map((product) => (
-            <Col key={product._id} xs={12} sm={4} md={4} lg={4}>
-              <Card>
-                <Card.Img
-                  variant="top"
-                  src={product.imagen}
-                  alt={product.nombre}
-                  style={{ maxWidth: '100%', height: 'auto', objectFit: 'cover' }}
-                />
-                <Card.Body className='card'>
-                  <Card.Title>{product.nombre}</Card.Title>
-                  <Card.Text className='cardText'>{product.descripcion}</Card.Text>
-                  <Card.Text>Precio: {product.precio}</Card.Text>
-                  <Card.Text>Categoría: {product.categoria}</Card.Text>
-                  <Link to={`/admin/products/${product._id}`} className="mr-3 btn-info text-light btn">
-                    Detalles
-                  </Link>
-                  <button
-                    className="btn btn-danger mr-3"
-                    onClick={() => handleDeleteProduct(product._id)}
-                  >
-                    Borrar
-                  </button>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-        </Col>
-        </Row>
+ 
+      
 
        
       </Container>

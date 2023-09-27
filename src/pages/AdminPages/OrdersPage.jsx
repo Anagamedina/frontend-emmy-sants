@@ -47,9 +47,12 @@ function OrdersPage() {
                     <ul class="list-group list-group-flush"> 
 
                     <li class="list-group-item" key={i}>
-                    {order.products.map( (producto,y) =>{
+                    {order.products.filter(p=>p.product!=null).map( (producto,y) =>{
+                      //  return(
+                      //   JSON.stringify(producto)
+                      //  )
                         return (
-                            <li class="list-group-item"  key={y}>   {producto.amount} x {producto.product.nombre}  = {producto.product.precio*producto.amount}€</li> 
+                            <li class="list-group-item"  key={y}>   {producto.amount} x {producto?.product?.nombre}  = {producto.product.precio*producto.amount}€</li> 
                         )
                     } )}
 
