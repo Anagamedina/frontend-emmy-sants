@@ -52,7 +52,7 @@ function OrdersPage() {
                       //   JSON.stringify(producto)
                       //  )
                         return (
-                            <li class="list-group-item"  key={y}>   {producto.amount} x {producto?.product?.nombre}  = {producto.product.precio*producto.amount}€</li> 
+                            <li class="list-group-item"  key={y}>   {producto.amount} x {producto.product.nombre}  = {producto.product.precio*producto.amount}€</li> 
                         )
                     } )}
 

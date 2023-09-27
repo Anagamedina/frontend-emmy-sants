@@ -133,6 +133,7 @@ function AddProductPage() {
                 />
               </div>
               <div className="mb-3">
+<<<<<<< HEAD
                 <label htmlFor="categoria" className="form-label">
                   Categoría:
                 </label>
@@ -144,6 +145,37 @@ function AddProductPage() {
                   value={formData.categoria}
                   onChange={(e) => setFormData({ ...formData, categoria: e.target.value })}
                 />
+=======
+                <label className="form-label">Categoría: </label>
+                <div className="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    className="form-check-input"
+                    id="categoria-ramos"
+                    name="categoria"
+                    value="Ramos"
+                    checked={formData.categoria === 'Ramos'}
+                    onChange={(e) => setFormData({ ...formData, categoria: e.target.value })}
+                  />
+                  <label className="form-check-label" htmlFor="categoria-ramos">
+                       Ramos
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    className="form-check-input"
+                    id="categoria-plantas"
+                    name="categoria"
+                    value="Plantas"
+                    checked={formData.categoria === 'Plantas'}
+                    onChange={(e) => setFormData({ ...formData, categoria: e.target.value })}
+                  />
+                  <label className="form-check-label" htmlFor="categoria-plantas">
+                    Plantas
+                  </label>
+                </div>
+>>>>>>> 321bcd21ff971341bc7730d263a8c8edbc9fe316
               </div>
               <div className="mb-3">
                 <label htmlFor="product-image" className="form-label">
