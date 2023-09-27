@@ -133,19 +133,6 @@ function AddProductPage() {
                 />
               </div>
               <div className="mb-3">
-<<<<<<< HEAD
-                <label htmlFor="categoria" className="form-label">
-                  Categoría:
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="categoria"
-                  name="categoria" 
-                  value={formData.categoria}
-                  onChange={(e) => setFormData({ ...formData, categoria: e.target.value })}
-                />
-=======
                 <label className="form-label">Categoría: </label>
                 <div className="form-check form-check-inline">
                   <input
@@ -175,7 +162,6 @@ function AddProductPage() {
                     Plantas
                   </label>
                 </div>
->>>>>>> 321bcd21ff971341bc7730d263a8c8edbc9fe316
               </div>
               <div className="mb-3">
                 <label htmlFor="product-image" className="form-label">
