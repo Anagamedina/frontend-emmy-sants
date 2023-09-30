@@ -1,51 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Container, Row, Col, Card, Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import  authService  from '../../services/auth.service';
+import React, { useState } from 'react';
+import { Container, Row, Col, Alert } from 'react-bootstrap';
+import authService from '../../services/auth.service.js'; // Asegúrate de importar authService correctamente
+import {  useNavigate } from "react-router-dom";
 
-function AddProductPage() {
+function AddProductPage({ history }) {
+  const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     nombre: '',
     descripcion: '',
     precio: '',
-    categoria: '',
+    categoria: '', // Cambié esto de un campo de radio a un campo de texto
     'product-image': null,
   });
 
-  const [products, setProducts] = useState([]);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
- 
-  const [filterCategory, setFilterCategory] = useState('todas');
-
-  function productsFiltered(){
-    let response = products
-
-    if(filterCategory !== "todas"){
-      response = response.filter(prod => prod.categoria === filterCategory)
-    }
-
-    return response
-  }
-
-   
 
   const clearForm = () => {
     setFormData({
       nombre: '',
       descripcion: '',
       precio: '',
-      categoria: '',
+      categoria: '', // Asegúrate de que coincida con el nombre del campo en tu formulario
       'product-image': null,
     });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    const backendUrl = 'http://localhost:5005';
 
     const formDataToSend = new FormData();
     for (const key in formData) {
@@ -55,19 +38,22 @@ function AddProductPage() {
     }
 
     authService.api
-      .post(`${backendUrl}/api/products/create`, formDataToSend, {
+      .post('/api/products/create', formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
       .then((response) => {
-        console.log('Product created:', response.data); 
+        console.log('Product created:', response.data);
         clearForm();
         setSuccessMessage('Producto creado correctamente');
         setErrorMessage('');
         setTimeout(() => {
           setSuccessMessage('');
         }, 5000);
+
+        // Después de crear el producto con éxito, redirige al usuario a la página de lista de productos.
+        navigate('/admin/product');
       })
       .catch((error) => {
         console.error('Error creating product:', error);
@@ -75,24 +61,19 @@ function AddProductPage() {
         setErrorMessage('Error al crear el producto');
       });
   };
- 
-  
- 
-
 
   return (
     <div>
-    <h2 className='addProduct'>Crear Producto</h2>
-    <div className="message-container">
+      <div className="message-container">
         {successMessage && <Alert variant="success">{successMessage}</Alert>}
         {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-        
       </div>
 
       <Container>
         <Row>
-          <Col xs={12} md={6} lg={6} className='mx-auto'>
-            <form className='formAdd' onSubmit={onSubmit}>
+          <Col xs={12} md={6} lg={6} className="mx-auto">
+            <form className="formAdd" onSubmit={onSubmit}>
+              <h2 className="addProduct">Crear Producto</h2>
               <div className="mb-3">
                 <label htmlFor="nombre" className="form-label">
                   Nombre:
@@ -133,35 +114,25 @@ function AddProductPage() {
                 />
               </div>
               <div className="mb-3">
-                <label className="form-label">Categoría: </label>
-                <div className="form-check form-check-inline">
-                  <input
-                    type="radio"
-                    className="form-check-input"
-                    id="categoria-ramos"
-                    name="categoria"
-                    value="Ramos"
-                    checked={formData.categoria === 'Ramos'}
-                    onChange={(e) => setFormData({ ...formData, categoria: e.target.value })}
-                  />
-                  <label className="form-check-label" htmlFor="categoria-ramos">
-                       Ramos
-                  </label>
-                </div>
-                <div className="form-check form-check-inline">
-                  <input
-                    type="radio"
-                    className="form-check-input"
-                    id="categoria-plantas"
-                    name="categoria"
-                    value="Plantas"
-                    checked={formData.categoria === 'Plantas'}
-                    onChange={(e) => setFormData({ ...formData, categoria: e.target.value })}
-                  />
-                  <label className="form-check-label" htmlFor="categoria-plantas">
-                    Plantas
-                  </label>
-                </div>
+                <label htmlFor="categoria" className="form-label">
+                  Categoría:
+                </label>
+
+                {/* <input
+                  type="text"
+                  className="form-control"
+                  id="categoria"
+                  name="categoria" 
+                  value={formData.categoria}
+                  onChange={(e) => setFormData({ ...formData, categoria: e.target.value })}
+                /> */}
+
+              <select className="form-select form-select-lg mb-3"  onChange={(e) => setFormData({ ...formData, categoria: e.target.value })} >
+                <option  disabled>Elije:</option>
+                <option value="plantas">Plantas</option>
+                <option value="ramos">Ramos</option> 
+              </select>
+
               </div>
               <div className="mb-3">
                 <label htmlFor="product-image" className="form-label">
@@ -181,10 +152,6 @@ function AddProductPage() {
             </form>
           </Col>
         </Row>
- 
-      
-
-       
       </Container>
     </div>
   );

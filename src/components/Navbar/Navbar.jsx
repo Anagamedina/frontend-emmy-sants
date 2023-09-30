@@ -2,6 +2,7 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
+import logo from "../../img/logoemmy.png"
 
 function Navbar() {
   // Subscribe to the AuthContext to gain access to
@@ -10,9 +11,14 @@ function Navbar() {
 
   return (
     <div className="content">
+    
       <nav className="nav">
+        
+        <div className="logo"  >
+          <img src={logo} alt="Logo Emmy Sants" />
+        </div>
 
- 
+      <div className="linksNav" >
           <>
              <Link to="/">
               <button>Home</button>
@@ -27,8 +33,8 @@ function Navbar() {
           </>
         )}
 
-         {/* solo si la variable user existe y si el valor de user.isAdmin es false.*/}
-        {user && !user.isAdmin && (  
+         
+        {user && !user.isAdmin && (
           <>
             <Link to="/profile">
               <button>Profile    <span>{ user.name}</span> </button>
@@ -61,9 +67,11 @@ function Navbar() {
            
           </>
         )}
+        </div>
       </nav>
 
-    </div>
+      </div>
+   
   );
 }
 

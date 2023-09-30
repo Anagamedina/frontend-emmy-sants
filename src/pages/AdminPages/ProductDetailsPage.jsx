@@ -1,5 +1,4 @@
-import React, { useState, useEffect,useContext } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect,useContext } from 'react'
 import { Container, Card, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -9,8 +8,6 @@ import { AuthContext } from "../../context/auth.context";
 //eliminar el boton de editar y cmbiar para usuario
 function ProductDetailsPage() {
   const {  user } = useContext(AuthContext);
-
-
   const { id } = useParams();
 
   const [product, setProduct] = useState({});
@@ -19,8 +16,7 @@ function ProductDetailsPage() {
 
   useEffect(() => {
     const backendUrl = 'http://localhost:5005';
-
-    axios
+    authService.api
       .get(`${backendUrl}/api/products/${id}`)
       .then((response) => {
         setProduct(response.data);
@@ -45,8 +41,7 @@ function ProductDetailsPage() {
     };
 
     const backendUrl = 'http://localhost:5005';
-
-    axios
+    authService.api
       .put(`${backendUrl}/api/products/${id}`, updatedProduct)
       .then((response) => {
         // const updatedProductData = response.data; 
@@ -71,7 +66,7 @@ function ProductDetailsPage() {
 
       const backendUrl = 'http://localhost:5005';
 
-      axios
+      authService.api
         .put(`${backendUrl}/api/products/${id}/update-image`, formData)
         .then((response) => {
           const updatedImageUrl = response.data.imagen;
@@ -141,6 +136,8 @@ function ProductDetailsPage() {
             )}
           </Card.Text>
           <Card.Text>Categoría: {product.categoria}</Card.Text>
+          <Card.Text>Stock: {product.amount}</Card.Text>
+          
 
 
 {user && user.isAdmin && (

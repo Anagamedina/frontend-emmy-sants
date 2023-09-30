@@ -18,6 +18,10 @@
   color: #d8d5d5; /* Color tenue o gris claro */
 }
 
+.formField {
+  margin-bottom: 5px;
+}
+
 /* Placeholder styles for specific form fields */
 #formBasicName::placeholder {
   color: #d8d5d5; /* Color tenue o gris claro */

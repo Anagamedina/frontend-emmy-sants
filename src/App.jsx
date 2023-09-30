@@ -8,6 +8,8 @@ import ProductsListPage from "./pages/AdminPages/ProductsListPage";
 import OrdersPage from "./pages/AdminPages/OrdersPage";
 import SignupPage from "./pages/SignupPage/SignupPage"
 import LoginPage from "./pages/LoginPage/LoginPage"
+import PlantasPage from "./pages/ProductsPages/PlantasPage";
+// import IsPrivate from "./components/IsPrivate/IsPrivate"
 
 function App() {
   return (
@@ -18,11 +20,16 @@ function App() {
         <Route path="/" element={<HomePage />} />
 
         <Route
+          path="/plantas"
+          element={
+              <PlantasPage />
+          }
+        />
+       
+        <Route
           path="/signup"
           element={
-            // <IsPrivate>
               <SignupPage />
-            // </IsPrivate>
           }
         />
 
@@ -73,3 +80,4 @@ function App() {
 }
 
 export default App;
+

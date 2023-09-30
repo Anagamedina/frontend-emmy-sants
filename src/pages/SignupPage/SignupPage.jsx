@@ -52,27 +52,27 @@ function SignupPage() {
           <Form className="cardForm" onSubmit={handleSignupSubmit}>
           <h1 className="signupText" >Registro de Usuarios</h1>
             <Form.Group controlId="formBasicName">
-              <Form.Label>Nombre:</Form.Label>
-              <Form.Control type="text" placeholder="Ej: Pedro" value={firstName} onChange={handleFirstName} />
+              {/* <Form.Label>Nombre:</Form.Label> */}
+              <Form.Control className="formField" type="text" placeholder="Nombre  Ej: Pedro" value={firstName} onChange={handleFirstName} />
             </Form.Group>
 
             <Form.Group controlId="formBasicName">
-              <Form.Label>Apellido:</Form.Label>
-              <Form.Control type="text" placeholder="Ej:Perez" value={lastName} onChange={handleLastName} />
+              {/* <Form.Label>Apellido:</Form.Label> */}
+              <Form.Control className="formField" type="text" placeholder="Apellido  Ej:Perez" value={lastName} onChange={handleLastName} />
             </Form.Group>
 
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Correo Electrónico:</Form.Label>
-              <Form.Control type="email" placeholder="Ej: pedrop@gmail.com" value={email} onChange={handleEmail} />
+              {/* <Form.Label>Correo Electrónico:</Form.Label> */}
+              <Form.Control className="formField" type="email" placeholder="Correo Electronico  Ej: pedrop@gmail.com" value={email} onChange={handleEmail} />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
-              <Form.Label>Contraseña:</Form.Label>
-              <Form.Control type="password" placeholder="Ej: Aaaa1234 (MAY-min-numero)" value={password} onChange={handlePassword} />
+              {/* <Form.Label>Contraseña:</Form.Label> */}
+              <Form.Control className="formField" type="password" placeholder="Contraseña  Ej: Aaaa1234 (MAY-min-numero)" value={password} onChange={handlePassword} />
             </Form.Group>
 
-            <Form.Group controlId="formBasicConfirmPassword">
-              <Form.Label>Confirma tu Contraseña:</Form.Label>
+            <Form.Group className="formField" controlId="formBasicConfirmPassword">
+              {/* <Form.Label>Confirma tu Contraseña:</Form.Label> */}
               <Form.Control type="password" placeholder="Confirma tu Contraseña" value={confirmPassword} onChange={handleConfirmPassword} />
             </Form.Group>
 

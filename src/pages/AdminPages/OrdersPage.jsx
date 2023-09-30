@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Card, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import authService from '../../services/auth.service.js'; // Asegúrate de importar authService correctamente
 
 function OrdersPage() {
    
@@ -10,7 +11,7 @@ function OrdersPage() {
   
   const axiosOrders = () => {
     const backendUrl = 'http://localhost:5005'; 
-    axios
+    authService.api
       .get(`${backendUrl}/api/orders`)
       .then((response) => {
         console.log(response);
@@ -32,7 +33,7 @@ function OrdersPage() {
     <br/>
     <br/>
     <div className="message-container"> 
-        test
+       
       </div>
 {orders.length}
       <Container> 
