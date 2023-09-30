@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import authService from "../services/auth.service";
+import {  useNavigate } from "react-router-dom";
 
 const AuthContext = React.createContext();
 
 function AuthProviderWrapper(props) {
+  const navigate = useNavigate();
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -12,7 +15,7 @@ function AuthProviderWrapper(props) {
     localStorage.setItem("authToken", token);
   };
 
-  const authenticateUser = () => {
+  const authenticateUser = async () => {
     // Get the stored token from the localStorage
     const storedToken = localStorage.getItem("authToken");
 
@@ -28,7 +31,7 @@ function AuthProviderWrapper(props) {
         */
 
       // Or using a service
-      authService
+      await authService
         .verify()
         .then((response) => {
           // If the server verifies that JWT token is valid  ✅
@@ -37,6 +40,12 @@ function AuthProviderWrapper(props) {
           setIsLoggedIn(true);
           setIsLoading(false);
           setUser(user);
+
+          if(user?.isAdmin){
+            navigate("/admin/product"); 
+           }else{
+             navigate("/");
+           }
         })
         .catch((error) => {
           // If the server sends an error response (invalid token) ❌
@@ -61,6 +70,7 @@ function AuthProviderWrapper(props) {
     // Upon logout, remove the token from the localStorage
     removeToken();
     authenticateUser();
+    navigate("/login")
   };
 
   useEffect(() => {

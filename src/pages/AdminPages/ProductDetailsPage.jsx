@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect,useContext } from 'react'
 import { Container, Card, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import  authService  from '../../services/auth.service'; 
+import { AuthContext } from "../../context/auth.context";
 
+//eliminar el boton de editar y cmbiar para usuario
 function ProductDetailsPage() {
+  const {  user } = useContext(AuthContext);
   const { id } = useParams();
 
   const [product, setProduct] = useState({});
@@ -13,8 +16,7 @@ function ProductDetailsPage() {
 
   useEffect(() => {
     const backendUrl = 'http://localhost:5005';
-
-    axios
+    authService.api
       .get(`${backendUrl}/api/products/${id}`)
       .then((response) => {
         setProduct(response.data);
@@ -39,12 +41,11 @@ function ProductDetailsPage() {
     };
 
     const backendUrl = 'http://localhost:5005';
-
-    axios
+    authService.api
       .put(`${backendUrl}/api/products/${id}`, updatedProduct)
       .then((response) => {
-        const updatedProductData = response.data;
-        setProduct(updatedProductData);
+        // const updatedProductData = response.data; 
+        // setProduct(updatedProductData);
         setIsEditing(false);
       })
       .catch((error) => {
@@ -65,7 +66,7 @@ function ProductDetailsPage() {
 
       const backendUrl = 'http://localhost:5005';
 
-      axios
+      authService.api
         .put(`${backendUrl}/api/products/${id}/update-image`, formData)
         .then((response) => {
           const updatedImageUrl = response.data.imagen;
@@ -135,6 +136,14 @@ function ProductDetailsPage() {
             )}
           </Card.Text>
           <Card.Text>Categoría: {product.categoria}</Card.Text>
+          <Card.Text>Stock: {product.amount}</Card.Text>
+          
+
+
+{user && user.isAdmin && (
+<div> 
+
+
           {isEditing ? (
             <div>
               <Button className="btn-info text-light mr-3 mb-3" onClick={handleSaveClick}>
@@ -145,7 +154,8 @@ function ProductDetailsPage() {
               </Button>
             </div>
           ) : (
-            <div>
+           
+           <div>
               {!isEditingImage ? (
                 <div>
                 <Button  className="btn-info text-light mr-3 mb-3" onClick={handleEditClick}>
@@ -167,6 +177,8 @@ function ProductDetailsPage() {
                   </Button>
                 </div>
               )}
+
+
               {!isEditingImage && (
                 <div>
                   <Link to={`/admin/product`} className="mb-3 btn btn-danger">
@@ -174,8 +186,14 @@ function ProductDetailsPage() {
                   </Link>
                 </div>
               )}
+
             </div>
           )}
+
+</div>)
+
+        }
+
           {isEditingImage && (
             <div className='custom-input-file col-md-6 col-sm-6 col-xs-6'>
               <input type="file" accept="image/*" className="input-file" onChange={handleImageChange} />

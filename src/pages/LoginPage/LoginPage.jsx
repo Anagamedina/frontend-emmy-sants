@@ -12,7 +12,7 @@ function LoginPage() {
 
   const navigate = useNavigate();
 
-  const { storeToken, authenticateUser } = useContext(AuthContext);
+  const { storeToken, authenticateUser, user } = useContext(AuthContext);
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
@@ -23,10 +23,17 @@ function LoginPage() {
 
     authService
       .login(requestBody)
-      .then((response) => {
+      .then(async (response) => {
         storeToken(response.data.authToken);
-        authenticateUser();
-        navigate("/");
+       
+        await authenticateUser();
+         console.log(user); 
+        //  if(user?.isAdmin){
+        //   navigate("/admin/product"); 
+        //  }else{
+        //    navigate("/");
+        //  }
+      
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;

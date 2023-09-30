@@ -4,8 +4,12 @@ import HomePage from "./pages/HomePage/HomePage";
 import Navbar from "./components/Navbar/Navbar";
 import AddProductPage from "./pages/AdminPages/AddProductPage";
 import ProductDetailsPage from "./pages/AdminPages/ProductDetailsPage";
+import ProductsListPage from "./pages/AdminPages/ProductsListPage";
+import OrdersPage from "./pages/AdminPages/OrdersPage";
 import SignupPage from "./pages/SignupPage/SignupPage"
 import LoginPage from "./pages/LoginPage/LoginPage"
+import PlantasPage from "./pages/ProductsPages/PlantasPage";
+// import IsPrivate from "./components/IsPrivate/IsPrivate"
 
 function App() {
   return (
@@ -16,11 +20,16 @@ function App() {
         <Route path="/" element={<HomePage />} />
 
         <Route
+          path="/plantas"
+          element={
+              <PlantasPage />
+          }
+        />
+       
+        <Route
           path="/signup"
           element={
-            // <IsPrivate>
               <SignupPage />
-            // </IsPrivate>
           }
         />
 
@@ -37,11 +46,26 @@ function App() {
           path="/admin/product"
           element={
             // <IsPrivate>
+              <ProductsListPage />
+            // </IsPrivate>
+          }
+        />
+      <Route
+          path="/admin/add-product"
+          element={
+            // <IsPrivate>
               <AddProductPage />
             // </IsPrivate>
           }
         />
-
+         <Route
+          path="/admin/orders"
+          element={
+            // <IsPrivate>
+              <OrdersPage />
+            // </IsPrivate>
+          }
+        />
       <Route
           path="/admin/products/:id"
           element={
@@ -56,3 +80,4 @@ function App() {
 }
 
 export default App;
+
