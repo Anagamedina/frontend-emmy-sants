@@ -52,6 +52,13 @@ function AddProductPage({ history }) {
           setSuccessMessage('');
         }, 5000);
 
+        if (formData.categoria === 'plantas' || formData.categoria === 'ramos') {
+          // Redirige al usuario a la página de lista de productos.
+          navigate('/admin/product');
+        } else {
+          setErrorMessage('Categoria no válida');
+        }
+
         // Después de crear el producto con éxito, redirige al usuario a la página de lista de productos.
         navigate('/admin/product');
       })
