@@ -127,11 +127,11 @@ function AddProductPage({ history }) {
                   onChange={(e) => setFormData({ ...formData, categoria: e.target.value })}
                 /> */}
 
-              <select className="form-select form-select-lg mb-3"  onChange={(e) => setFormData({ ...formData, categoria: e.target.value })} >
-                <option  disabled>Elije:</option>
-                <option value="plantas">Plantas</option>
-                <option value="ramos">Ramos</option> 
-              </select>
+                <select className="form-select form-select-lg mb-3" onChange={(e) => setFormData({ ...formData, categoria: e.target.value })} >
+                  <option value="" disabled selected>Elija una opción</option>
+                  <option value="plantas">Plantas</option>
+                  <option value="ramos">Ramos</option>
+                </select>
 
               </div>
               <div className="mb-3">
