@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useContext } from 'react'
-import { Container, Card, Button } from 'react-bootstrap';
+import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import  authService  from '../../services/auth.service'; 
@@ -93,16 +93,22 @@ function ProductDetailsPage() {
   };
  
   return (
-    <Container className="contentProducts contenedorEditor d-flex align-items-center justify-content-center vh-100">
+    <Container className="contentProducts">
+  <Row>
+    <Col md={4}>
       <Card>
         <Card.Img
           variant="top"
           src={product.imagen}
           alt={product.nombre}
-          style={{ width: '400px', height: '400px', objectFit: 'cover' }}
+          style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
         />
+      </Card>
+    </Col>
+    <Col md={8}>
+      <Card>
         <Card.Body>
-          <Card.Title>
+          <Card.Title style={{ fontSize: '3rem' }}>
             {isEditing ? (
               <input
                 type="text"
@@ -113,7 +119,7 @@ function ProductDetailsPage() {
               product.nombre
             )}
           </Card.Title>
-          <Card.Text>
+          <Card.Text style={{ fontSize: '1.2rem' }}>
             {isEditing ? (
               <textarea
                 value={product.descripcion}
@@ -123,76 +129,51 @@ function ProductDetailsPage() {
               product.descripcion
             )}
           </Card.Text>
-          <Card.Text>
-            Precio:{' '}
-            {isEditing ? (
-              <input
-                type="number"
-                value={product.precio}
-                onChange={(e) => setProduct({ ...product, precio: e.target.value })}
-              />
-            ) : (
-              product.precio
-            )}
-          </Card.Text>
-          <Card.Text>Categoría: {product.categoria}</Card.Text>
-          <Card.Text>Stock: {product.amount}</Card.Text>
+          <Card.Text>Precio: {product.precio}€</Card.Text>
           
-
-
-{user && user.isAdmin && (
-<div> 
-
-
-          {isEditing ? (
+          {user && user.isAdmin && (
             <div>
-              <Button className="btn-info text-light mr-3 mb-3" onClick={handleSaveClick}>
-                Guardar Cambios
-              </Button>
-              <Button variant="danger" className=" mb-3" onClick={handleCancelClick}>
-                Cancelar
-              </Button>
-            </div>
-          ) : (
-           
-           <div>
-              {!isEditingImage ? (
+              {isEditing ? (
                 <div>
-                <Button  className="btn-info text-light mr-3 mb-3" onClick={handleEditClick}>
-                  Editar
-                </Button>
-
-                <Button  className=" btn-info text-light mb-3" onClick={handleEditImageClick}>
-                    Cambiar Imagen
+                  <Button className="btn-info text-light mr-3 mb-3" onClick={handleSaveClick}>
+                    Guardar Cambios
                   </Button>
-
-                  </div>
-              ) : (
-                <div className="d-flex">
-                  <Button  className="btn-info text-light mb-3" onClick={handleImageSaveClick}>
-                    Guardar Nueva Imagen
-                  </Button>
-                  <Button variant="danger" className="ml-3 mb-3" onClick={handleCancelImageClick}>
+                  <Button variant="danger" className=" mb-3" onClick={handleCancelClick}>
                     Cancelar
                   </Button>
                 </div>
-              )}
-
-
-              {!isEditingImage && (
+              ) : (
                 <div>
-                  <Link to={`/admin/product`} className="mb-3 btn btn-danger">
-                  Volver
-                  </Link>
+                  {!isEditingImage ? (
+                    <div>
+                      <Button className="btn-info text-light mr-3 mb-3" onClick={handleEditClick}>
+                        Editar
+                      </Button>
+                      <Button className=" btn-info text-light mb-3" onClick={handleEditImageClick}>
+                        Cambiar Imagen
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="d-flex">
+                      <Button className="btn-info text-light mb-3" onClick={handleImageSaveClick}>
+                        Guardar Nueva Imagen
+                      </Button>
+                      <Button variant="danger" className="ml-3 mb-3" onClick={handleCancelImageClick}>
+                        Cancelar
+                      </Button>
+                    </div>
+                  )}
+                  {!isEditingImage && (
+                    <div>
+                      <Link to={`/admin/product`} className="mb-3 btn btn-danger">
+                        Volver
+                      </Link>
+                    </div>
+                  )}
                 </div>
               )}
-
             </div>
           )}
-
-</div>)
-
-        }
 
           {isEditingImage && (
             <div className='custom-input-file col-md-6 col-sm-6 col-xs-6'>
@@ -201,7 +182,10 @@ function ProductDetailsPage() {
           )}
         </Card.Body>
       </Card>
-    </Container>
+    </Col>
+  </Row>
+</Container>
+
   );
 }
 

@@ -11,36 +11,7 @@ function UserRamosDetailsPage() {
   const { id } = useParams();
 
   const [selectedProduct, setSelectedProduct] = useState({});
-  const [plantInfo, setPlantInfo] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [plantInfoLoaded, setPlantInfoLoaded] = useState(false);
 
-
-  const plantInfoInApi = (productName) => {
-    const backendUrl = 'http://localhost:5005';
-
-    const prompt = `Dame sobre la siguiente planta: ${selectedProduct.nombre}. Dame la siguiente información: Nombre común. Punto. Nombre cientifico. Características, listado de cuidados que debe tener, cantidad de agua que debe darsele en determinado periodo de tiempo, si es de sol o sombra.`;
-
-    setIsLoading(true);
-
-    axios
-      .get(`${backendUrl}/api/apiAi/info-planta`, {
-        params: {
-          prompt: prompt,
-        },
-      })
-      .then((response) => {
-        const info = response.data;
-        setPlantInfo(info);
-        setPlantInfoLoaded(true);
-      })
-      .catch((error) => {
-        console.error('Error al obtener información de la planta:', error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
 
   useEffect(() => {
     const backendUrl = 'http://localhost:5005';
