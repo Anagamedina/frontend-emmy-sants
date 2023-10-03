@@ -19,7 +19,7 @@ function HomePage() {
       <div className="flores">
         <Link to="/flores">
           <img src={flores} alt="Floress" />
-          <h2 className="titulo">Flores</h2>
+          <h2 className="titulo">Ramos</h2>
         </Link>
       </div>
     </div>

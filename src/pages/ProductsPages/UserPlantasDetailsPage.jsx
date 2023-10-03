@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, Card, Button, Row, Col, Spinner } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom'; // Eliminamos el import innecesario
 import axios from 'axios'; // Agregamos la importación de axios
 import authService from '../../services/auth.service';
 import { AuthContext } from '../../context/auth.context';
+import "./productsPages.css"
 
 function UserProductDetailsPage() {
   const { id } = useParams();
@@ -53,9 +55,9 @@ function UserProductDetailsPage() {
   }, [id]);
 
   return (
-    <Container>
+    <Container className="contentProducts">
       <Row>
-        <Col md={6}>
+        <Col md={4}>
           <Card>
             <Card.Img
               variant="top"
@@ -65,35 +67,47 @@ function UserProductDetailsPage() {
             />
           </Card>
         </Col>
-        <Col md={6}>
-          <Card>
-            <Card.Body>
-              <Card.Title>{selectedProduct.nombre}</Card.Title>
-              <Card.Text>{selectedProduct.descripcion}</Card.Text>
-              <Card.Text>Precio: {selectedProduct.precio}</Card.Text>
+        <Col md={8}>
+        <Card>
+  <Card.Body>
+    <Card.Title style={{ fontSize: '3rem' }}>{selectedProduct.nombre}</Card.Title>
+    <Card.Text style={{ fontSize: '1.2rem' }}>{selectedProduct.descripcion}</Card.Text>
+    <Card.Text>Precio: {selectedProduct.precio}€</Card.Text>
+    
+    <Button className='btn btn-danger' variant="info">
+       <Link to={`/plantas`} >volver</Link>
+    </Button>
+  </Card.Body>
+</Card>
 
-              <Button
-                variant="info"
-                onClick={() => plantInfoInApi(selectedProduct.nombre)}
-              >
-                Información Adicional
-              </Button>
 
-              {isLoading && (
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <Spinner animation="border" />
-                  <span style={{ marginLeft: '10px' }}>Cargando información de la API</span>
-                </div>
-              )}
+  <Card className='botonInfoAdicionalCard'>
+    <Card.Body>
+      <Button
+        className='botonInfoAdicional'
+        style={{ color: 'white' }}
+        variant="info"
+        onClick={() => plantInfoInApi(selectedProduct.nombre)}
+      >
+        Información Adicional
+      </Button>
 
-              {plantInfoLoaded && (
-                <div>
-                  <p>{plantInfo.planta}</p>
-                </div>
-              )}
-            </Card.Body>
-          </Card>
-        </Col>
+      {isLoading && (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Spinner animation="border" />
+          <span style={{ marginLeft: '10px' }}>Cargando información de la API 📦</span>
+        </div>
+      )}
+
+      {plantInfoLoaded && (
+        <div className='plantaInfo'>
+          <p>{plantInfo.planta}</p>
+        </div>
+      )}
+    </Card.Body>
+  </Card>
+</Col>
+
       </Row>
     </Container>
   );

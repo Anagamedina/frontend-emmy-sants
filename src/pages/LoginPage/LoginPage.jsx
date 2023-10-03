@@ -9,6 +9,7 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [showPassword, setShowPassword] = useState(false); // Nuevo estado
 
   const navigate = useNavigate();
 
@@ -16,6 +17,10 @@ function LoginPage() {
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +32,7 @@ function LoginPage() {
         storeToken(response.data.authToken);
        
         await authenticateUser();
-         console.log(user); 
+        console.log(user); 
         //  if(user?.isAdmin){
         //   navigate("/admin/product"); 
         //  }else{
@@ -42,29 +47,35 @@ function LoginPage() {
   };
 
   return (
-    <Container className=" cardSignup justify-content-center align-items-center" >
+    <Container className=" cardSignup justify-content-center align-items-center">
       <Row className="cardSignup justify-content-center align-items-center" style={{ minHeight: "90vh" }}>
         <Col xs={12} md={6}>
           <Form className="cardLoginForm" onSubmit={handleLoginSubmit}>
-          <h1 className="loginText">Login</h1>
+            <h1 className="loginText">Login</h1>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email:</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmail} />
+              <Form.Label></Form.Label>
+              <Form.Control type="email" placeholder="Ingrese su Correo Electrónico" value={email} onChange={handleEmail} />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password:</Form.Label>
-              <Form.Control type="password" placeholder="Password" value={password} onChange={handlePassword} />
+              <Form.Label></Form.Label>
+              <Form.Control
+                type={showPassword ? "text" : "password"} // Establece el tipo dinámicamente
+                placeholder="Ingrese su Contraseña"
+                value={password}
+                onChange={handlePassword}
+                
+              />
+             
             </Form.Group>
 
             <Button className="btn-info text-light buttonSignup mr-3 mb-3" type="submit">
               Login
             </Button>
-            <p className="linkSignupText" >Don't have an account yet? <Link to="/signup" className="linkSignup">Sign Up</Link></p>
+            <p className="linkSignupText">¿No tienes una cuenta? <Link to="/signup" id="linkSignup">Registrate Aquí</Link></p>
           </Form>
 
           {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-
         </Col>
       </Row>
     </Container>

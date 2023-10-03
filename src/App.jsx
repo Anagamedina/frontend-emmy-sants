@@ -10,7 +10,9 @@ import SignupPage from "./pages/SignupPage/SignupPage"
 import LoginPage from "./pages/LoginPage/LoginPage"
 import PlantasPage from "./pages/ProductsPages/PlantasPage";
 import RamosPage from "./pages/ProductsPages/RamosPage";
-import UserProductDetailsPage from "./pages/ProductsPages/UserProductDetailsPage";
+import UserPlantasDetailsPage from "./pages/ProductsPages/UserPlantasDetailsPage";
+import UserRamosDetailsPage from "./pages/ProductsPages/UserRamosDetailsPage";
+
 // import IsPrivate from "./components/IsPrivate/IsPrivate"
 
 function App() {
@@ -36,8 +38,13 @@ function App() {
         />
         
         <Route
-          path="product/:id"
-          element={< UserProductDetailsPage/>}
+          path="product/plantas/:id"
+          element={< UserPlantasDetailsPage/>}
+        />
+
+<Route
+          path="product/ramos/:id"
+          element={< UserRamosDetailsPage/>}
         />
 
        
@@ -89,7 +96,11 @@ function App() {
             // </IsPrivate>
           }
         />
+
+        
       </Routes>
+
+      
     </div>
   );
 }

@@ -91,9 +91,9 @@ function ProductDetailsPage() {
   const handleCancelImageClick = () => {
     setIsEditingImage(false);
   };
-
+ 
   return (
-    <Container className="contenedorEditor d-flex align-items-center justify-content-center vh-100">
+    <Container className="contentProducts contenedorEditor d-flex align-items-center justify-content-center vh-100">
       <Card>
         <Card.Img
           variant="top"

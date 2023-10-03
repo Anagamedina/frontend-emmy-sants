@@ -79,7 +79,7 @@ function SignupPage() {
             <Button className="btn-info text-light buttonSignup mr-3 mb-3" type="submit">
               Sign Up
             </Button>
-            <p className="linkLoginText" >¿Ya tienes una cuenta? <Link to="/login" className="linkLogin">Login</Link></p>
+            <p id="linkLoginText" >¿Ya tienes una cuenta? <Link to="/login" id="linkLogin">Haz Login Aquí</Link></p>
           </Form>
 
           {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}

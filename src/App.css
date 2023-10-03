@@ -11,7 +11,7 @@
   background-color: white;
   box-shadow: 3px 3px 40px rgb(231, 229, 229);
   padding: 40px;
-  margin-top: 80px;
+ 
 }
 
 /* Estilos base */
@@ -53,10 +53,6 @@
   z-index: 10001;
   width: 100%;
   margin-top: 40px;
-}
-
-.SignupPage {
-  margin-top: 200px;
 }
 
 .contenedorEditor {
