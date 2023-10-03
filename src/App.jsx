@@ -9,6 +9,8 @@ import OrdersPage from "./pages/AdminPages/OrdersPage";
 import SignupPage from "./pages/SignupPage/SignupPage"
 import LoginPage from "./pages/LoginPage/LoginPage"
 import PlantasPage from "./pages/ProductsPages/PlantasPage";
+import RamosPage from "./pages/ProductsPages/RamosPage";
+import UserProductDetailsPage from "./pages/ProductsPages/UserProductDetailsPage";
 // import IsPrivate from "./components/IsPrivate/IsPrivate"
 
 function App() {
@@ -25,6 +27,19 @@ function App() {
               <PlantasPage />
           }
         />
+
+        <Route
+          path="/flores"
+          element={
+              <RamosPage />
+          }
+        />
+        
+        <Route
+          path="product/:id"
+          element={< UserProductDetailsPage/>}
+        />
+
        
         <Route
           path="/signup"

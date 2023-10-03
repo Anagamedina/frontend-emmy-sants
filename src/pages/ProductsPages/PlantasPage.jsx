@@ -1,50 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Row, Col, Card, Button, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Modal, Spinner } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; // Importa Link para la navegación
+import "./productsPages.css"
 
 function PlantasPage() {
   const [plantProducts, setPlantProducts] = useState([]);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});
-  const [productInfo, setProductInfo] = useState({});
   const [plantInfo, setPlantInfo] = useState({});
-  const [plantInfoLoaded, setPlantInfoLoaded] = useState(false); // Agregar estado para plantInfoLoaded
+  const [isLoading, setIsLoading] = useState(false);
+  const [plantInfoLoaded, setPlantInfoLoaded] = useState(false);
 
   const openDetailsModal = (product) => {
     setSelectedProduct(product);
     setShowDetailsModal(true);
   };
 
-  const fetchProductInfo = (productName) => {
+  const plantInfoInApi = (productName) => {
     const backendUrl = 'http://localhost:5005';
 
-    axios
-      .get(`${backendUrl}/api/product-info/${productName}`)
-      .then((response) => {
-        const info = response.data;
-        setProductInfo(info);
-      })
-      .catch((error) => {
-        console.error('Error al obtener información del producto:', error);
-      });
-  };
+    const prompt = `Nombre científico de la planta ${productName}. Luego punto y Después sus características, clima donde habita, y hazme un listado de cuidados que debe tener, incluyendo cantidad de agua que debe darsele en determinado periodo de tiempo, si es de sol o sombra.`;
 
-  const fetchPlantInfo = (productName) => {
-    const backendUrl = 'http://localhost:5005';
+    setIsLoading(true);
 
     axios
-      .get(`${backendUrl}/api/apiAi`, {
+      .get(`${backendUrl}/api/apiAi/info-planta`, {
         params: {
-          productName: productName,
+          prompt: prompt,
         },
       })
       .then((response) => {
         const info = response.data;
         setPlantInfo(info);
-        setPlantInfoLoaded(true); // Establecer que la información se ha cargado
+        setPlantInfoLoaded(true);
       })
       .catch((error) => {
         console.error('Error al obtener información de la planta:', error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -72,12 +67,12 @@ function PlantasPage() {
   }
 
   return (
-    <div className="contentPlantas">
-      <h1>PlantasPage</h1>
+    <div className="contentProducts">
+      <h1>Plantas</h1>
       <Container>
         <Row>
           {plantProducts.map((product) => (
-            <Col key={product._id} xs={12} sm={4} md={3} lg={3}>
+            <Col key={product._id} xs={12} sm={6} md={4} lg={3}>
               <Card>
                 <Card.Img
                   variant="top"
@@ -91,12 +86,11 @@ function PlantasPage() {
                   </Card.Title>
                   <Card.Text className="cardText">{product.descripcion}</Card.Text>
                   <Card.Text>Precio: {product.precio}</Card.Text>
-                  <Card.Text>Categoría: {product.categoria}</Card.Text>
                   <Button
                     variant="info"
                     onClick={() => openDetailsModal(product)}
                   >
-                    Ver detalles
+                    <Link to={`/product/${product._id}`}>Ver detalles</Link>
                   </Button>
                 </Card.Body>
               </Card>
@@ -111,40 +105,51 @@ function PlantasPage() {
         </Modal.Header>
         <Modal.Body>
           <Container>
-            <Card>
-              <Card.Img
-                variant="top"
-                src={selectedProduct.imagen}
-                alt={selectedProduct.nombre}
-                style={{ width: '400px', height: '400px', objectFit: 'cover' }}
-              />
-              <Card.Body>
-                <Card.Title>{selectedProduct.nombre}</Card.Title>
-                <Card.Text>{selectedProduct.descripcion}</Card.Text>
-                <Card.Text>Precio: {selectedProduct.precio}</Card.Text>
-                <Card.Text>Categoría: {selectedProduct.categoria}</Card.Text>
+            <Row>
+              <Col md={6}>
+                <Card>
+                  <Card.Img
+                    variant="top"
+                    src={selectedProduct.imagen}
+                    alt={selectedProduct.nombre}
+                    style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+                  />
+                </Card>
+              </Col>
+              <Col md={6}>
+                <Card>
+                  <Card.Body>
+                    <Card.Title>{selectedProduct.nombre}</Card.Title>
+                    <Card.Text>{selectedProduct.descripcion}</Card.Text>
+                    <Card.Text>Precio: {selectedProduct.precio}</Card.Text>
 
-                <Button
-                  variant="info"
-                  onClick={() => fetchPlantInfo(selectedProduct.nombre)}
-                >
-                  Información Adicional
-                </Button>
+                    <Button
+                      variant="info"
+                      onClick={() => plantInfoInApi(selectedProduct.nombre)}
+                    >
+                      Información Adicional
+                    </Button>
 
-                {/* Mostrar la información adicional de la planta debajo del enlace */}
-                {plantInfoLoaded && (
-                  <div>
-                    <p>{plantInfo.descripcionAdicional}</p>
-                    <p>{plantInfo.otraInformacion}</p>
-                  </div>
-                )}
+                    {isLoading && (
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <Spinner animation="border" />
+                        <span style={{ marginLeft: '10px' }}>Cargando información de la API</span>
+                      </div>
+                    )}
 
-                {/* Agregar un botón para cerrar el modal */}
-                <Button variant="secondary" onClick={() => setShowDetailsModal(false)}>
-                  Cerrar
-                </Button>
-              </Card.Body>
-            </Card>
+                    {plantInfoLoaded && (
+                      <div>
+                        <p>{plantInfo.planta}</p>
+                      </div>
+                    )}
+
+                    <Button variant="secondary" onClick={() => setShowDetailsModal(false)}>
+                      Cerrar
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
           </Container>
         </Modal.Body>
       </Modal>

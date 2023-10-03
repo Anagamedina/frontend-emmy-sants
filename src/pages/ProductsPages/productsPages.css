@@ -1,5 +1,18 @@
 .contentPlantas {
-    color: black;
     margin-top: 100px;
     margin-bottom: 30px;
+}
+
+.contentProducts {
+    margin-top: 100px;
+}
+
+.modal-content{
+    align-items: center;
+    justify-content: center;
+    width: 900px !important;
+}
+.modal-dialog {
+    margin-right: 40% !important;
+
 }
