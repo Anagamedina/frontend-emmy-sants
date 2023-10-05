@@ -6,6 +6,8 @@ import axios from 'axios'; // Agregamos la importación de axios
 import authService from '../../services/auth.service';
 import { AuthContext } from '../../context/auth.context';
 import "./productsPages.css"
+import plantas from "../../img/plantas.png"
+
 
 function UserProductDetailsPage() {
   const { id } = useParams();
@@ -83,6 +85,9 @@ function UserProductDetailsPage() {
 
   <Card className='botonInfoAdicionalCard'>
     <Card.Body>
+    <div>
+      <img src={plantas} alt="Cuidados Plantas" />
+    </div>
       <Button
         className='botonInfoAdicional'
         style={{ color: 'white' }}

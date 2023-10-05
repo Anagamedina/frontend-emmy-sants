@@ -3,11 +3,9 @@
 
 
 
-.content {
-  
-  overflow: hidden; /* Evita que aparezca el scroll en el contenedor */
+.content {  
+  overflow: visible; 
 }
-
 
 .plantas,
 .flores {
@@ -60,10 +58,12 @@ text-decoration: none;
   
   .titleHome {
     font-family: 'Playball', cursive;
-
-    margin: 50px 0 3px 0;
+    margin-top: 10px;
     font-size: 1.8rem;
     color: rgb(206, 139, 189);
-    z-index: 100000;
     word-spacing: 0.20rem;
   }
+/* 
+  .divTitleHome {
+    z-index: 1;
+  } */

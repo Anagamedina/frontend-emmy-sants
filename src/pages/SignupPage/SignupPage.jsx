@@ -51,12 +51,12 @@ function SignupPage() {
         <Col xs={12} md={6}>
           <Form className="cardForm" onSubmit={handleSignupSubmit}>
           <h1 className="signupText" >Registro de Usuarios</h1>
-            <Form.Group controlId="formBasicName">
+            <Form.Group controlId="formBasicFirstName">
               {/* <Form.Label>Nombre:</Form.Label> */}
               <Form.Control className="formField" type="text" placeholder="Nombre  Ej: Pedro" value={firstName} onChange={handleFirstName} />
             </Form.Group>
 
-            <Form.Group controlId="formBasicName">
+            <Form.Group controlId="formBasicLastName">
               {/* <Form.Label>Apellido:</Form.Label> */}
               <Form.Control className="formField" type="text" placeholder="Apellido  Ej:Perez" value={lastName} onChange={handleLastName} />
             </Form.Group>
