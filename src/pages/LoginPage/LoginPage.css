@@ -1,5 +1,5 @@
 .loginText {
-  margin-top: 10px;
+  margin-top: 30px;
   margin-bottom: 30px;
 }
 .buttonSignup {
@@ -35,15 +35,6 @@
 
 }
 
-
-.linkSignup {
-  text-decoration: none; /* Elimina el subrayado del enlace */
-  /* Otros estilos opcionales, como color y efectos al pasar el mouse */
-  color: #007bff; /* Cambia el color del enlace si lo deseas */
-  /* Estilo al pasar el mouse */
-  transition: color 0.3s ease; /* Cambia suavemente el color al pasar el mouse */
-}
-
 .linkSignup:hover {
   color: #0056b3; /* Cambia el color al pasar el mouse */
   /* Puedes ajustar el color al pasar el mouse según tu preferencia */
@@ -54,3 +45,6 @@
   margin-top: 20px;
 }
 
+#linkSignup {
+  color:#49a6ed;
+}

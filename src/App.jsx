@@ -9,8 +9,10 @@ import OrdersPage from "./pages/AdminPages/OrdersPage";
 import SignupPage from "./pages/SignupPage/SignupPage"
 import LoginPage from "./pages/LoginPage/LoginPage"
 import PlantasPage from "./pages/ProductsPages/PlantasPage";
-import Cart from "./pages/OrderPage/Cart";
-import Success from "./pages/OrderPage/Success";
+import RamosPage from "./pages/ProductsPages/RamosPage";
+import UserPlantasDetailsPage from "./pages/ProductsPages/UserPlantasDetailsPage";
+import UserRamosDetailsPage from "./pages/ProductsPages/UserRamosDetailsPage";
+
 // import IsPrivate from "./components/IsPrivate/IsPrivate"
 
 function App() {
@@ -27,6 +29,24 @@ function App() {
               <PlantasPage />
           }
         />
+
+        <Route
+          path="/flores"
+          element={
+              <RamosPage />
+          }
+        />
+        
+        <Route
+          path="product/plantas/:id"
+          element={< UserPlantasDetailsPage/>}
+        />
+
+<Route
+          path="product/ramos/:id"
+          element={< UserRamosDetailsPage/>}
+        />
+
        
         <Route
           path="/signup"
@@ -76,19 +96,11 @@ function App() {
             // </IsPrivate>
           }
         />
-      <Route
-          path="/cart"
-          element={ 
-              <Cart /> 
-          }
-        />
-        <Route
-          path="/success"
-          element={ 
-              <Success /> 
-          }
-        />
+
+        
       </Routes>
+
+      
     </div>
   );
 }

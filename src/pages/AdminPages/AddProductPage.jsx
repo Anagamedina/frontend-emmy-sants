@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Alert } from 'react-bootstrap';
-import authService from '../../services/auth.service.js'; // Asegúrate de importar authService correctamente
+import authService from '../../services/auth.service.js'; 
 import {  useNavigate } from "react-router-dom";
+import "./adminProductsPages.css"
 
 function AddProductPage({ history }) {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ function AddProductPage({ history }) {
     nombre: '',
     descripcion: '',
     precio: '',
-    categoria: '', // Cambié esto de un campo de radio a un campo de texto
+    categoria: '',
     'product-image': null,
   });
 
@@ -52,13 +53,6 @@ function AddProductPage({ history }) {
           setSuccessMessage('');
         }, 5000);
 
-        if (formData.categoria === 'plantas' || formData.categoria === 'ramos') {
-          // Redirige al usuario a la página de lista de productos.
-          navigate('/admin/product');
-        } else {
-          setErrorMessage('Categoria no válida');
-        }
-
         // Después de crear el producto con éxito, redirige al usuario a la página de lista de productos.
         navigate('/admin/product');
       })
@@ -70,96 +64,90 @@ function AddProductPage({ history }) {
   };
 
   return (
-    <div>
+    <div className="contentProducts">
       <div className="message-container">
-        {successMessage && <Alert variant="success">{successMessage}</Alert>}
+        {successMessage && <Alert variant="success">{setSuccessMessage}</Alert>}
         {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       </div>
 
       <Container>
-        <Row>
-          <Col xs={12} md={6} lg={6} className="mx-auto">
-            <form className="formAdd" onSubmit={onSubmit}>
-              <h2 className="addProduct">Crear Producto</h2>
-              <div className="mb-3">
-                <label htmlFor="nombre" className="form-label">
-                  Nombre:
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="nombre"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="descripcion" className="form-label">
-                  Descripción:
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="descripcion"
-                  name="descripcion"
-                  value={formData.descripcion}
-                  onChange={(e) => setFormData({ ...formData, descripcion: e.target.value })}
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="precio" className="form-label">
-                  Precio:
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="precio"
-                  name="precio"
-                  value={formData.precio}
-                  onChange={(e) => setFormData({ ...formData, precio: e.target.value })}
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="categoria" className="form-label">
-                  Categoría:
-                </label>
+  <Row>
+    <Col xs={12} md={6} lg={6} className="mx-auto">
+      <form className="formAdd" onSubmit={onSubmit}>
+        <h2 className="addProduct">Crear un Producto</h2>
+        <div className="mb-3">
+          <input
+            type="text"
+            className="form-control"
+            id="nombre"
+            name="nombre"
+            value={formData.nombre}
+            onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+            placeholder="Coloque aquí el nombre del producto"
+            required 
+          />
+        </div>
+        <div className="mb-3">
+          <input
+            type="text"
+            className="form-control"
+            id="descripcion"
+            name="descripcion"
+            value={formData.descripcion}
+            onChange={(e) => setFormData({ ...formData, descripcion: e.target.value })}
+            placeholder="Ingrese una breve descripción del producto"
+            required 
+          />
+        </div>
+        <div className="mb-3">
+          <input
+            type="number"
+            className="form-control"
+            id="precio"
+            name="precio"
+            value={formData.precio}
+            onChange={(e) => setFormData({ ...formData, precio: e.target.value })}
+            placeholder="Ingrese el precio del producto"
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <select
+            className="form-select form-select-lg mb-3"
+            onChange={(e) => setFormData({ ...formData, categoria: e.target.value })}
+            value={formData.categoria || ''} 
+            required 
+          >
+            <option value="" disabled>
+              Categoría del producto: Elija una opción
+            </option>
+            <option value="plantas">Plantas</option>
+            <option value="ramos">Ramos</option>
+          </select>
+        </div>
 
-                {/* <input
-                  type="text"
-                  className="form-control"
-                  id="categoria"
-                  name="categoria" 
-                  value={formData.categoria}
-                  onChange={(e) => setFormData({ ...formData, categoria: e.target.value })}
-                /> */}
+        <div className="mb-3">
+          <label htmlFor="product-image" className="form-label">
+            Imagen del producto:
+          </label>
+          <input
+            type="file"
+            className="form-control"
+            id="product-image"
+            name="product-image"
+            onChange={(e) => setFormData({ ...formData, 'product-image': e.target.files[0] })}
+            required 
+          />
+        </div>
+        <button type="submit" className="btn-info text-light btn">
+          Crear Producto
+        </button>
+      </form>
+    </Col>
+  </Row>
+</Container>
 
-              <select className="form-select form-select-lg mb-3"  onChange={(e) => setFormData({ ...formData, categoria: e.target.value })} >
-                <option  disabled>Elije:</option>
-                <option value="plantas">Plantas</option>
-                <option value="ramos">Ramos</option> 
-              </select>
 
-              </div>
-              <div className="mb-3">
-                <label htmlFor="product-image" className="form-label">
-                  Imagen del producto:
-                </label>
-                <input
-                  type="file"
-                  className="form-control"
-                  id="product-image"
-                  name="product-image"
-                  onChange={(e) => setFormData({ ...formData, 'product-image': e.target.files[0] })}
-                />
-              </div>
-              <button type="submit" className="btn-info text-light btn ">
-                Crear Producto
-              </button>
-            </form>
-          </Col>
-        </Row>
-      </Container>
     </div>
   );
 }

@@ -1,21 +1,13 @@
-
-.cardSignup {
-  margin-top: 50px;
-}
-
-.form-label {
-  margin-top: 5px;
-}
-
 .signupText {
-  margin-top: 10px;
+  margin-top: 30px;
   margin-bottom: 40px;
 }
 .buttonSignup {
   margin-top: 20px;
 }
 ::placeholder {
-  color: #d8d5d5; /* Color tenue o gris claro */
+  color: #c7c2c2; 
+  font-style: italic;
 }
 
 .formField {
@@ -62,8 +54,12 @@
   /* Puedes ajustar el color al pasar el mouse según tu preferencia */
 }
 
-.linkLoginText {
+#linkLoginText{
   margin-top: 10px;
+}
+
+#linkLogin {
+  color:#49a6ed;
 }
 
 
