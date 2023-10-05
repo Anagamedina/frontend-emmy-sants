@@ -4,7 +4,7 @@ import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import "./productsPages.css"
 
-function PlantasPage() {
+function RamosPage() {
   const [plantProducts, setPlantProducts] = useState([]);
 
   useEffect(() => {
@@ -27,12 +27,12 @@ function PlantasPage() {
   }, []);
 
   function getPlantProducts(products) {
-    return products.filter((product) => product.categoria === 'plantas');
+    return products.filter((product) => product.categoria === 'ramos');
   }
 
   return (
     <div className="contentProducts">
-      <h1>Plantas</h1>
+      <h1>Ramos</h1>
       <Container>
         <Row>
           {plantProducts.map((product) => (
@@ -51,7 +51,7 @@ function PlantasPage() {
                   <Card.Text className="cardText">{product.descripcion}</Card.Text>
                   <Card.Text>Precio: {product.precio}</Card.Text>
                   <Button variant="info">
-                    <Link to={`/product/plantas/${product._id}`} className='botonVerDetalles'>Ver detalles</Link>
+                    <Link to={`/product/ramos/${product._id}`} className='botonVerDetalles'>Ver detalles</Link>
                   </Button>
                 </Card.Body>
               </Card>
@@ -63,4 +63,4 @@ function PlantasPage() {
   );
 }
 
-export default PlantasPage;
+export default RamosPage;

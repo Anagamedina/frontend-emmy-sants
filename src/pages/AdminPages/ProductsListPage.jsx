@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom'; 
 import authService from '../../services/auth.service.js'; // Asegúrate de importar authService correctamente
 
@@ -35,8 +35,23 @@ function ProductsListPage() {
     axiosProducts();
   }, []);
 
+  const handleDeleteProduct = (productId) => {
+    const backendUrl = 'http://localhost:5005';
+  
+    authService.api
+      .delete(`${backendUrl}/api/products/${productId}`)
+      .then(() => {
+        // Actualiza la lista de productos después de eliminar el producto
+        axiosProducts();
+      })
+      .catch((error) => {
+        console.error('Error al eliminar el producto:', error);
+      });
+  };
+  
+
   return (
-    <div>
+    <div className="contentProducts">
       <Container>
         <Row>
           <Col lg={3}>
@@ -76,7 +91,10 @@ function ProductsListPage() {
                       <Link to={`/admin/products/${product._id}`} className="mr-3 btn-info text-light btn">
                         Detalles
                       </Link>
-                      {/* Aquí puedes agregar el botón para eliminar el producto */}
+                      <Button className='mr-3' variant="danger" onClick={() => handleDeleteProduct(product._id)}>
+                        Eliminar
+                      </Button>
+
                     </Card.Body>
                   </Card>
                 </Col>

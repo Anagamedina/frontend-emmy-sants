@@ -1,5 +1,31 @@
-.contentPlantas {
-    color: black;
-    margin-top: 100px;
+
+.contentProducts {
+    margin-top: 80px;
     margin-bottom: 30px;
+}
+
+.modal-content{
+    align-items: center;
+    justify-content: center;
+    width: 900px !important;
+}
+.modal-dialog {
+    margin-right: 40% !important;
+
+}
+
+.botonInfoAdicional {
+    color: white;
+
+}
+
+a:link, a:visited, a:active {
+    color: white;
+    text-decoration:none;
+  }
+
+.plantaInfo {
+    padding: 15px;
+    text-align: justify;
+    margin-top: 10px;
 }
