@@ -7,7 +7,7 @@ import flores from "../../img/flores.jpg"
 function HomePage() {
   return (
     <div className="content">
-      <div>
+      <div className='divTitleHome' >
         <h3 className='titleHome'>Somos tu floristería en la web</h3>
       </div>
       <div className="plantas">

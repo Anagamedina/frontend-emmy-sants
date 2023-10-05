@@ -1,7 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
-import Navbar from "./components/Navbar/Navbar";
 import AddProductPage from "./pages/AdminPages/AddProductPage";
 import ProductDetailsPage from "./pages/AdminPages/ProductDetailsPage";
 import ProductsListPage from "./pages/AdminPages/ProductsListPage";
@@ -12,14 +11,14 @@ import PlantasPage from "./pages/ProductsPages/PlantasPage";
 import RamosPage from "./pages/ProductsPages/RamosPage";
 import UserPlantasDetailsPage from "./pages/ProductsPages/UserPlantasDetailsPage";
 import UserRamosDetailsPage from "./pages/ProductsPages/UserRamosDetailsPage";
-import Cart from "./pages/OrderPage/Cart"; 
+import CustomNavbar from "./components/Navbar/CustomNavbar";
 
 // import IsPrivate from "./components/IsPrivate/IsPrivate"
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <CustomNavbar />
 
       <Routes>
         <Route path="/" element={<HomePage />} />
