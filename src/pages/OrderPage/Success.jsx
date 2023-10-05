@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-import authService from "../../services/auth.service.js"; // Asegúrate de importar authService correctamente
+import authService from "../../services/auth.service.js"; 
 
+//Página que se muestra después de que un usuario haya completado un pago con Stripe
 function Success() {
   const [order, setOrder] = useState({});
 
@@ -20,6 +21,12 @@ function Success() {
       );
       setOrder(orderRes.data);
     };
+
+  //   authService.api
+  // .get("http://localhost:5005/api/orders/orders/" + id)
+  // .then((response) => {
+  //   let orderRes = response.data;
+  //   setOrder(orderRes);
 
     try {
       start();
