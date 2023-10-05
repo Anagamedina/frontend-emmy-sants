@@ -12,6 +12,7 @@ import PlantasPage from "./pages/ProductsPages/PlantasPage";
 import RamosPage from "./pages/ProductsPages/RamosPage";
 import UserPlantasDetailsPage from "./pages/ProductsPages/UserPlantasDetailsPage";
 import UserRamosDetailsPage from "./pages/ProductsPages/UserRamosDetailsPage";
+import Cart from "./pages/OrderPage/Cart"; 
 
 // import IsPrivate from "./components/IsPrivate/IsPrivate"
 
@@ -96,7 +97,14 @@ function App() {
             // </IsPrivate>
           }
         />
-
+      <Route
+          path="/cart"
+          element={
+            // <IsPrivate>
+              <Cart/>
+            // </IsPrivate>
+          }
+        />
         
       </Routes>
 
