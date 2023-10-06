@@ -44,7 +44,7 @@ function AuthProviderWrapper(props) {
           if(user?.isAdmin){
             navigate("/admin/product"); 
            }else{
-             navigate("/");
+            //  navigate("/");
            }
         })
         .catch((error) => {

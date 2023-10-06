@@ -1,53 +1,51 @@
 import React, { useState, useEffect } from "react";
-import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
 import authService from "../../services/auth.service.js"; 
 
-//Página que se muestra después de que un usuario haya completado un pago con Stripe
 function Success() {
   const [order, setOrder] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const start = async () => {
-      const queryParams = new URLSearchParams(window.location.search);
-      const id = queryParams.get("id");
+    const fetchOrderDetails = async () => {
+      try {
+        const queryParams = new URLSearchParams(window.location.search);
+        const id = queryParams.get("id");
+        console.log("aqui");
+        // Llama a la API para verificar el estado de pago en Stripe
+        await authService.api.get(
+          `http://localhost:5005/api/stripe/checkPayment/${id}`
+        );
 
-      await authService.api.get(
-        "http://localhost:5005/api/stripe/checkPayment/" + id
-      );
+        // Llama a la API para obtener los detalles de la orden 
+        const orderRes = await authService.api.get(
+          `http://localhost:5005/api/orders/orders/${id}` 
+        );
 
-      let orderRes = await authService.api.get(
-        "http://localhost:5005/api/orders/orders/" + id
-      );
-      setOrder(orderRes.data);
+        setOrder(orderRes.data);
+        setLoading(false);
+      } catch (error) {
+        setError("Error al cargar los detalles de la orden.");
+        setLoading(false);
+      }
     };
 
-  //   authService.api
-  // .get("http://localhost:5005/api/orders/orders/" + id)
-  // .then((response) => {
-  //   let orderRes = response.data;
-  //   setOrder(orderRes);
-
-    try {
-      start();
-    } catch (e) {
-
-      console.log(e)
-    }
+    fetchOrderDetails();
   }, []);
 
   return (
-    <div style={{ "white-space": "pre" }}>
-      <br />
-      <br />
-      <br />
-      <br />
-
-      {JSON.stringify(order, null, 4)}
-      <br />
-      <br />
+    <div>
+      {loading ? (
+        <p>Cargando...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        <pre>{JSON.stringify(order, null, 4)}</pre>
+      )}
     </div>
   );
 }
+
 export default Success;
+
 // "651daee1f23e47b2e9f830c6"
