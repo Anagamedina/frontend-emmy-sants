@@ -18,7 +18,7 @@ function Cart() {
       //  solicitud al backend para crear un nuevo pedido
       const orderResponse = await authService.api.post("http://localhost:5005/api/orders/create/",{
          products:[ {
-                 "product": "65109609ea5efa2ff1a74838",
+                 "product": "65109609ea5efa2ff1a74838",   
                  "amount": 4
              }] 
       });
