@@ -12,7 +12,6 @@ import RamosPage from "./pages/ProductsPages/RamosPage";
 import UserPlantasDetailsPage from "./pages/ProductsPages/UserPlantasDetailsPage";
 import UserRamosDetailsPage from "./pages/ProductsPages/UserRamosDetailsPage";
 import CustomNavbar from "./components/Navbar/CustomNavbar";
-import ShoppingCartPage from "./pages/ProductsPages/ShoppingCartPage";
 
 // import IsPrivate from "./components/IsPrivate/IsPrivate"
 
@@ -98,14 +97,7 @@ function App() {
           }
         />
 
-<Route
-          path="/products/shoppingcart"
-          element={
-            // <IsPrivate>
-              <ShoppingCartPage />
-            // </IsPrivate>
-          }
-        />
+
 
         
       </Routes>

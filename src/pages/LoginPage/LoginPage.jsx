@@ -3,70 +3,82 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import authService from "../../services/auth.service";
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [showPassword, setShowPassword] = useState(false); // Nuevo estado
 
   const navigate = useNavigate();
 
-  const { storeToken, authenticateUser } = useContext(AuthContext);
+  const { storeToken, authenticateUser, user } = useContext(AuthContext);
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     const requestBody = { email, password };
 
-    // Send a request to the server using axios
-    /* 
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`)
-      .then((response) => {})
-    */
-
-    // Or using a service
     authService
       .login(requestBody)
-      .then((response) => {
-        // If the POST request is successful store the authentication token,
-        // after the token is stored authenticate the user
-        // and at last navigate to the home page
+      .then(async (response) => {
         storeToken(response.data.authToken);
-        authenticateUser();
-        navigate("/");
+       
+        await authenticateUser();
+        console.log(user); 
+        //  if(user?.isAdmin){
+        //   navigate("/admin/product"); 
+        //  }else{
+        //    navigate("/");
+        //  }
+      
       })
       .catch((error) => {
-        // If the request resolves with an error, set the error message in the state
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
       });
   };
 
   return (
-    <div className="LoginPage">
-      <h1>Login</h1>
+    <Container className=" cardSignup justify-content-center align-items-center">
+      <Row className="cardSignup justify-content-center align-items-center" style={{ minHeight: "90vh" }}>
+        <Col xs={12} md={6}>
+          <Form className="cardLoginForm" onSubmit={handleLoginSubmit}>
+            <h1 className="loginText">Login</h1>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label></Form.Label>
+              <Form.Control type="email" placeholder="Ingrese su Correo Electrónico" value={email} onChange={handleEmail} />
+            </Form.Group>
 
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label></Form.Label>
+              <Form.Control
+                type={showPassword ? "text" : "password"} // Establece el tipo dinámicamente
+                placeholder="Ingrese su Contraseña"
+                value={password}
+                onChange={handlePassword}
+                
+              />
+             
+            </Form.Group>
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+            <Button className="btn-info text-light buttonSignup mr-3 mb-3" type="submit">
+              Login
+            </Button>
+            <p className="linkSignupText">¿No tienes una cuenta? <Link to="/signup" id="linkSignup">Registrate Aquí</Link></p>
+          </Form>
 
-        <button type="submit">Login</button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
-    </div>
+          {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
