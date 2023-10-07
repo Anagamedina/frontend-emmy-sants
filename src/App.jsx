@@ -43,6 +43,7 @@ function App() {
         />
 
 <Route
+<Route
           path="product/ramos/:id"
           element={< UserRamosDetailsPage/>}
         />
@@ -96,6 +97,9 @@ function App() {
             // </IsPrivate>
           }
         />
+
+
+
 
 
 
