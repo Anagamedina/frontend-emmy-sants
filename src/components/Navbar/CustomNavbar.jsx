@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/auth.context";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import logo from "../../img/logoemmy.png";
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaShoppingCart } from 'react-icons/fa'; // Importa el icono del carrito de compras
 import "./Navbar.css"; //
 
 function CustomNavbar() {
@@ -61,6 +61,10 @@ function CustomNavbar() {
               </>
             )}
 
+            {/* Enlace del carrito de compras */}
+            <Link to="/products/shoppingcart" className="nav-link">
+              <FaShoppingCart />
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
