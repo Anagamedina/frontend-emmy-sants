@@ -6,10 +6,16 @@ import Nav from 'react-bootstrap/Nav';
 import logo from "../../img/logoemmy.png";
 import { FaBars } from 'react-icons/fa';
 import "./Navbar.css"; //
+import Cart from "../../pages/OrderPage/Cart.jsx"
 
 function CustomNavbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   const [expanded, setExpanded] = useState(false);
+  const [toggleCarti, setToggleCarti] = useState(false);
+  
+  const toggleCart=()=>{
+    setToggleCarti(!toggleCarti)
+  }
 
   return (
     <div className="content">
@@ -60,7 +66,14 @@ function CustomNavbar() {
                 <span className="holaUser" >    🌷  Hola {user.firstName}</span>
               </>
             )}
-
+            <button onClick={toggleCart } className="nav-button">  { !toggleCarti  ? "Ver ":"Ocultar"} carrito</button>
+            
+             { toggleCarti &&  
+                <div className="miniCart">
+                  <Cart></Cart>
+                </div> 
+             }
+            
           </Nav>
         </Navbar.Collapse>
       </Navbar>

@@ -33,13 +33,29 @@ function UserProductDetailsPage() {
   //   "usuario": "65204b50aa655f842b1abad0"
   //  }
 
+  
+//Esta función verifica si el producto actual ya está en el carrito.
   const addToCart=(prod)=>{
     let carrito = [] 
 
     let cardLS = localStorage.getItem("cart")
     if(cardLS != null){
       carrito = JSON.parse(cardLS)
-    }
+    } 
+
+  //   const existingProduct = carrito.find((p) => p._id === prod._id);
+
+  //   if (existingProduct) {
+  //     // Si el producto ya está en el carrito, lo eliminamos
+  //     carrito = carrito.filter((p) => p._id !== prod._id);
+  //   } else {
+  //     // Si el producto no está en el carrito, lo agregamos
+  //     carrito.push(prod);
+  //   }
+  
+  //   localStorage.setItem("cart", JSON.stringify(carrito));
+  //   isAddedToCart(); // Actualiza el estado del botón
+  // };
 
     if(carrito.length === 0  || carrito.find(p=>p._id !== prod._id))  {
       carrito.push(prod) 
@@ -49,6 +65,9 @@ function UserProductDetailsPage() {
     isAddedToCard()
   }
 
+
+
+  ///verifique si el producto actual está en el carrito:
   const isAddedToCard=(prod)=>{
     let carrito = [] 
 
@@ -56,7 +75,7 @@ function UserProductDetailsPage() {
     if(cardLS != null){
       carrito = JSON.parse(cardLS)
     } 
-    setIsAddedToCardVal(carrito.find(p=>p._id === id))  
+    setIsAddedToCardVal(carrito.find(p=>p._id === id))  //setIsAddedToCardVal(carrito.some((p) => p._id === id));
   }
 
   const plantInfoInApi = (productName) => {

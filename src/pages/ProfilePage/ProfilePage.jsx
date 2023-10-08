@@ -11,6 +11,8 @@ function ProfilePage() {
 
       let {data} = await authService.api("/api/orders/history")
       setData(data)
+      // const response = await authService.api("/api/orders/history");
+      // setData(response.data); es lo mismo!!!!! 
     }
     start()
   },[])
@@ -26,16 +28,16 @@ function ProfilePage() {
       <br></br>
       <br></br>
       <h1>Profile page</h1>
-{
+{ data ? 
   data.map(order=>(
     <div className="card">{order.createdAt}</div>
-  ))
+  )) : <p>Cargando...</p> 
 }
 
-      <div>
+      {/* <div>
         <hr></hr>
         {JSON.stringify(data)}
-      </div>
+      </div> */}
     </div>
   );
 }

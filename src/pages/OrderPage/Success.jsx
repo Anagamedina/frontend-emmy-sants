@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import authService from "../../services/auth.service.js";
 
-
+//para mostrar los detalles de una orden después de que se haya realizado un pago exitoso.
 //http://localhost:3000/success?id=652113715d337963c72f0c43
 
 function Success() {
@@ -43,7 +43,19 @@ function Success() {
       ) : error ? (
         <p>{error}</p>
       ) : (
-        <pre>{JSON.stringify(order, null, 4)}</pre>
+        <div>
+          <h2>Detalles de la orden</h2>
+          <p>Estado: {order.state}</p>
+          <p>ID de la orden: {order._id}</p>
+          <p>Productos:</p>
+          <ul>
+            {order.products.map((product) => (
+              <li key={product._id}>
+                Nombre: {product.product.nombre}, Cantidad: {product.amount}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );
