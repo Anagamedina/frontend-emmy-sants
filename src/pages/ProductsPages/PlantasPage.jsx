@@ -49,7 +49,8 @@ function PlantasPage() {
                     <h4>{product.nombre}</h4>
                   </Card.Title>
                   <Card.Text className="cardText">{product.descripcion}</Card.Text>
-                  <Card.Text>Precio: {product.precio}</Card.Text>
+                  <Card.Text>Precio: {product.precio}</Card.Text> 
+                  {/* <Card.Text>Stock: {product.amount}</Card.Text> */}
                   <Button variant="info">
                     <Link to={`/product/plantas/${product._id}`} className='botonVerDetalles'>Ver detalles</Link>
                   </Button>

@@ -6,10 +6,16 @@ import Nav from 'react-bootstrap/Nav';
 import logo from "../../img/logoemmy.png";
 import { FaBars, FaShoppingCart } from 'react-icons/fa'; // Importa el icono del carrito de compras
 import "./Navbar.css"; //
+import Cart from "../../pages/OrderPage/Cart.jsx"
 
 function CustomNavbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   const [expanded, setExpanded] = useState(false);
+  const [toggleCarti, setToggleCarti] = useState(false);
+  
+  const toggleCart=()=>{
+    setToggleCarti(!toggleCarti)
+  }
 
   return (
     <div className="content">
@@ -61,11 +67,14 @@ function CustomNavbar() {
                 <span className="holaUser" >    🌷  Hola {user.firstName}</span>
               </>
             )}
-
-            {/* Enlace del carrito de compras */}
-            <Link to="/products/shopping-cart" className="nav-link">
-              <FaShoppingCart />
-            </Link>
+            <button onClick={toggleCart } className="nav-button">  { !toggleCarti  ? "Ver ":"Ocultar"} carrito</button>
+            
+             { toggleCarti &&  
+                <div className="miniCart">
+                  <Cart></Cart>
+                </div> 
+             }
+            
           </Nav>
         </Navbar.Collapse>
       </Navbar>

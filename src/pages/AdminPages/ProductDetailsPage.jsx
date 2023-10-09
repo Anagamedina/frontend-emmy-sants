@@ -130,6 +130,7 @@ function ProductDetailsPage() {
             )}
           </Card.Text>
           <Card.Text>Precio: {product.precio}€</Card.Text>
+          <Card.Text>Amount: {product.amount} </Card.Text>
           
           {user && user.isAdmin && (
             <div>

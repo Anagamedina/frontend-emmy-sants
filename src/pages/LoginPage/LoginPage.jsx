@@ -38,6 +38,8 @@ function LoginPage() {
         //  }else{
         //    navigate("/");
         //  }
+
+        navigate("/")
       
       })
       .catch((error) => {

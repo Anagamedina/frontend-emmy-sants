@@ -44,20 +44,21 @@ function OrdersPage() {
             return (
                 <div class="card" style={{width: "18rem"}}>
 
-                    <p>fecha:  {order.createdAt}</p>
+                    <p>fecha:  {order.createdAt}</p> 
                     <ul class="list-group list-group-flush"> 
 
-                    <li class="list-group-item" key={i}>
+                    <div class="list-group-item" key={i}>
                     {order.products.filter(p=>p.product!=null).map( (producto,y) =>{
-                      //  return(
-                      //   JSON.stringify(producto)
-                      //  )
+                       
                         return (
+                          <div> 
                             <li class="list-group-item"  key={y}>   {producto.amount} x {producto.product.nombre}  = {producto.product.precio*producto.amount}€</li> 
+                          </div>
                         )
+
                     } )}
 
-                     </li>
+                     </div>
                      </ul>
                    </div>
 
