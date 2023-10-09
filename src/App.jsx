@@ -74,14 +74,6 @@ function App() {
           }
         />
 
-<Route
-          path="/products/shopping-cart"
-          element={
-            // <IsPrivate>
-              <ShoppingCartPage />
-            // </IsPrivate>
-          }
-        />
 
         <Route
           path="/admin/product"
