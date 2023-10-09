@@ -12,6 +12,8 @@ import RamosPage from "./pages/ProductsPages/RamosPage";
 import UserPlantasDetailsPage from "./pages/ProductsPages/UserPlantasDetailsPage";
 import UserRamosDetailsPage from "./pages/ProductsPages/UserRamosDetailsPage";
 import CustomNavbar from "./components/Navbar/CustomNavbar";
+import ShoppingCartPage from "./pages/OrderPage/ShoppingCartPage";
+import StoragePage from "./pages/AdminPages/StoragePage";
 
 // import IsPrivate from "./components/IsPrivate/IsPrivate"
 
@@ -64,6 +66,15 @@ function App() {
           }
         />
 
+<Route
+          path="/products/shopping-cart"
+          element={
+            // <IsPrivate>
+              <ShoppingCartPage />
+            // </IsPrivate>
+          }
+        />
+
         <Route
           path="/admin/product"
           element={
@@ -93,6 +104,15 @@ function App() {
           element={
             // <IsPrivate>
               <ProductDetailsPage />
+            // </IsPrivate>
+          }
+        />
+
+<Route
+          path="/admin/storage"
+          element={
+            // <IsPrivate>
+              <StoragePage />
             // </IsPrivate>
           }
         />

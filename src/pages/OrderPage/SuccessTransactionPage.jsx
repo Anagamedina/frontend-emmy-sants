@@ -3,7 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import authService from "../../services/auth.service.js"; // Asegúrate de importar authService correctamente
 
-function Success() {
+function SuccessTransactionPage() {
   const [order, setOrder] = useState({});
 
   useEffect(() => {
@@ -42,5 +42,5 @@ function Success() {
     </div>
   );
 }
-export default Success;
+export default SuccessTransactionPage;
 // "651daee1f23e47b2e9f830c6"

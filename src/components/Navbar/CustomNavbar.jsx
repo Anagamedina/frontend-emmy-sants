@@ -34,6 +34,7 @@ function CustomNavbar() {
             {user && user.isAdmin && (
               <>
                 <Link to="/admin/product" className="nav-link">Admin</Link>
+                <Link to="/admin/storage" className="nav-link">Storage</Link>
               </>
             )}
             {user && !user.isAdmin && (
@@ -62,7 +63,7 @@ function CustomNavbar() {
             )}
 
             {/* Enlace del carrito de compras */}
-            <Link to="/products/shoppingcart" className="nav-link">
+            <Link to="/products/shopping-cart" className="nav-link">
               <FaShoppingCart />
             </Link>
           </Nav>

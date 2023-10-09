@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
-function Cart() {
+function ShoppingCartPage() {
     async function createPaymentSession() {
       const stripe = await loadStripe("pk_test_51NworTIamvwN9XVUOROW2KekjqXq8JjSZENPuI9WKEuJ4HWyscjw1G6ZXh8MAPKy9nVXQlFlgak49n8XXJcb5G2F00ucmpwsQE");
     // 1//enviar  create order al backend
@@ -34,4 +34,4 @@ function Cart() {
     </div>
   );
 }
-export default Cart;
+export default ShoppingCartPage;
