@@ -30,14 +30,14 @@ function LoginPage() {
       .login(requestBody)
       .then(async (response) => {
         storeToken(response.data.authToken);
-       
         await authenticateUser();
-        console.log(user); 
-        //  if(user?.isAdmin){
-        //   navigate("/admin/product"); 
-        //  }else{
-        //    navigate("/");
-        //  }
+        console.log(user);
+
+         if(user?.isAdmin){
+          navigate("/admin/product"); 
+         }else{
+           navigate("/");
+         }
 
         navigate("/")
       

@@ -5,15 +5,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import logo from "../../img/logoemmy.png";
 import { FaBars } from 'react-icons/fa';
-import "./Navbar.css"; //
+import "./Navbar.css";
 import Cart from "../../pages/OrderPage/Cart.jsx"
 
 function CustomNavbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   const [expanded, setExpanded] = useState(false);
   const [toggleCarti, setToggleCarti] = useState(false);
-  
-  const toggleCart=()=>{
+
+  const toggleCart = () => {
     setToggleCarti(!toggleCarti)
   }
 
@@ -35,13 +35,20 @@ function CustomNavbar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto linksNav">
             <Link to="/" className="nav-link">Home</Link>
-            <Link to="/plantas" className="nav-link">Plantas</Link>
-            <Link to="/flores" className="nav-link">Ramos</Link>
+            
+            {user && !user.isAdmin && ( // Mostrar "Plantas" y "Ramos" solo a usuarios regulares
+              <>
+                <Link to="/plantas" className="nav-link">Plantas</Link>
+                <Link to="/flores" className="nav-link">Ramos</Link>
+              </>
+            )}
+
             {user && user.isAdmin && (
               <>
                 <Link to="/admin/product" className="nav-link">Admin</Link>
               </>
             )}
+
             {user && !user.isAdmin && (
               <>
                 <Link to="/profile" className="nav-link">
@@ -63,17 +70,24 @@ function CustomNavbar() {
 
             {user && !user.isAdmin && (
               <>
-                <span className="holaUser" >    🌷  Hola {user.firstName}</span>
+                <span className="holaUser">🌷 Hola {user.firstName}</span>
               </>
             )}
-            <button onClick={toggleCart } className="nav-button">  { !toggleCarti  ? "Ver ":"Ocultar"} carrito</button>
-            
-             { toggleCarti &&  
-                <div className="miniCart">
-                  <Cart></Cart>
-                </div> 
-             }
-            
+
+            {user && user.isAdmin && (
+              <>
+                <Link to="/" className="nav-link">Tienda Online</Link>
+              </>
+            )}
+
+            <button onClick={toggleCart} className="nav-button">  {!toggleCarti ? "Ver " : "Ocultar"} carrito</button>
+
+            {toggleCarti &&
+              <div className="miniCart">
+                <Cart></Cart>
+              </div>
+            }
+
           </Nav>
         </Navbar.Collapse>
       </Navbar>
