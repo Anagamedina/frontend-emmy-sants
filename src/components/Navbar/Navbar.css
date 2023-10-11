@@ -17,7 +17,7 @@
     background-color: rgb(206, 139, 189);
     align-items: center;
     justify-content: center;
-    position: fixed;
+    /* position: fixed; */
     justify-content: space-between;
     align-content: center;
 }
@@ -35,7 +35,7 @@ button {
 }
 
 .logo img {
-    margin-left: 100px;
+    margin-left: 10px;
     width: 200px;
 }
 
@@ -51,7 +51,7 @@ button {
     color: white;
   }
   .navToggle {
-    margin: 0px 100px 0px 0px;
+    margin: 0px 10px 0px 0px;
   }
 
   .holaUser {
@@ -62,7 +62,7 @@ button {
 .log{
     margin-top: 8px;
 }
-.miniCart  {
+/* .miniCart  {
   position: fixed;
   right: 0;
   z-index: 20;
@@ -72,4 +72,25 @@ button {
   border: 1px solid;
   top: 0;
   height: 100%;
+} */
+
+.miniCart {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 20;
+  background: #ce8bbd;
+  padding: 10px;
+  border: 1px solid;
+  width: 100%; /* Ocupará todo el ancho disponible */
+  max-width: 300px; /* Establece un ancho máximo para evitar que se expanda demasiado */
+  height: auto; /* Altura automática para adaptarse al contenido */
+}
+
+@media (max-width: 768px) {
+  /* Estilos específicos para pantallas más pequeñas, ajusta según tus necesidades */
+  .miniCart {
+    top:370px;
+    max-width: 100%; /* Ocupará todo el ancho disponible en pantallas más pequeñas */
+  }
 }

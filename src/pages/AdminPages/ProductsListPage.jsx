@@ -56,7 +56,7 @@ function ProductsListPage() {
         <Row>
           <Col lg={3}>
             {/* Filtros de Categoría */}
-            <h2>Select Category</h2>
+            <h2>Panel de Control </h2>
             <ul className="list-group">
               <li className={`list-group-item ${filterCategory === 'todas' ? 'active' : ''}`} onClick={() => setFilterCategory("todas")}>Todas</li>
               <li className={`list-group-item ${filterCategory === 'ramos' ? 'active' : ''}`} onClick={() => setFilterCategory("ramos")}>Ramos</li>

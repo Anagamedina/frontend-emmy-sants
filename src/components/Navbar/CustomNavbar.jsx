@@ -9,18 +9,18 @@ import "./Navbar.css";
 import Cart from "../../pages/OrderPage/Cart.jsx"
 
 function CustomNavbar() {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const { isLoggedIn, user, logOutUser, setCartVisibility, showCart, cartCounter, setCartCounter } = useContext(AuthContext);
   const [expanded, setExpanded] = useState(false);
-  const [toggleCarti, setToggleCarti] = useState(false);
+  // const [toggleCarti, setToggleCarti] = useState(false);
 
   const toggleCart = () => {
-    setToggleCarti(!toggleCarti)
+    setCartVisibility(!showCart)
   }
 
   return (
     <div className="content">
       <Navbar bg="rgb(206, 139, 189)" expand="lg" expanded={expanded} className={`nav ${expanded ? 'expanded' : ''}`}>
-        <Navbar.Brand href="/" className="logo">
+        <Navbar.Brand className="logo">
           <img src={logo} alt="Logo Emmy Sants" />
         </Navbar.Brand>
         <Navbar.Toggle
@@ -74,20 +74,17 @@ function CustomNavbar() {
               </>
             )}
 
-            {user && user.isAdmin && (
-              <>
-                <Link to="/" className="nav-link">Tienda Online</Link>
-              </>
-            )}
+          
+            <button onClick={toggleCart} className="nav-button">  {!showCart ? "Ver " : "Ocultar"} carrito</button>
+            <button onClick={toggleCart} className="nav-button"> 🛒 <sup>{cartCounter}</sup> </button>
 
-            <button onClick={toggleCart} className="nav-button">  {!toggleCarti ? "Ver " : "Ocultar"} carrito</button>
-
-            {toggleCarti &&
+            {showCart &&
               <div className="miniCart">
                 <Cart></Cart>
               </div>
             }
 
+            
           </Nav>
         </Navbar.Collapse>
       </Navbar>

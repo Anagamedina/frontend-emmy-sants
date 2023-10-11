@@ -30,16 +30,16 @@ function LoginPage() {
       .login(requestBody)
       .then(async (response) => {
         storeToken(response.data.authToken);
-        await authenticateUser();
-        console.log(user);
+        let userL = await authenticateUser();
+        console.log(userL);
 
-         if(user?.isAdmin){
+         if(userL?.isAdmin){
           navigate("/admin/product"); 
          }else{
            navigate("/");
          }
 
-        navigate("/")
+         
       
       })
       .catch((error) => {

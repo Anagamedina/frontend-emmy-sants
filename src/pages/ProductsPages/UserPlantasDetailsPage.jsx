@@ -12,6 +12,8 @@ import plantas from "../../img/plantas.png"
 function UserProductDetailsPage() {
   const { id } = useParams();
 
+  const {   setCartVisibility  } = useContext(AuthContext);
+
   const [selectedProduct, setSelectedProduct] = useState({});
   const [plantInfo, setPlantInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -43,26 +45,27 @@ function UserProductDetailsPage() {
       carrito = JSON.parse(cardLS)
     } 
 
-  //   const existingProduct = carrito.find((p) => p._id === prod._id);
-
+  //   const existingProduct = carrito.find((p) => p._id === prod._id); 
   //   if (existingProduct) {
   //     // Si el producto ya está en el carrito, lo eliminamos
   //     carrito = carrito.filter((p) => p._id !== prod._id);
   //   } else {
   //     // Si el producto no está en el carrito, lo agregamos
   //     carrito.push(prod);
-  //   }
-  
+  //   } 
   //   localStorage.setItem("cart", JSON.stringify(carrito));
   //   isAddedToCart(); // Actualiza el estado del botón
   // };
-
-    if(carrito.length === 0  || carrito.find(p=>p._id !== prod._id))  {
+  prod.quantity = 1
+  //comprobar si hay como minimo un prod, y comprobar si nohay  duplicados
+    if( carrito.length === 0 || carrito.find(p=>p._id !== prod._id))  {
       carrito.push(prod) 
     } 
     
     localStorage.setItem("cart", JSON.stringify(carrito))
-    isAddedToCard()
+    // isAddedToCard()
+    setCartVisibility(true)
+    setIsAddedToCardVal(true)
   }
 
 
