@@ -1,11 +1,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100;200&display=swap');
 
 
 
 .content {
   
-  overflow: hidden; /* Evita que aparezca el scroll en el contenedor */
+  overflow: hidden;
 }
 
 
@@ -78,7 +79,8 @@ text-decoration: none;
     justify-content:space-around;
   }
   .footerText {
-    margin: 10px;
+
+    margin-top: 20px;
+    font-family: 'Onest', sans-serif;
     color: rgb(206, 139, 189);
-  font-weight: 600 ;
   }

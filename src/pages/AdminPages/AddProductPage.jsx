@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import Compressor from 'compressorjs'; 
 import { Container, Row, Col, Alert } from 'react-bootstrap';
-import authService from '../../services/auth.service.js';
+import authService from '../../services/auth.service.js'; 
 import { useNavigate } from 'react-router-dom';
 import './adminProductsPages.css';
 
-function AddProductPage() {
+function AddProductPage({ history }) {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -13,7 +14,6 @@ function AddProductPage() {
     precio: '',
     categoria: '',
     'product-image': null,
-    cantidad: 0, // Nuevo campo para la cantidad
   });
 
   const [successMessage, setSuccessMessage] = useState('');
@@ -26,8 +26,26 @@ function AddProductPage() {
       precio: '',
       categoria: '',
       'product-image': null,
-      cantidad: 0,
     });
+  };
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+
+    new Compressor(file, {
+      quality: 0.1, 
+      success(result) {
+        setFormData({ ...formData, 'product-image': result });
+      },
+      error(err) {
+        console.error('Error al comprimir la imagen:', err);
+      },
+    });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const onSubmit = (e) => {
@@ -55,7 +73,6 @@ function AddProductPage() {
           setSuccessMessage('');
         }, 5000);
 
-        // Después de crear el producto con éxito, redirige al usuario a la página de lista de productos.
         navigate('/admin/product');
       })
       .catch((error) => {
@@ -84,9 +101,7 @@ function AddProductPage() {
                   id="nombre"
                   name="nombre"
                   value={formData.nombre}
-                  onChange={(e) =>
-                    setFormData({ ...formData, nombre: e.target.value })
-                  }
+                  onChange={handleInputChange}
                   placeholder="Coloque aquí el nombre del producto"
                   required
                 />
@@ -98,9 +113,7 @@ function AddProductPage() {
                   id="descripcion"
                   name="descripcion"
                   value={formData.descripcion}
-                  onChange={(e) =>
-                    setFormData({ ...formData, descripcion: e.target.value })
-                  }
+                  onChange={handleInputChange}
                   placeholder="Ingrese una breve descripción del producto"
                   required
                 />
@@ -112,9 +125,7 @@ function AddProductPage() {
                   id="precio"
                   name="precio"
                   value={formData.precio}
-                  onChange={(e) =>
-                    setFormData({ ...formData, precio: e.target.value })
-                  }
+                  onChange={handleInputChange}
                   placeholder="Ingrese el precio del producto"
                   required
                 />
@@ -122,9 +133,8 @@ function AddProductPage() {
               <div className="mb-3">
                 <select
                   className="form-select form-select-lg mb-3"
-                  onChange={(e) =>
-                    setFormData({ ...formData, categoria: e.target.value })
-                  }
+                  onChange={handleInputChange}
+                  name="categoria"
                   value={formData.categoria || ''}
                   required
                 >
@@ -145,33 +155,10 @@ function AddProductPage() {
                   className="form-control"
                   id="product-image"
                   name="product-image"
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      'product-image': e.target.files[0],
-                    })
-                  }
+                  onChange={handleImageUpload} 
                   required
                 />
               </div>
-
-              <div className="mb-3">
-                <label htmlFor="cantidad" className="form-label">
-                  Cantidad del producto:
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="cantidad"
-                  name="cantidad"
-                  value={formData.cantidad}
-                  onChange={(e) =>
-                    setFormData({ ...formData, cantidad: e.target.value })
-                  }
-                  required
-                />
-              </div>
-
               <button type="submit" className="btn-info text-light btn">
                 Crear Producto
               </button>

@@ -3,7 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import authService from "../../services/auth.service";
 import   CartIcon from "../../img/Cart";
 
-
+import "./cart.css"
 
 function Cart() {
   const [sessionId, setSessionId] = useState(null);
@@ -11,27 +11,17 @@ function Cart() {
   // const [productsCart, setProductCart] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const [productsCart, setProductCart] = useState( JSON.parse(localStorage.getItem("cart")) );
-
-
-
-  function handleQuantityChange(product, newQuantity) {
-    setProductCart((prevCart) =>
-      prevCart.map((p) =>
-        p._id === product._id ? { ...p, quantity: parseInt(newQuantity) } : p
-      )
-    );
+ 
+  function handleQuantityChange(pid, newQuantity) {
+    let prevCart = [...productsCart]
+    let prodSelected =  prevCart.find(prod => prod._id === pid ) 
+     
+    prodSelected.quantity = parseInt(newQuantity)
+ 
+    setProductCart(prevCart) 
   }
+   
 
-  // function handleQuantityChange(product, newQuantity) {
-  //   const updatedCart = [...productsCart];
-  //   const productIndex = updatedCart.findIndex((p) => p._id === product._id);
-  
-  //   if (productIndex !== -1) {
-  //     updatedCart[productIndex].quantity = newQuantity;
-  //     setProductCart(updatedCart);
-  //   }
-  // }
-  
 
   function incrementQuantity(pid) {
     let prevCart = [...productsCart]
@@ -52,6 +42,14 @@ function Cart() {
     setProductCart(prevCart) 
   }
 
+  function removeFromCart(pid){
+    let prevCart = [...productsCart]
+     
+    prevCart = prevCart.filter(p=>p._id !== pid) 
+     
+    setProductCart(prevCart) 
+
+  }
 
   async function createPaymentSession() {
     try {
@@ -117,18 +115,20 @@ function Cart() {
 
   return (
     <div>
-      <h2><CartIcon></CartIcon> Productos de carrito</h2>
+      <h2 className="cartTitle"><CartIcon></CartIcon> Productos de carrito</h2>
 
       <ul className="list-group">
         {productsCart.map((prod) => (
           <li className="list-group-item" key={prod._id}>
+            <span onClick={() => removeFromCart(prod._id)} className="closeButton">x</span> 
             <p>Nombre: {prod.nombre}</p>
             <p>Precio: {prod.precio}</p>
             <input
               type="number"
               placeholder="Cantidad"
               value={prod.quantity || 0}
-              onChange={(e) => handleQuantityChange(prod, e.target.value)}
+              onChange={(e) => handleQuantityChange(prod._id, e.target.value)}
+               style={{width:"60px"}}
             />
             <button className="btn btn-info" onClick={() => incrementQuantity(prod._id)}>+</button>
             <button className="btn btn-info"  onClick={() => decrementQuantity(prod._id)}>-</button>
@@ -148,5 +148,3 @@ function Cart() {
 }
 
 export default Cart;
-
-

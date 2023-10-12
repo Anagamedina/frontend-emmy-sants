@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import AddProductPage from "./pages/AdminPages/AddProductPage";
 import ProductDetailsPage from "./pages/AdminPages/ProductDetailsPage";
@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="App">
       <CustomNavbar />
-
+       
       <Routes>
         <Route path="/" element={<HomePage />} />
 
@@ -73,7 +73,6 @@ function App() {
             // </IsPrivate>
           }
         />
-
 
         <Route
           path="/admin/product"
@@ -130,4 +129,3 @@ function App() {
 }
 
 export default App;
-

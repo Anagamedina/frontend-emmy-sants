@@ -1,68 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100;200&display=swap');
 
 .content {
-    display: flex;
-    width: 100%;
-    height: 5%;
-    flex-wrap: wrap;
-    list-style: none;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  width: 100%;
+  height: 5%;
+  flex-wrap: wrap;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav {
-   
-    display: flex;
-    width: 100%;
-    height: 50px;
-    background-color: rgb(206, 139, 189);
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    justify-content: space-between;
-    align-content: center;
+  font-family: 'Onest', sans-serif;
+  font-size: 1.3rem;
+  z-index: 21;
+  display: flex;
+  width: 100%;
+  height: 50px;
+  background-color: rgb(206, 139, 189);
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  justify-content: space-between;
+  align-content: center;
 }
 
-
 button {
-    background: none;
-    border: none;
-    color: white;
-   
+  background: none;
+  border: none;
+  color: white;
 }
 
 .linksNav a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .logo img {
-    margin-left: 100px;
-    width: 200px;
+  margin: 0 20px; /* Ajusta los márgenes del logo aquí */
+  width: 200px;
 }
 
-  .nav.expanded {
-    padding-top: 50px;
-    text-align: center;
-    height: 370px;
-    background-color: rgb(206, 139, 189); 
-    padding-bottom: 50px;
-  }
-  
-  .navbar-toggler-icon {
-    color: white;
-  }
-  .navToggle {
-    margin: 0px 100px 0px 0px;
-  }
-
-  .holaUser {
-    margin-top: 9px !important;
-    text-align: center;
-  }
-
-.log{
-    margin-top: 8px;
+.nav.expanded {
+  padding-top: 50px;
+  text-align: center;
+  height: 370px;
+  background-color: rgb(206, 139, 189);
+  padding-bottom: 50px;
 }
-.miniCart  {
+
+.navbar-toggler-icon {
+  color: white;
+}
+
+.navToggle {
+  margin: 0 20px 0 0; /* Ajusta los márgenes del icono de hamburguesa aquí */
+}
+
+.holaUser {
+  margin-top: 9px !important;
+  text-align: center;
+}
+
+.log {
+  margin-top: 8px;
+}
+
+.miniCart {
   position: fixed;
   right: 0;
   z-index: 20;
@@ -72,4 +75,13 @@ button {
   border: 1px solid;
   top: 0;
   height: 100%;
+}
+.cartNav {
+  margin-right: 2%;
+}
+
+@media (max-width: 768px) {
+  .miniCart {
+    z-index: 21; /* Cambiamos el z-index para que esté por encima de la barra de navegación colapsada */
+  }
 }

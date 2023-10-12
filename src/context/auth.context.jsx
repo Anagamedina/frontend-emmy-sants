@@ -10,6 +10,26 @@ function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
+  // const [cart, setCart] = useState([]);
+  const [showCart, setShowCart] = useState(false); 
+  const [cartCounter, setCartCounter] = useState(0); 
+
+  useEffect(()=>{
+    setCartVisibility(false)
+  },[])
+
+  const setCartVisibility=(v)=> {
+    setShowCart(v); 
+
+      let carrito = []  
+      let cardLS = localStorage.getItem("cart")
+      if(cardLS != null){
+        carrito = JSON.parse(cardLS)
+      } 
+      setCartCounter(carrito.length)
+  }
+
+  
 
   const storeToken = (token) => {
     localStorage.setItem("authToken", token);
@@ -31,21 +51,23 @@ function AuthProviderWrapper(props) {
         */
 
       // Or using a service
-      await authService
+      return await authService
         .verify()
         .then((response) => {
           // If the server verifies that JWT token is valid  ✅
-          const user = response.data;
+          const userData = response.data;
           // Update state variables
           setIsLoggedIn(true);
           setIsLoading(false);
-          setUser(user);
+          setUser(userData);
 
-          if(user?.isAdmin){
-            navigate("/admin/product"); 
-           }else{
-            //  navigate("/");
-           }
+          console.log(userData)
+          return userData
+          // if(user?.isAdmin){
+          //   navigate("/admin/product"); 
+          //  }else{
+          //    navigate("/");
+          //  }
         })
         .catch((error) => {
           // If the server sends an error response (invalid token) ❌
@@ -91,6 +113,8 @@ function AuthProviderWrapper(props) {
         storeToken,
         authenticateUser,
         logOutUser,
+        showCart,
+        setCartVisibility, cartCounter, setCartCounter
       }}
     >
       {props.children}

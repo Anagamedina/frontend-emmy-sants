@@ -1,8 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
+
 
 .contentProducts {
     margin-bottom: 30px;
 }
 
+.contentProducts h1 {
+    font-family: 'Playball', cursive;
+    font-size: 5rem;
+}
 .modal-content{
     align-items: center;
     justify-content: center;
@@ -27,4 +33,9 @@ a:link, a:visited, a:active {
     padding: 15px;
     text-align: justify;
     margin-top: 10px;
+}
+
+.nameProduct {
+    font-size: 2rem;
+
 }
