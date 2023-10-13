@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import authService from "../../services/auth.service.js";
 
 //para mostrar los detalles de una orden después de que se haya realizado un pago exitoso.
-//http://localhost:3000/success?id=652113715d337963c72f0c43
+
 
 function Success() {
   const [order, setOrder] = useState({});
@@ -63,4 +63,4 @@ function Success() {
 
 export default Success;
 
-// "651daee1f23e47b2e9f830c6"
+

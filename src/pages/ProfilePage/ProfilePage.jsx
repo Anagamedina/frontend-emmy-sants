@@ -5,13 +5,25 @@ import './ProfilePage.css';
 function ProfilePage() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [suma, setSuma] = useState(0);
 
   useEffect(() => {
     async function fetchOrderHistory() {
       try {
         const response = await authService.api.get("/api/orders/history");
+        
+        let sumaa 
+        response.data.map(order=>{
+          sumaa = 0
+          order.products.map(productInfo => {
+            sumaa+= productInfo.amount  *(productInfo.product && productInfo.product.precio || 0)
+          })
+          order.totalAmount = sumaa
+        })
+
         setOrders(response.data);
         setLoading(false);
+
       } catch (error) {
         console.error("Error fetching order history:", error);
         setLoading(false);
@@ -44,7 +56,7 @@ function ProfilePage() {
                           {productInfo.product && (
                             <img
                               className="product-image"
-                              src={productInfo.product.imagen} // Asegúrate de que la propiedad sea "imagen"
+                              src={productInfo.product.imagen} 
                               alt={productInfo.product.nombre}
                             />
                           )}

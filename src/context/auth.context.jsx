@@ -25,6 +25,7 @@ function AuthProviderWrapper(props) {
       let cardLS = localStorage.getItem("cart")
       if(cardLS != null){
         carrito = JSON.parse(cardLS)
+        // localStorage.setItem("cart","[]")
       } 
       setCartCounter(carrito.length)
   }

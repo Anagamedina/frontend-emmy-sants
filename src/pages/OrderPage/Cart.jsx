@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import authService from "../../services/auth.service";
 import   CartIcon from "../../img/Cart";
+import { AuthContext } from "../../context/auth.context";
 
 import "./cart.css"
 
@@ -10,8 +11,9 @@ function Cart() {
   const [orderHistory, setOrderHistory] = useState([]);
   // const [productsCart, setProductCart] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
-  const [productsCart, setProductCart] = useState( JSON.parse(localStorage.getItem("cart")) );
- 
+  const [productsCart, setProductCart] = useState( JSON.parse( localStorage.getItem("cart") ) || []  );
+  const {user, setCartVisibility } = useContext(AuthContext);
+
   function handleQuantityChange(pid, newQuantity) {
     let prevCart = [...productsCart]
     let prodSelected =  prevCart.find(prod => prod._id === pid ) 
@@ -110,11 +112,13 @@ function Cart() {
     }, 0);
     setTotalAmount(total); 
     
-    localStorage.setItem("cart",JSON.stringify(productsCart))
+    localStorage.setItem("cart", JSON.stringify(productsCart) )
   }, [productsCart]);
 
   return (
     <div>
+
+      <div className="closeButton" onClick={()=>setCartVisibility(false)}> X </div>
       <h2><CartIcon></CartIcon> Productos de carrito</h2>
 
       <ul className="list-group">
@@ -138,11 +142,22 @@ function Cart() {
       <br />
       <p>Total a pagar: {totalAmount || 0}</p>
       <br />
-      <input
-        onClick={() => createPaymentSession()}
-        type="button"
-        value="Pagar"
-      />
+
+      {
+        user && (
+          <input
+          onClick={() => createPaymentSession()}
+          type="button"
+          value="Pagar"
+        />
+        )
+      }
+      {
+        !user && (
+           <p>Mensaje</p>
+        )
+      }
+     
     </div>
   );
 }

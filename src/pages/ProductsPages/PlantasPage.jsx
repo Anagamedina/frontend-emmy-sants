@@ -47,8 +47,9 @@ function PlantasPage() {
                 <Card.Body className="card">
                   <Card.Title>
                     <h4>{product.nombre}</h4>
-                  </Card.Title>
-                  <Card.Text className="cardText">{product.descripcion}</Card.Text>
+                  </Card.Title> 
+                  <Card.Text className='cardText'>{product.descripcion.slice(0,52)}...</Card.Text>
+
                   <Card.Text>Precio: {product.precio}</Card.Text> 
                   {/* <Card.Text>Stock: {product.amount}</Card.Text> */}
                   <Button variant="info">

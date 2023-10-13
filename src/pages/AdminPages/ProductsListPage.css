@@ -1,0 +1,7 @@
+.list-group-item.active {
+    background-color: rgb(206, 139, 189) !important;
+    border-color: rgb(206, 139, 189) !important;
+}
+.list-group {
+    box-shadow: 3px 3px 40px rgb(212, 210, 210);
+}

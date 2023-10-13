@@ -24,6 +24,9 @@ function ProductsListPage() {
     authService.api
       .get(`${backendUrl}/api/products`)
       .then((response) => {
+          response.data.map(prod =>  
+            prod.imagen = prod.imagen.replace("/upload","/upload/w_250")
+           )
         setProducts(response.data);
       })
       .catch((error) => {
@@ -85,8 +88,8 @@ function ProductsListPage() {
                     />
                     <Card.Body className='card'>
                       <Card.Title>{product.nombre}</Card.Title>
-                      <Card.Text className='cardText'>{product.descripcion}</Card.Text>
-                      <Card.Text>Precio: {product.precio}</Card.Text>
+                      <Card.Text className='cardText'>{product.descripcion.slice(0,52)}...</Card.Text>
+                      <Card.Text>Precio: {product.precio}€</Card.Text>
                       <Card.Text>Categoría: {product.categoria}</Card.Text>
                       <Link to={`/admin/products/${product._id}`} className="mr-3 btn-info text-light btn">
                         Detalles

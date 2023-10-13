@@ -75,8 +75,12 @@ function CustomNavbar() {
             )}
 
           
-            <button onClick={toggleCart} className="nav-button">  {!showCart ? "Ver " : "Ocultar"} carrito</button>
-            <button onClick={toggleCart} className="nav-button"> 🛒 <sup>{cartCounter}</sup> </button>
+            {/* <button onClick={toggleCart} className="nav-button">  {!showCart ? "Ver " : "Ocultar"} carrito</button> */}
+            {/* <button onClick={toggleCart} className="nav-button"> 🛒 <sup>{cartCounter}</sup> </button> */}
+
+
+
+
 
             {showCart &&
               <div className="miniCart">
@@ -85,6 +89,20 @@ function CustomNavbar() {
             }
 
             
+          </Nav> 
+          <Nav> 
+            <Nav.Link eventKey={2} href="#cart" style={{minWidth:"300px"}}>
+          
+              <div className="cartNav">
+                {/* Mostrar el carrito solo si no está logueado un usuario admin */
+                (!user || (user && !user.isAdmin)) && (
+                  <>
+                    {/* <button onClick={toggleCart} className="nav-button">  {!showCart ? "Ver" : "Ocultar"} carrito</button> */}
+                    <button onClick={toggleCart} className="nav-button"> 🛒 <sup>{cartCounter}</sup> </button>
+                  </>
+                )}
+              </div>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

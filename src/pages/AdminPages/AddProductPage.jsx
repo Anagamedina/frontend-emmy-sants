@@ -4,6 +4,7 @@ import authService from '../../services/auth.service.js';
 import {  useNavigate } from "react-router-dom";
 import "./adminProductsPages.css"
 
+
 function AddProductPage({ history }) {
   const navigate = useNavigate();
   
@@ -153,3 +154,8 @@ function AddProductPage({ history }) {
 }
 
 export default AddProductPage;
+
+
+
+
+
