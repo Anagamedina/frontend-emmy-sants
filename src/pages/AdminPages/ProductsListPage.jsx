@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom'; 
-import authService from '../../services/auth.service.js'; // Asegúrate de importar authService correctamente
+import authService from '../../services/auth.service.js';
+import './ProductsListPage.css'
 
 
 function ProductsListPage() {
@@ -61,16 +62,16 @@ function ProductsListPage() {
             {/* Filtros de Categoría */}
             <h2>Panel de Control </h2>
             <ul className="list-group">
-              <li className={`list-group-item ${filterCategory === 'todas' ? 'active' : ''}`} onClick={() => setFilterCategory("todas")}>Todas</li>
+              <li className={`list-group-item ${filterCategory === 'todas' ? 'active' : ''}`} onClick={() => setFilterCategory("todas")}>Todos los productos</li>
               <li className={`list-group-item ${filterCategory === 'ramos' ? 'active' : ''}`} onClick={() => setFilterCategory("ramos")}>Ramos</li>
               <li className={`list-group-item ${filterCategory === 'plantas' ? 'active' : ''}`} onClick={() => setFilterCategory("plantas")}>Plantas</li>
             </ul>
 
             <div className="d-grid gap-2 m-3">
-              <Link className="btn btn-success" to={"/admin/add-product"}>
+              <Link className="btn btn-info btn-block" to={"/admin/add-product"}>
                 Crear Producto
               </Link>
-              <Link className="btn btn-info" to={"/admin/orders"}>
+              <Link className="btn btn-warning btn-block text-dark" to={"/admin/orders"}>
                 Ver ordenes
               </Link>
             </div>

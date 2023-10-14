@@ -50,9 +50,9 @@ function RamosPage() {
                   </Card.Title>
                   <Card.Text className="cardText">{product.descripcion}</Card.Text>
                   <Card.Text>Precio: {product.precio}</Card.Text>
-                  <Button variant="info">
-                    <Link to={`/product/ramos/${product._id}`} className='botonVerDetalles'>Ver detalles</Link>
-                  </Button>
+                  <Link to={`/product/ramos/${product._id}`} className='botonVerDetalles'>
+                    <Button className='text-light' variant="info">Ver detalles</Button>
+                  </Link>
                 </Card.Body>
               </Card>
             </Col>

@@ -5,8 +5,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import logo from "../../img/logoemmy.png";
 import { FaBars } from 'react-icons/fa';
-import "./Navbar.css";
+import "./Navbar.css"; 
 import Cart from "../../pages/OrderPage/Cart.jsx"
+
 
 function CustomNavbar() {
   const { isLoggedIn, user, logOutUser, setCartVisibility, showCart, cartCounter, setCartCounter } = useContext(AuthContext);
@@ -75,11 +76,6 @@ function CustomNavbar() {
             )}
 
           
-            {/* <button onClick={toggleCart} className="nav-button">  {!showCart ? "Ver " : "Ocultar"} carrito</button> */}
-            {/* <button onClick={toggleCart} className="nav-button"> 🛒 <sup>{cartCounter}</sup> </button> */}
-
-
-
 
 
             {showCart &&
@@ -97,7 +93,7 @@ function CustomNavbar() {
                 {/* Mostrar el carrito solo si no está logueado un usuario admin */
                 (!user || (user && !user.isAdmin)) && (
                   <>
-                    {/* <button onClick={toggleCart} className="nav-button">  {!showCart ? "Ver" : "Ocultar"} carrito</button> */}
+               
                     <button onClick={toggleCart} className="nav-button"> 🛒 <sup>{cartCounter}</sup> </button>
                   </>
                 )}

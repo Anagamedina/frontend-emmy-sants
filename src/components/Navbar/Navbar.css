@@ -1,12 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100;200&display=swap');
+
 
 .content {
-    display: flex;
-    width: 100%;
-    height: 5%;
-    flex-wrap: wrap;
-    list-style: none;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  width: 100%;
+  height: 5%;
+  flex-wrap: wrap;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav {
@@ -17,57 +19,27 @@
     background-color: rgb(206, 139, 189);
     align-items: center;
     justify-content: center;
-    /* position: fixed; */
+    position: fixed;
     justify-content: space-between;
     align-content: center;
 }
 
-/* .nav { 
-    font-family: 'Onest', sans-serif;
-  font-size: 1.3rem;
-  z-index: 21;
-  display: flex;
-  width: 100%;
-  height: 50px;
-  background-color: rgb(206, 139, 189);
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  justify-content: space-between;
-  align-content: center;
-}*/
-
 
 button {
-    background: none;
-    border: none;
-    color: white;
-   
+  background: none;
+  border: none;
+  color: white;
+ 
 }
-.linksNav  {
-  width: 100%;
-}
+
 .linksNav a {
     text-decoration: none;
-    
 }
-/* .nav-link{
-  min-width: 100px;
-} */
+
 .logo img {
-    margin-left: 10px;
+    margin-left: 100px;
     width: 200px;
 }
-.nav.expanded {
-  padding-top: 50px;
-  text-align: center;
-  height: 370px;
-  background-color: rgb(206, 139, 189); 
-  padding-bottom: 50px;
-}
-    /* margin: 0 20px; /* Ajusta los márgenes del logo aquí */
-    /* width: 200px;
-
 
   .nav.expanded {
     padding-top: 50px;
@@ -81,7 +53,7 @@ button {
     color: white;
   }
   .navToggle {
-    margin: 0px 10px 0px 0px;
+    margin: 0px 100px 0px 0px;
   }
 
   .holaUser {
@@ -92,7 +64,7 @@ button {
 .log{
     margin-top: 8px;
 }
-/* .miniCart  {
+.miniCart  {
   position: fixed;
   right: 0;
   z-index: 20;
@@ -102,25 +74,4 @@ button {
   border: 1px solid;
   top: 0;
   height: 100%;
-} */
-
-.miniCart {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 20;
-  background: #ce8bbd;
-  padding: 10px;
-  border: 1px solid;
-  width: 100%; /* Ocupará todo el ancho disponible */
-  max-width: 300px; /* Establece un ancho máximo para evitar que se expanda demasiado */
-  height: auto; /* Altura automática para adaptarse al contenido */
-}
-
-@media (max-width: 768px) {
-  /* Estilos específicos para pantallas más pequeñas, ajusta según tus necesidades */
-  .miniCart {
-    top:370px;
-    max-width: 100%; /* Ocupará todo el ancho disponible en pantallas más pequeñas */
-  }
 }

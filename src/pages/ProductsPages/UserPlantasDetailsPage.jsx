@@ -9,7 +9,7 @@ import "./productsPages.css"
 import plantas from "../../img/plantas.png"
 
 
-function UserProductDetailsPage() {
+function UserPlantasDetailsPage() {
   const { id } = useParams();
 
   const {   setCartVisibility  } = useContext(AuthContext);
@@ -130,7 +130,7 @@ function UserProductDetailsPage() {
     <Button className='btn btn-danger' variant="info">
        <Link to={`/plantas`} >volver</Link>
     </Button>
-    <Button className='btn btn-success m-2' disabled={isAddedToCardVal}  onClick={()=>addToCart(selectedProduct)} variant="info">
+    <Button className='btn btn-success m-2 text-light' disabled={isAddedToCardVal}  onClick={()=>addToCart(selectedProduct)} variant="info">
         Añadir al carrito
     </Button>
   </Card.Body>
@@ -154,7 +154,7 @@ function UserProductDetailsPage() {
       {isLoading && (
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Spinner animation="border" />
-          <span style={{ marginLeft: '10px' }}>Cargando información de la API 📦</span>
+          <span style={{ marginLeft: '10px' }}>Descargando la información 📦</span>
         </div>
       )}
 
@@ -172,4 +172,4 @@ function UserProductDetailsPage() {
   );
 }
 
-export default UserProductDetailsPage;
+export default UserPlantasDetailsPage;

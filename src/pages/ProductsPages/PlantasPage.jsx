@@ -52,9 +52,9 @@ function PlantasPage() {
 
                   <Card.Text>Precio: {product.precio}</Card.Text> 
                   {/* <Card.Text>Stock: {product.amount}</Card.Text> */}
-                  <Button variant="info">
-                    <Link to={`/product/plantas/${product._id}`} className='botonVerDetalles'>Ver detalles</Link>
-                  </Button>
+                  <Link to={`/product/plantas/${product._id}`} className='botonVerDetalles'>
+                    <Button className='text-light' variant="info">Ver detalles</Button>
+                  </Link>
                 </Card.Body>
               </Card>
             </Col>
