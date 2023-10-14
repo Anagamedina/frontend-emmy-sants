@@ -21,7 +21,7 @@
 }
 
 .product-image {
-  width: 40px; /* Tamaño de la imagen más pequeño */
+  width: 100px; /* Tamaño de la imagen más pequeño */
   height: 40px;
   margin-right: 10px;
 }

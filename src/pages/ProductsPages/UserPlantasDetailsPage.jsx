@@ -21,19 +21,6 @@ function UserProductDetailsPage() {
   const [isAddedToCardVal, setIsAddedToCardVal] = useState({});
 
     
-  // {
-  //   "products": [
-  //     {
-  //       "product": "6510977c639e3b694084ddc4",
-  //       "amount": 7
-  //     },
-  //     {
-  //       "product": "65109609ea5efa2ff1a74838",
-  //       "amount": 4
-  //    }
-  //   ],
-  //   "usuario": "65204b50aa655f842b1abad0"
-  //  }
 
   
 //Esta función verifica si el producto actual ya está en el carrito.
