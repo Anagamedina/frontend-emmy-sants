@@ -4,7 +4,7 @@ import authService from "../../services/auth.service";
 import   CartIcon from "../../img/Cart";
 import { AuthContext } from "../../context/auth.context";
 
-import "./cart.css"
+import "../../utils/Cart.css"
 
 function Cart() {
   const [sessionId, setSessionId] = useState(null);
