@@ -5,9 +5,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import logo from "../../img/logoemmy.png";
 import { FaBars } from 'react-icons/fa';
-import "./Navbar.css"; 
+import "./Navbar.css";
 import Cart from "../../pages/OrderPage/Cart.jsx"
-
 
 function CustomNavbar() {
   const { isLoggedIn, user, logOutUser, setCartVisibility, showCart, cartCounter, setCartCounter } = useContext(AuthContext);
