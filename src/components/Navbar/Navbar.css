@@ -52,6 +52,9 @@ background-color: rgb(206, 139, 189);
 padding-bottom: 50px;
 }
   
+.holaUser {
+  margin-top: 8px;
+}
 
 @media (max-width: 768px) {
 /* Estilos específicos para pantallas más pequeñas, ajusta según tus necesidades */

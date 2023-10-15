@@ -37,12 +37,14 @@ function CustomNavbar() {
           <Nav className="ml-auto linksNav">
             <Link to="/" className="nav-link">Home</Link>
             
-            {user && !user.isAdmin && ( // Mostrar "Plantas" y "Ramos" solo a usuarios regulares
-              <>
-                <Link to="/plantas" className="nav-link">Plantas</Link>
-                <Link to="/flores" className="nav-link">Ramos</Link>
-              </>
-            )}
+            {
+              !(user && user.isAdmin) && (
+                <>
+                  <Link to="/plantas" className="nav-link">Plantas</Link>
+                  <Link to="/flores" className="nav-link">Ramos</Link>
+                </>
+              )
+            }
 
             {user && user.isAdmin && (
               <>
