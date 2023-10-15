@@ -6,6 +6,7 @@ import "./productsPages.css"
 
 function RamosPage() {
   const [plantProducts, setPlantProducts] = useState([]);
+  const [stockInfo, setStockInfo] = useState({});
 
   useEffect(() => {
     const axiosProducts = () => {
@@ -17,6 +18,19 @@ function RamosPage() {
           const allProducts = response.data;
           const plantProducts = getPlantProducts(allProducts);
           setPlantProducts(plantProducts);
+
+          const productIds = plantProducts.map((product) => product._id);
+          axios
+            .all(productIds.map((productId) =>
+              axios.get(`${backendUrl}/api/products/${productId}/storage`)
+            ))
+            .then((stockResponses) => {
+              const stockData = {};
+              stockResponses.forEach((response, index) => {
+                stockData[productIds[index]] = response.data.amount;
+              });
+              setStockInfo(stockData);
+            });
         })
         .catch((error) => {
           console.error('Error:', error);
@@ -47,9 +61,18 @@ function RamosPage() {
                 <Card.Body className="card">
                   <Card.Title>
                     <h4>{product.nombre}</h4>
-                  </Card.Title>
-                  <Card.Text className="cardText">{product.descripcion}</Card.Text>
-                  <Card.Text>Precio: {product.precio}</Card.Text>
+                  </Card.Title> 
+                  <Card.Text className='cardText'>{product.descripcion.slice(0, 52)}...</Card.Text>
+                  <Card.Text>Precio: {product.precio}€</Card.Text>
+                  
+                  {/* Título h4 con fondo de color rojo o verde para indicar el estado de stock */}
+                  <h4
+                    className={`text-light bg-${stockInfo[product._id] > 0 ? 'success' : 'danger'}`}
+                  >
+                    {stockInfo[product._id] > 0 ? 'En Stock' : 'Sin Stock'}
+                  </h4>
+
+                  {/* Botón "Ver detalles" que lleva a la página de detalles del producto */}
                   <Link to={`/product/ramos/${product._id}`} className='botonVerDetalles'>
                     <Button className='text-light' variant="info">Ver detalles</Button>
                   </Link>

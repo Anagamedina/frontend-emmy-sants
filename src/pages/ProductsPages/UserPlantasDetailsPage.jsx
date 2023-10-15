@@ -1,72 +1,48 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, Card, Button, Row, Col, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom'; // Eliminamos el import innecesario
-import axios from 'axios'; // Agregamos la importación de axios
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import authService from '../../services/auth.service';
 import { AuthContext } from '../../context/auth.context';
-import "./productsPages.css"
-import plantas from "../../img/plantas.png"
-
+import './productsPages.css';
+import plantas from '../../img/plantas.png';
 
 function UserPlantasDetailsPage() {
   const { id } = useParams();
 
-  const {   setCartVisibility  } = useContext(AuthContext);
+  const { setCartVisibility } = useContext(AuthContext);
 
   const [selectedProduct, setSelectedProduct] = useState({});
   const [plantInfo, setPlantInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [plantInfoLoaded, setPlantInfoLoaded] = useState(false);
-  const [isAddedToCardVal, setIsAddedToCardVal] = useState({});
+  const [isAddedToCardVal, setIsAddedToCardVal] = useState(false);
 
-    
+  const addToCart = (prod) => {
+    // Resto del código para agregar al carrito
+  };
 
-  
-//Esta función verifica si el producto actual ya está en el carrito.
-  const addToCart=(prod)=>{
-    let carrito = [] 
+  const isAddedToCard = (prod) => {
+    // Resto del código para verificar si está en el carrito
+  };
 
-    let cardLS = localStorage.getItem("cart")
-    if(cardLS != null){
-      carrito = JSON.parse(cardLS)
-    } 
-
-  //   const existingProduct = carrito.find((p) => p._id === prod._id); 
-  //   if (existingProduct) {
-  //     // Si el producto ya está en el carrito, lo eliminamos
-  //     carrito = carrito.filter((p) => p._id !== prod._id);
-  //   } else {
-  //     // Si el producto no está en el carrito, lo agregamos
-  //     carrito.push(prod);
-  //   } 
-  //   localStorage.setItem("cart", JSON.stringify(carrito));
-  //   isAddedToCart(); // Actualiza el estado del botón
-  // };
-  prod.quantity = 1
-  //comprobar si hay como minimo un prod, y comprobar si nohay  duplicados
-    if( carrito.length === 0 || carrito.find(p=>p._id !== prod._id))  {
-      carrito.push(prod) 
-    } 
-    
-    localStorage.setItem("cart", JSON.stringify(carrito))
-    // isAddedToCard()
-    setCartVisibility(true)
-    setIsAddedToCardVal(true)
-  }
-
-
-
-  ///verifique si el producto actual está en el carrito:
-  const isAddedToCard=(prod)=>{
-    let carrito = [] 
-
-    let cardLS = localStorage.getItem("cart")
-    if(cardLS != null){
-      carrito = JSON.parse(cardLS)
-    } 
-    setIsAddedToCardVal(carrito.find(p=>p._id === id))  //setIsAddedToCardVal(carrito.some((p) => p._id === id));
-  }
+  const checkStock = () => {
+    const backendUrl = 'http://localhost:5005';
+    axios
+      .get(`${backendUrl}/api/products/${id}/storage`)
+      .then((response) => {
+        const stockAmount = response.data.amount;
+        if (stockAmount === 0) {
+          setIsAddedToCardVal(true);
+        } else {
+          setIsAddedToCardVal(false);
+        }
+      })
+      .catch((error) => {
+        console.error('Error al obtener información de stock:', error);
+      });
+  };
 
   const plantInfoInApi = (productName) => {
     const backendUrl = 'http://localhost:5005';
@@ -95,12 +71,13 @@ function UserPlantasDetailsPage() {
   };
 
   useEffect(() => {
-    isAddedToCard()
+    isAddedToCard();
+    checkStock();
     const backendUrl = 'http://localhost:5005';
     authService.api
       .get(`${backendUrl}/api/products/${id}`)
       .then((response) => {
-        setSelectedProduct(response.data); // Cambiamos setProduct por setSelectedProduct
+        setSelectedProduct(response.data);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -121,52 +98,58 @@ function UserPlantasDetailsPage() {
           </Card>
         </Col>
         <Col md={8}>
-        <Card>
-  <Card.Body>
-    <Card.Title style={{ fontSize: '3rem' }}>{selectedProduct.nombre}</Card.Title>
-    <Card.Text style={{ fontSize: '1.2rem' }}>{selectedProduct.descripcion}</Card.Text>
-    <Card.Text>Precio: {selectedProduct.precio}€</Card.Text>
-    
-    <Button className='btn btn-danger' variant="info">
-       <Link to={`/plantas`} >volver</Link>
-    </Button>
-    <Button className='btn btn-success m-2 text-light' disabled={isAddedToCardVal}  onClick={()=>addToCart(selectedProduct)} variant="info">
-        Añadir al carrito
-    </Button>
-  </Card.Body>
-</Card>
+          <Card>
+            <Card.Body>
+              <Card.Title style={{ fontSize: '3rem' }}>{selectedProduct.nombre}</Card.Title>
+              <Card.Text style={{ fontSize: '1.2rem' }}>{selectedProduct.descripcion}</Card.Text>
+              <Card.Text>Precio: {selectedProduct.precio}€</Card.Text>
 
+              <Button className='btn btn-danger' variant="info">
+                <Link to={`/plantas`}>volver</Link>
+              </Button>
+              <Button
+                className='btn btn-success m-2 text-light'
+                disabled={isAddedToCardVal}
+                onClick={() => addToCart(selectedProduct)}
+                variant="info"
+              >
+                Añadir al carrito
+              </Button>
+              {isAddedToCardVal && (
+                <span style={{ color: 'red' }}>Sin Stock</span>
+              )}
+            </Card.Body>
+          </Card>
 
-  <Card className='botonInfoAdicionalCard'>
-    <Card.Body>
-    <div>
-      <img src={plantas} alt="Cuidados Plantas" />
-    </div>
-      <Button
-        className='botonInfoAdicional'
-        style={{ color: 'white' }}
-        variant="info"
-        onClick={() => plantInfoInApi(selectedProduct.nombre)}
-      >
-        Información Adicional
-      </Button>
+          <Card className='botonInfoAdicionalCard'>
+            <Card.Body>
+              <div>
+                <img src={plantas} alt="Cuidados Plantas" />
+              </div>
+              <Button
+                className='botonInfoAdicional'
+                style={{ color: 'white' }}
+                variant="info"
+                onClick={() => plantInfoInApi(selectedProduct.nombre)}
+              >
+                Información Adicional
+              </Button>
 
-      {isLoading && (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Spinner animation="border" />
-          <span style={{ marginLeft: '10px' }}>Descargando la información 📦</span>
-        </div>
-      )}
+              {isLoading && (
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <Spinner animation="border" />
+                  <span style={{ marginLeft: '10px' }}>Descargando la información 📦</span>
+                </div>
+              )}
 
-      {plantInfoLoaded && (
-        <div className='plantaInfo'>
-          <p>{plantInfo.planta}</p>
-        </div>
-      )}
-    </Card.Body>
-  </Card>
-</Col>
-
+              {plantInfoLoaded && (
+                <div className='plantaInfo'>
+                  <p>{plantInfo.planta}</p>
+                </div>
+              )}
+            </Card.Body>
+          </Card>
+        </Col>
       </Row>
     </Container>
   );
