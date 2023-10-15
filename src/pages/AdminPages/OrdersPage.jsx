@@ -8,7 +8,7 @@ function OrdersPage() {
   const [totalOrders, setTotalOrders] = useState(0);
 
   const axiosOrders = () => {
-    const backendUrl = 'http://localhost:5005'; // Asegúrate de que esta URL sea correcta
+    const backendUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005'; // Asegúrate de que esta URL sea correcta
     axios
       .get(`${backendUrl}/api/orders`)
       .then((response) => {

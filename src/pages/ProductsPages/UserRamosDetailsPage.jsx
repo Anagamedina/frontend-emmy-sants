@@ -62,7 +62,7 @@ function UserRamosDetailsPage() {
 
 
   const checkStock = () => {
-    const backendUrl = 'http://localhost:5005';
+    const backendUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
     axios
       .get(`${backendUrl}/api/products/${id}/storage`)
       .then((response) => {
@@ -80,7 +80,7 @@ function UserRamosDetailsPage() {
 
   useEffect(() => {
     checkStock();
-    const backendUrl = 'http://localhost:5005';
+    const backendUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
     authService.api
       .get(`${backendUrl}/api/products/${id}`)
       .then((response) => {
