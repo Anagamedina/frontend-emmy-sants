@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useState, useEffect,useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import authService from "../../services/auth.service";

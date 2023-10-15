@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import "./LoginPage.css";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";

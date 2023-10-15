@@ -43,8 +43,28 @@
     margin-right: 10px;
 }
 
-.product-name {
+/* .product-name {
     font-weight: bold;
+} */
+
+ul {
+    list-style: none;
 }
 
-/* Otros estilos ... */
+.cardHeader {
+    background-color: rgb(206, 139, 189) !important;
+    color: white !important;
+    border:rgb(206, 139, 189) !important;
+}
+
+.cardFooter {
+    background-color: rgb(206, 139, 189) !important;
+    border:rgb(206, 139, 189) !important;
+    color: white !important;
+}
+
+.card {
+    box-shadow: 2px 2px 10px rgb(193, 190, 190);
+    
+
+}

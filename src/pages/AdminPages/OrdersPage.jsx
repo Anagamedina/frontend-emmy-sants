@@ -29,28 +29,31 @@ function OrdersPage() {
     <Container>
       <br />
       <br />
-      <h2>Número de Pedidos: {totalOrders}</h2>
+      <h2 className='titleOrders' >Número de Pedidos: {totalOrders}</h2>
       <Row>
         {orders.map((order, i) => (
           <Col key={i} xs={12} lg={3}>
             <Card style={{ width: '100%' }}>
               <Card.Body className='cardBodyOrder'>
-                <Card.Title>Order ID: {order._id ? order._id : "ID no disponible"}</Card.Title>
+                <Card.Title>
+                <h4>Comprador:<br /> {order.usuario ? `${order.usuario.firstName} ${order.usuario.lastName}` : "Usuario no disponible"}</h4>
+                <hr></hr>
+                <h6>Número de Orden: {order._id ? order._id : "ID no disponible"}</h6>
+                </Card.Title>
                 <Card.Text>
+                <hr></hr>
                   Estado: {order.state ? order.state : "Estado no disponible"}
-                  <br />
-                  Fecha de Creación: {order.createdAt ? new Date(order.createdAt).toLocaleString() : "Fecha no disponible"}
-                  <br />
-                  Comprador: {order.usuario ? `${order.usuario.firstName} ${order.usuario.lastName}` : "Usuario no disponible"}
-                  <br />
-                  Monto total de la compra: {calculateTotalPrice(order.products)}€
+                  <hr></hr>
+                  Fecha de Creación: <br />{order.createdAt ? new Date(order.createdAt).toLocaleString() : "Fecha no disponible"}
+                  <hr></hr>
+                  StrapiID: <p className='strapiFont' >{order.strapiID ? order.strapiID : "Nombre no disponible"}</p>
+                  <hr></hr>
+                  Total Compra: {calculateTotalPrice(order.products)}€
                 </Card.Text>
                 <ul className="list-group list-group-flush">
                   {order.products.map((productInfo, y) => (
                     <li className="list-group-item" key={y}>
-                      Producto ID: {productInfo.product ? productInfo.product._id : "ID no disponible"}
-                      <br />
-                      Nombre del Producto: {productInfo.product ? productInfo.product.nombre : "Nombre no disponible"}
+                      Producto: {productInfo.product ? productInfo.product.nombre : "Nombre no disponible"}
                       <br />
                       Precio del Producto: {productInfo.product ? productInfo.product.precio : "Nombre no disponible"}€
                       <br />
