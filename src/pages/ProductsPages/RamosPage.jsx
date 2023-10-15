@@ -15,6 +15,9 @@ function RamosPage() {
       axios
         .get(`${backendUrl}/api/products`)
         .then((response) => {
+          response.data.map(prod =>  
+            prod.imagen = prod.imagen.replace("/upload","/upload/w_250")
+           )
           const allProducts = response.data;
           const plantProducts = getPlantProducts(allProducts);
           setPlantProducts(plantProducts);

@@ -11,21 +11,60 @@ import plantas from '../../img/plantas.png';
 function UserPlantasDetailsPage() {
   const { id } = useParams();
 
-  const { setCartVisibility } = useContext(AuthContext);
+  const { showCart, setCartVisibility } = useContext(AuthContext);
 
   const [selectedProduct, setSelectedProduct] = useState({});
   const [plantInfo, setPlantInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [plantInfoLoaded, setPlantInfoLoaded] = useState(false);
   const [isAddedToCardVal, setIsAddedToCardVal] = useState(false);
+  const [hasStock, setHasStock] = useState(false);
 
-  const addToCart = (prod) => {
-    // Resto del código para agregar al carrito
-  };
+  //Esta función verifica si el producto actual ya está en el carrito.
+  const addToCart=(prod)=>{
+    let carrito = [] 
 
-  const isAddedToCard = (prod) => {
-    // Resto del código para verificar si está en el carrito
-  };
+    let cardLS = localStorage.getItem("cart")
+    if(cardLS != null){
+      carrito = JSON.parse(cardLS)
+    } 
+
+  //   const existingProduct = carrito.find((p) => p._id === prod._id); 
+  //   if (existingProduct) {
+  //     // Si el producto ya está en el carrito, lo eliminamos
+  //     carrito = carrito.filter((p) => p._id !== prod._id);
+  //   } else {
+  //     // Si el producto no está en el carrito, lo agregamos
+  //     carrito.push(prod);
+  //   } 
+  //   localStorage.setItem("cart", JSON.stringify(carrito));
+  //   isAddedToCart(); // Actualiza el estado del botón
+  // };
+  prod.quantity = 1
+  //comprobar si hay como minimo un prod, y comprobar si nohay  duplicados
+    if( carrito.length === 0 || carrito.find(p=>p._id !== prod._id))  {
+      carrito.push(prod) 
+    } 
+    
+    localStorage.setItem("cart", JSON.stringify(carrito))
+    // isAddedToCard()
+    setCartVisibility(true)
+    setIsAddedToCardVal(true)
+  }
+
+
+
+  ///verifique si el producto actual está en el carrito:
+  const isAddedToCard=(prod)=>{
+    let carrito = [] 
+
+    let cardLS = localStorage.getItem("cart")
+    if(cardLS != null){
+      carrito = JSON.parse(cardLS)
+    } 
+    setIsAddedToCardVal(carrito.find(p=>p._id === id))  //setIsAddedToCardVal(carrito.some((p) => p._id === id));
+  }
+
 
   const checkStock = () => {
     const backendUrl = 'http://localhost:5005';
@@ -33,10 +72,11 @@ function UserPlantasDetailsPage() {
       .get(`${backendUrl}/api/products/${id}/storage`)
       .then((response) => {
         const stockAmount = response.data.amount;
-        if (stockAmount === 0) {
-          setIsAddedToCardVal(true);
+        console.log("stockis",stockAmount);
+        if (stockAmount <= 0) {
+          setHasStock(false);
         } else {
-          setIsAddedToCardVal(false);
+          setHasStock(true);
         }
       })
       .catch((error) => {
@@ -84,6 +124,10 @@ function UserPlantasDetailsPage() {
       });
   }, [id]);
 
+  useEffect(() => {
+    isAddedToCard(selectedProduct)
+  }, [showCart]);
+
   return (
     <Container className="contentProducts">
       <Row>
@@ -115,7 +159,7 @@ function UserPlantasDetailsPage() {
               >
                 Añadir al carrito
               </Button>
-              {isAddedToCardVal && (
+              {!hasStock && (
                 <span style={{ color: 'red' }}>Sin Stock</span>
               )}
             </Card.Body>

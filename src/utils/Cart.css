@@ -1,11 +1,33 @@
+.closeButton{
+  top: 10px;
+  right: 15px;
+  position: absolute;
+  border: 1px solid;
+  border-radius: 12px;
+  padding:0 5px;
+}
+.separated{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+
+}
+.separated .menos{
+  background-color: #ef8c8c;
+  border: 1px solid #ef8c8c;
+
+}
+.separated .mas{
+  background-color: #94fba8;
+  border: 1px solid #94fba8;
+}
 .cart {
-    background: #f26661;
-    display: none;
+    background: #ce8bbd;
     padding: 32px;
     position: fixed;
     right: 0px;
     top: 0px;
-    width: 200px;
+  
     z-index: 1001;
   }
   
