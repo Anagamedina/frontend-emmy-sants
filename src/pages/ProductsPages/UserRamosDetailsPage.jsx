@@ -25,7 +25,7 @@ function UserRamosDetailsPage() {
       .get(`${backendUrl}/api/products/${id}/storage`)
       .then((response) => {
         const stockAmount = response.data.amount;
-        if (stockAmount === 0) {
+        if (stockAmount <= 0) {
           setIsAddedToCardVal(true);
         } else {
           setIsAddedToCardVal(false);

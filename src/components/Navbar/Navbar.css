@@ -61,6 +61,12 @@ button {
   max-width: 300px; 
   height: auto; 
 }
+
+.holaUser {
+  margin-top: 8px;
+}
+
+
 @media (max-width: 768px) {
   
   .miniCart {
