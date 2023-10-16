@@ -84,3 +84,16 @@ text-decoration: none;
     font-family: 'Onest', sans-serif;
     color: rgb(206, 139, 189);
   }
+
+  .redes{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .redes img{
+    height: 30px;
+  } 
+  .redes a{
+    color: rgb(206, 139, 189) !important;
+
+  }

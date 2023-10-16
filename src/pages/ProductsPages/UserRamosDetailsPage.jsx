@@ -15,9 +15,51 @@ function UserRamosDetailsPage() {
   const [selectedProduct, setSelectedProduct] = useState({});
   const [isAddedToCardVal, setIsAddedToCardVal] = useState(false);
 
-  const addToCart = (prod) => {
-    // Resto del código para agregar al carrito
-  };
+  //Esta función verifica si el producto actual ya está en el carrito.
+  const addToCart=(prod)=>{
+    let carrito = [] 
+
+    let cardLS = localStorage.getItem("cart")
+    if(cardLS != null){
+      carrito = JSON.parse(cardLS)
+    } 
+
+  //   const existingProduct = carrito.find((p) => p._id === prod._id); 
+  //   if (existingProduct) {
+  //     // Si el producto ya está en el carrito, lo eliminamos
+  //     carrito = carrito.filter((p) => p._id !== prod._id);
+  //   } else {
+  //     // Si el producto no está en el carrito, lo agregamos
+  //     carrito.push(prod);
+  //   } 
+  //   localStorage.setItem("cart", JSON.stringify(carrito));
+  //   isAddedToCart(); // Actualiza el estado del botón
+  // };
+  prod.quantity = 1
+  //comprobar si hay como minimo un prod, y comprobar si nohay  duplicados
+    if( carrito.length === 0 || carrito.find(p=>p._id !== prod._id))  {
+      carrito.push(prod) 
+    } 
+    
+    localStorage.setItem("cart", JSON.stringify(carrito))
+    // isAddedToCard()
+    setCartVisibility(true)
+    setIsAddedToCardVal(true)
+  }
+
+
+
+  ///verifique si el producto actual está en el carrito:
+  const isAddedToCard=(prod)=>{
+    let carrito = [] 
+
+    let cardLS = localStorage.getItem("cart")
+    if(cardLS != null){
+      carrito = JSON.parse(cardLS)
+    } 
+    setIsAddedToCardVal(carrito.find(p=>p._id === id))  //setIsAddedToCardVal(carrito.some((p) => p._id === id));
+  }
+
 
   const checkStock = () => {
     const backendUrl = 'http://localhost:5005';
@@ -26,10 +68,15 @@ function UserRamosDetailsPage() {
       .then((response) => {
         const stockAmount = response.data.amount;
         if (stockAmount <= 0) {
-          setIsAddedToCardVal(true);
+          setHasStock(false);
         } else {
-          setIsAddedToCardVal(false);
+          setHasStock(true);
         }
+        // if (stockAmount === 0) {
+        //   setIsAddedToCardVal(true);
+        // } else {
+        //   setIsAddedToCardVal(false);
+        // }
       })
       .catch((error) => {
         console.error('Error al obtener información de stock:', error);
@@ -74,13 +121,13 @@ function UserRamosDetailsPage() {
               </Button>
               <Button
                 className='btn btn-success m-2 text-light'
-                disabled={isAddedToCardVal}
+                disabled={isAddedToCardVal || !hasStock}
                 onClick={() => addToCart(selectedProduct)}
                 variant="info"
               >
                 Añadir al carrito
               </Button>
-              {isAddedToCardVal && (
+              {!hasStock && (
                 <span style={{ color: 'red' }}>Sin Stock</span>
               )}
             </Card.Body>

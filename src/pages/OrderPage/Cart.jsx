@@ -66,6 +66,7 @@ function Cart() {
           "pk_test_51NworTIamvwN9XVUOROW2KekjqXq8JjSZENPuI9WKEuJ4HWyscjw1G6ZXh8MAPKy9nVXQlFlgak49n8XXJcb5G2F00ucmpwsQE"
         );
 
+        localStorage.setItem("cart","[]")
         const result = await stripe.redirectToCheckout({
           sessionId: orderResponse.data.strapiID,
         });
@@ -144,7 +145,7 @@ function Cart() {
           value="Pagar"
         />
       )}
-      {!user && <p>Mensaje</p>}
+      {!user && <p> Por favor, registrate o inicia sesión para realizar tu pedido.</p>}
     </div>
   );
 }

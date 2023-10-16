@@ -66,11 +66,14 @@ function PlantasPage() {
                   <Card.Text>Precio: {product.precio}€</Card.Text>
                   
                   {/* Título h4 con fondo de color rojo o verde para indicar el estado de stock */}
-                  <h4
-                    className={`text-light bg-${stockInfo[product._id] > 0 ? 'success' : 'danger'}`}
+                  <div className='m-2'>
+                  
+                  <h6
+                    className={`text-lightx btn btn-outline-${stockInfo[product._id] > 0 ? 'success' : 'secondary'} d-inline p-1 m-2 bgx-${stockInfo[product._id] > 0 ? 'success' : 'secondary'}`}
                   >
                     {stockInfo[product._id] > 0 ? 'En Stock' : 'Sin Stock'}
-                  </h4>
+                  </h6>
+                  </div>
 
                   {/* Botón "Ver detalles" que lleva a la página de detalles del producto */}
                   <Link to={`/product/plantas/${product._id}`} className='botonVerDetalles'>

@@ -24,11 +24,23 @@ function HomePage() {
           </Link>
         </div>
       </div>
-      <footer className='divFooterText' >
-        <p className='footerText'>Carrer de Pamplona 95, Local 7, Barcelona, 08090</p>
-        <p className='footerText'>Telefónos 666 78 78 90 / 934 77 77 80</p>
-        
+      <footer >
+        <div className='divFooterText' >
+
+          <p className='footerText'>Carrer de Pamplona 95, Local 7, Barcelona, 08090</p>
+          <p className='footerText'>Telefónos 666 78 78 90 / 934 77 77 80</p>
+        </div>
+ 
+          <div className="redes">
+           
+            
+
+            <a  href="https://www.instagram.com/emmy__floristeria/">
+            <img  src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/900px-Instagram_icon.png?20200512141346"></img>
+              Instagram </a>
+          </div>
       </footer>
+      
     </div>
   );
 }
