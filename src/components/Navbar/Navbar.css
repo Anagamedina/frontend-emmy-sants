@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100;200&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Onest:wght@100;200&display=swap");
 
 .content {
   display: flex;
@@ -10,9 +9,7 @@
   align-items: center;
   justify-content: center;
 }
-
 .nav {
- 
   display: flex;
   width: 100%;
   height: 50px;
@@ -25,41 +22,49 @@
 
 
 
-
 button {
   background: none;
   border: none;
   color: white;
- 
 }
-.linksNav  {
-width: 100%;
+
+.linksNav {
+  width: 100%;
 }
 .linksNav a {
   text-decoration: none;
-  
 }
+
 
 .logo img {
   margin-left: 10px;
   width: 200px;
 }
 .nav.expanded {
-padding-top: 50px;
-text-align: center;
-height: 370px;
-background-color: rgb(206, 139, 189); 
-padding-bottom: 50px;
-}
-  
-.holaUser {
-  margin-top: 8px;
+  padding-top: 50px;
+  text-align: center;
+  height: 370px;
+  background-color: rgb(206, 139, 189);
+  padding-bottom: 50px;
 }
 
-@media (max-width: 768px) {
-/* Estilos específicos para pantallas más pequeñas, ajusta según tus necesidades */
+
 .miniCart {
-  top:370px;
-  max-width: 100%; /* Ocupará todo el ancho disponible en pantallas más pequeñas */
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 20;
+  background: #ce8bbd;
+  padding: 10px;
+  border: 1px solid;
+  width: 100%; 
+  max-width: 300px; 
+  height: auto; 
 }
+@media (max-width: 768px) {
+  
+  .miniCart {
+    top: 370px;
+    max-width: 100%; 
+  }
 }

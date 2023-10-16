@@ -12,7 +12,7 @@ function ProductDetailsPage() {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    const backendUrl = 'http://localhost:5005';
+    const backendUrl = process.env.REACT_APP_SERVER_URL ||'http://localhost:5005';
     authService.api
       .get(`${backendUrl}/api/products/${id}`)
       .then((response) => {
@@ -37,7 +37,7 @@ function ProductDetailsPage() {
       amount: product.amount,
     };
 
-    const backendUrl = 'http://localhost:5005';
+    const backendUrl = process.env.REACT_APP_SERVER_URL ||'http://localhost:5005';
     authService.api
       .put(`${backendUrl}/api/products/${id}`, updatedProduct)
       .then((response) => {
@@ -58,7 +58,7 @@ function ProductDetailsPage() {
       const formData = new FormData();
       formData.append('new-product-image', file);
 
-      const backendUrl = 'http://localhost:5005';
+      const backendUrl =process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
       authService.api
         .put(`${backendUrl}/api/products/${id}/update-image`, formData)

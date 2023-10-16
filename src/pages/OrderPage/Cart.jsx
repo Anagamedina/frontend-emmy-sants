@@ -4,6 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import authService from "../../services/auth.service";
 import CartIcon from "../../img/Cart";
 import { AuthContext } from "../../context/auth.context";
+import { Link } from "react-router-dom";
 
 import "../../utils/Cart.css"
 
@@ -45,9 +46,11 @@ function Cart() {
   }
 
   async function createPaymentSession() {
+    const backendUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
+    
     try {
       const orderResponse = await authService.api.post(
-        "http://localhost:5005/api/orders/create/",
+        `${backendUrl}/api/orders/create/` ,
         {
           products: productsCart.map((prod) => ({
             product: prod._id,
@@ -103,6 +106,7 @@ function Cart() {
             </span>
             <p>Nombre: {prod.nombre}</p>
             <p>Precio: {prod.precio}</p>
+            <div className="separated">
             <input
               type="number"
               placeholder="Cantidad"
@@ -111,22 +115,26 @@ function Cart() {
               style={{ width: "60px" }}
             />
             <button
-              className="btn btn-info"
+              className="btn   mas"
               onClick={() => incrementQuantity(prod._id)}
             >
               +
             </button>
             <button
-              className="btn btn-info"
+              className="btn   menos"
               onClick={() => decrementQuantity(prod._id)}
             >
               -
             </button>
+            </div>
           </li>
         ))}
       </ul>
       <br />
-      <p>Total a pagar: {totalAmount || 0}</p>
+      <p>Total a pagar: {totalAmount || 0} €</p>
+      <br />
+      <Link className="btn btn-secondary " to="/">Seguir comprando</Link>
+      <br />
       <br />
 
       {user && (

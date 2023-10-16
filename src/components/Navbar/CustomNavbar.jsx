@@ -8,16 +8,13 @@ import logo from "../../img/logoemmy.png";
 import { FaBars } from 'react-icons/fa';
 import "./Navbar.css";
 import Cart from "../../pages/OrderPage/Cart.jsx"
-
 function CustomNavbar() {
   const { isLoggedIn, user, logOutUser, setCartVisibility, showCart, cartCounter, setCartCounter } = useContext(AuthContext);
   const [expanded, setExpanded] = useState(false);
   // const [toggleCarti, setToggleCarti] = useState(false);
-
   const toggleCart = () => {
     setCartVisibility(!showCart)
   }
-
   return (
     <div className="content">
       <Navbar bg="rgb(206, 139, 189)" expand="lg" expanded={expanded} className={`nav ${expanded ? 'expanded' : ''}`}>
@@ -32,7 +29,6 @@ function CustomNavbar() {
         >
           <FaBars />
         </Navbar.Toggle>
-
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto linksNav">
             <Link to="/" className="nav-link">Home</Link>
@@ -51,7 +47,6 @@ function CustomNavbar() {
                 <Link to="/admin/product" className="nav-link">Admin</Link>
               </>
             )}
-
             {user && !user.isAdmin && (
               <>
                 <Link to="/profile" className="nav-link">
@@ -59,7 +54,6 @@ function CustomNavbar() {
                 </Link>
               </>
             )}
-
             {isLoggedIn ? (
               <>
                 <button onClick={logOutUser} className="nav-button">Logout</button>
@@ -70,14 +64,20 @@ function CustomNavbar() {
                 <Link to="/login" className="nav-link">Login</Link>
               </>
             )}
-
             {user && !user.isAdmin && (
               <>
                 <span className="holaUser">🌷 Hola {user.firstName}</span>
               </>
             )}
 
-          
+
+            {/* <button onClick={toggleCart} className="nav-button">  {!showCart ? "Ver " : "Ocultar"} carrito</button>
+            <button onClick={toggleCart} className="nav-button"> 🛒 <sup>{cartCounter}</sup> </button> */}
+            {/* <button onClick={toggleCart} className="nav-button">  {!showCart ? "Ver " : "Ocultar"} carrito</button> */}
+            {/* <button onClick={toggleCart} className="nav-button"> 🛒 <sup>{cartCounter}</sup> </button> */}
+
+
+
 
 
             {showCart &&
@@ -86,16 +86,16 @@ function CustomNavbar() {
               </div>
             }
 
-            
+
           </Nav> 
           <Nav> 
             <Nav.Link eventKey={2} href="#cart" style={{minWidth:"300px"}}>
-          
+
               <div className="cartNav">
                 {/* Mostrar el carrito solo si no está logueado un usuario admin */
                 (!user || (user && !user.isAdmin)) && (
                   <>
-               
+                    {/* <button onClick={toggleCart} className="nav-button">  {!showCart ? "Ver" : "Ocultar"} carrito</button> */}
                     <button onClick={toggleCart} className="nav-button"> 🛒 <sup>{cartCounter}</sup> </button>
                   </>
                 )}
@@ -107,5 +107,4 @@ function CustomNavbar() {
     </div>
   );
 }
-
 export default CustomNavbar;

@@ -7,7 +7,7 @@ function StoragePage() {
   const [token, setToken] = useState('');
 
   const axiosStorage = () => {
-    const backendUrl = 'http://localhost:5005';
+    const backendUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
     // Realiza una solicitud para obtener la información de almacenamiento
     axios

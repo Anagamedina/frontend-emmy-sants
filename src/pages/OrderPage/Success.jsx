@@ -17,12 +17,12 @@ function Success() {
         console.log("aqui");
         // Llama a la API para verificar el estado de pago en Stripe
         await authService.api.get(
-          `http://localhost:5005/api/stripe/checkPayment/${id}`
+          process.env.REACT_APP_SERVER_URL +`/api/stripe/checkPayment/${id}`
         );
 
         // Llama a la API para obtener los detalles de la orden 
         const orderRes = await authService.api.get(
-          `http://localhost:5005/api/orders/orders/${id}` 
+          process.env.REACT_APP_SERVER_URL +`/api/orders/orders/${id}` 
         );
 
         setOrder(orderRes.data);

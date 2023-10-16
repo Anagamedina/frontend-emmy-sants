@@ -14,21 +14,21 @@
   margin-bottom: 5px;
 }
 
-/* Placeholder styles for specific form fields */
+
 #formBasicName::placeholder {
-  color: #d8d5d5; /* Color tenue o gris claro */
+  color: #d8d5d5; 
 }
 
 #formBasicEmail::placeholder {
-  color: #d8d5d5;/* Color tenue o gris claro */
+  color: #d8d5d5;
 }
 
 #formBasicPassword::placeholder {
-  color: #d8d5d5; /* Color tenue o gris claro */
+  color: #d8d5d5; 
 }
 
 #formBasicConfirmPassword::placeholder {
-  color: #d8d5d5; /* Color tenue o gris claro */
+  color: #d8d5d5; 
 }
 
 .cardForm {
@@ -42,16 +42,16 @@
 
 
 .linkLogin {
-  text-decoration: none; /* Elimina el subrayado del enlace */
-  /* Otros estilos opcionales, como color y efectos al pasar el mouse */
-  color: #007bff; /* Cambia el color del enlace si lo deseas */
-  /* Estilo al pasar el mouse */
-  transition: color 0.3s ease; /* Cambia suavemente el color al pasar el mouse */
+  text-decoration: none;
+ 
+  color: #007bff; 
+
+  transition: color 0.3s ease; 
 }
 
 .linkLogin:hover {
-  color: #0056b3; /* Cambia el color al pasar el mouse */
-  /* Puedes ajustar el color al pasar el mouse según tu preferencia */
+  color: #0056b3; 
+  
 }
 
 #linkLoginText{
