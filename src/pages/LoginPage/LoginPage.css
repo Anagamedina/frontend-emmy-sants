@@ -7,24 +7,24 @@
   margin-top: 20px;
 }
 ::placeholder {
-  color: #d8d5d5; /* Color tenue o gris claro */
+  color: #d8d5d5; 
 }
 
-/* Placeholder styles for specific form fields */
+
 #formBasicName::placeholder {
-  color: #d8d5d5; /* Color tenue o gris claro */
+  color: #d8d5d5; 
 }
 
 #formBasicEmail::placeholder {
-  color: #d8d5d5;/* Color tenue o gris claro */
+  color: #d8d5d5;
 }
 
 #formBasicPassword::placeholder {
-  color: #d8d5d5; /* Color tenue o gris claro */
+  color: #d8d5d5;
 }
 
 #formBasicConfirmPassword::placeholder {
-  color: #d8d5d5; /* Color tenue o gris claro */
+  color: #d8d5d5; 
 }
 
 .cardLoginForm {
@@ -36,8 +36,8 @@
 }
 
 .linkSignup:hover {
-  color: #0056b3; /* Cambia el color al pasar el mouse */
-  /* Puedes ajustar el color al pasar el mouse según tu preferencia */
+  color: #0056b3;
+  
 }
 
 
