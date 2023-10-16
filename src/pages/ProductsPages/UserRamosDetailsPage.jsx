@@ -14,6 +14,7 @@ function UserRamosDetailsPage() {
 
   const [selectedProduct, setSelectedProduct] = useState({});
   const [isAddedToCardVal, setIsAddedToCardVal] = useState(false);
+  const [hasStock, setHasStock] = useState(false);
 
   //Esta función verifica si el producto actual ya está en el carrito.
   const addToCart=(prod)=>{
@@ -67,11 +68,16 @@ function UserRamosDetailsPage() {
       .get(`${backendUrl}/api/products/${id}/storage`)
       .then((response) => {
         const stockAmount = response.data.amount;
-        if (stockAmount === 0) {
-          setIsAddedToCardVal(true);
+        if (stockAmount <= 0) {
+          setHasStock(false);
         } else {
-          setIsAddedToCardVal(false);
+          setHasStock(true);
         }
+        // if (stockAmount === 0) {
+        //   setIsAddedToCardVal(true);
+        // } else {
+        //   setIsAddedToCardVal(false);
+        // }
       })
       .catch((error) => {
         console.error('Error al obtener información de stock:', error);
@@ -116,13 +122,13 @@ function UserRamosDetailsPage() {
               </Button>
               <Button
                 className='btn btn-success m-2 text-light'
-                disabled={isAddedToCardVal}
+                disabled={isAddedToCardVal || !hasStock}
                 onClick={() => addToCart(selectedProduct)}
                 variant="info"
               >
                 Añadir al carrito
               </Button>
-              {isAddedToCardVal && (
+              {!hasStock && (
                 <span style={{ color: 'red' }}>Sin Stock</span>
               )}
             </Card.Body>

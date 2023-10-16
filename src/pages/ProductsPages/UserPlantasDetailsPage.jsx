@@ -10,6 +10,7 @@ import plantas from '../../img/plantas.png';
 
 function UserPlantasDetailsPage() {
   const { id } = useParams();
+  
 
   const { showCart, setCartVisibility } = useContext(AuthContext);
 
@@ -153,7 +154,7 @@ function UserPlantasDetailsPage() {
               </Button>
               <Button
                 className='btn btn-success m-2 text-light'
-                disabled={isAddedToCardVal}
+                disabled={isAddedToCardVal || !hasStock}
                 onClick={() => addToCart(selectedProduct)}
                 variant="info"
               >
