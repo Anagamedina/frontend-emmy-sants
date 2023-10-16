@@ -1,5 +1,3 @@
-//ANA
-
 // import React, { useState, useEffect } from "react";
 // import authService from "../../services/auth.service.js";
 
@@ -65,10 +63,10 @@
 
 // export default Success;
 
-//chat
+
 import React, { useState, useEffect } from "react";
 import authService from "../../services/auth.service.js";
-import "./Success.css"; 
+import "./Success.css"; // Importa tu archivo CSS aquí
 
 function Success() {
   const [order, setOrder] = useState({});
@@ -84,10 +82,12 @@ function Success() {
         
         await authService.api.get(
           process.env.REACT_APP_SERVER_URL + `/api/stripe/checkPayment/${id}`
+          process.env.REACT_APP_SERVER_URL + `/api/stripe/checkPayment/${id}`
         );
 
-        
+        // Llama a la API para obtener los detalles de la orden
         const orderRes = await authService.api.get(
+          process.env.REACT_APP_SERVER_URL + `/api/orders/orders/${id}`
           process.env.REACT_APP_SERVER_URL + `/api/orders/orders/${id}`
         );
 
@@ -104,11 +104,13 @@ function Success() {
 
   return (
     <div className="success-container">
+    <div className="success-container">
       {loading ? (
         <p>Cargando...</p>
       ) : error ? (
         <p>{error}</p>
       ) : (
+        <div className="success-card">
         <div className="success-card">
           <h2>Detalles de la orden</h2>
           <p>Estado: {order.state}</p>
@@ -128,5 +130,3 @@ function Success() {
 }
 
 export default Success;
-
-
