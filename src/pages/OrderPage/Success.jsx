@@ -1,3 +1,5 @@
+//ANA
+
 // import React, { useState, useEffect } from "react";
 // import authService from "../../services/auth.service.js";
 
@@ -63,10 +65,10 @@
 
 // export default Success;
 
-
+//chat
 import React, { useState, useEffect } from "react";
 import authService from "../../services/auth.service.js";
-import "./Success.css"; // Importa tu archivo CSS aquí
+import "./Success.css"; 
 
 function Success() {
   const [order, setOrder] = useState({});
@@ -79,12 +81,12 @@ function Success() {
         const queryParams = new URLSearchParams(window.location.search);
         const id = queryParams.get("id");
         console.log("aqui");
-        // Llama a la API para verificar el estado de pago en Stripe
+        
         await authService.api.get(
           process.env.REACT_APP_SERVER_URL + `/api/stripe/checkPayment/${id}`
         );
 
-        // Llama a la API para obtener los detalles de la orden
+        
         const orderRes = await authService.api.get(
           process.env.REACT_APP_SERVER_URL + `/api/orders/orders/${id}`
         );
@@ -126,3 +128,5 @@ function Success() {
 }
 
 export default Success;
+
+
