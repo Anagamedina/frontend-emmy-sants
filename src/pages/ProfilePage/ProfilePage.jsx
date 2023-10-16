@@ -198,11 +198,9 @@
 
 
 
-
 import React, { useState, useEffect } from 'react';
 import authService from "../../services/auth.service";
 import './ProfilePage.css';
-import { Redirect } from 'react-router-dom'; // Asegúrate de importar Redirect si estás utilizando React Router
 
 function ProfilePage() {
   const [orders, setOrders] = useState([]);
@@ -227,55 +225,55 @@ function ProfilePage() {
   // Verificar si el usuario está autenticado
   const isAuthenticated = authService.isAuthenticated();
 
-  if (!isAuthenticated) {
-    // Redirigir al usuario si no está autenticado
-    return <Redirect to="/login" />; // Asegúrate de configurar la ruta de inicio de sesión según tus necesidades
-  }
-
   return (
     <div className="profile-page">
-      <h1>Profile Page</h1>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
+      <h1 className="cardHeader">Profile Page</h1>
+      {isAuthenticated ? (
         <div className="order-list">
           <div className="order-cards">
-            {orders.map((order) => (
-              <div className="order-card" key={order._id}>
-                <div className="order-date">
-                  <strong>Order Date:</strong> {order.createdAt ? new Date(order.createdAt).toLocaleString() : 'N/A'}
-                </div>
-                <div className="order-details">
-                  <h3>Order Details</h3>
-                  <ul>
-                    {order.products.map((productInfo, index) => (
-                      <li key={index}>
-                        <div className="product-info">
-                          {productInfo.product && (
-                            <img
-                              className="product-image"
-                              src={productInfo.product.imagen}
-                              alt={productInfo.product.nombre}
-                            />
-                          )}
-                          <div className="product-name">
-                            {productInfo.amount} x {productInfo.product && productInfo.product.nombre || 'N/A'} (${(productInfo.amount * (productInfo.product && productInfo.product.precio || 0))})
+            {loading ? (
+              <p>Loading...</p>
+            ) : (
+              orders.map((order) => (
+                <div className="order-card card" key={order._id}>
+                  <div className="order-date">
+                    <strong>Order Date:</strong> {order.createdAt ? new Date(order.createdAt).toLocaleString() : 'N/A'}
+                  </div>
+                  <div className="order-details">
+                    <h3 className="cardHeader">Order Details</h3>
+                    <ul>
+                      {order.products.map((productInfo, index) => (
+                        <li key={index} className="cardFooter">
+                          <div className="product-info">
+                            {productInfo.product && (
+                              <img
+                                className="product-image"
+                                src={productInfo.product.imagen}
+                                alt={productInfo.product.nombre}
+                              />
+                            )}
+                            <div className="product-name cardFooter">
+                              {productInfo.amount} x {productInfo.product && productInfo.product.nombre || 'N/A'} (${(productInfo.amount * (productInfo.product && productInfo.product.precio || 0))})
+                            </div>
                           </div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="order-total">
+                    <strong className="cardHeader">Total:</strong> ${order.totalAmount || 0}
+                  </div>
                 </div>
-                <div className="order-total">
-                  <strong>Total:</strong> ${order.totalAmount || 0}
-                </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
+      ) : (
+        <p className="cardFooter">Por favor, inicia sesión para ver tu historial de pedidos.</p>
       )}
     </div>
   );
 }
 
 export default ProfilePage;
+
