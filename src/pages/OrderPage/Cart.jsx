@@ -1,12 +1,12 @@
 /*eslint-disable*/
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import authService from "../../services/auth.service";
 import CartIcon from "../../img/Cart";
 import { AuthContext } from "../../context/auth.context";
 import { Link } from "react-router-dom";
 
-import "../../utils/Cart.css"
+import "../../utils/Cart.css";
 
 function Cart() {
   const { user, setCartVisibility, setCartCounter } = useContext(AuthContext);
@@ -47,14 +47,14 @@ function Cart() {
 
   async function createPaymentSession() {
     const backendUrl = process.env.REACT_APP_SERVER_URL;
-    
+
     try {
       const orderResponse = await authService.api.post(
-        `${backendUrl}/api/orders/create` ,
+        `${backendUrl}/api/orders/create`,
         {
           products: productsCart.map((prod) => ({
             product: prod._id,
-            amount: prod.quantity || 0,
+            amount: prod.quantity,
           })),
           totalAmount: totalAmount,
         }
@@ -66,7 +66,7 @@ function Cart() {
           "pk_test_51NworTIamvwN9XVUOROW2KekjqXq8JjSZENPuI9WKEuJ4HWyscjw1G6ZXh8MAPKy9nVXQlFlgak49n8XXJcb5G2F00ucmpwsQE"
         );
 
-        localStorage.setItem("cart","[]")
+        localStorage.setItem("cart", "[]");
         const result = await stripe.redirectToCheckout({
           sessionId: orderResponse.data.strapiID,
         });
@@ -108,25 +108,19 @@ function Cart() {
             <p>Nombre: {prod.nombre}</p>
             <p>Precio: {prod.precio}</p>
             <div className="separated">
-            <input
-              type="number"
-              placeholder="Cantidad"
-              value={prod.quantity || 0}
-              onChange={(e) => handleQuantityChange(prod._id, e.target.value)}
-              style={{ width: "60px" }}
-            />
-            <button
-              className="btn   mas"
-              onClick={() => incrementQuantity(prod._id)}
-            >
-              +
-            </button>
-            <button
-              className="btn   menos"
-              onClick={() => decrementQuantity(prod._id)}
-            >
-              -
-            </button>
+              <input
+                type="number"
+                placeholder="Cantidad"
+                value={prod.quantity || 0}
+                onChange={(e) => handleQuantityChange(prod._id, e.target.value)}
+                style={{ width: "60px" }}
+              />
+              <button className="btn mas" onClick={() => incrementQuantity(prod._id)}>
+                +
+              </button>
+              <button className="btn menos" onClick={() => decrementQuantity(prod._id)}>
+                -
+              </button>
             </div>
           </li>
         ))}
@@ -134,18 +128,20 @@ function Cart() {
       <br />
       <p>Total a pagar: {totalAmount || 0} €</p>
       <br />
-      <Link className="btn btn-secondary " to="/">Seguir comprando</Link>
+      <Link
+        className="btn btn-secondary"
+        to="/"
+        onClick={() => setCartVisibility(false)} // Cierra la barra del carrito al hacer clic en "Seguir comprando"
+      >
+        Seguir comprando
+      </Link>
       <br />
       <br />
 
       {user && (
-        <input
-          onClick={() => createPaymentSession()}
-          type="button"
-          value="Pagar"
-        />
+        <input onClick={() => createPaymentSession()} type="button" value="Pagar" />
       )}
-      {!user && <p> Por favor, registrate o inicia sesión para realizar tu pedido.</p>}
+      {!user && <p> Por favor, regístrate o inicia sesión para realizar tu pedido.</p>}
     </div>
   );
 }

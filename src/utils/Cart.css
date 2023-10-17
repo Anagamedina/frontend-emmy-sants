@@ -27,7 +27,8 @@
     position: fixed;
     right: 0px;
     top: 0px;
-  
+    max-height: 95vh; /* Ajusta el valor según tus necesidades */
+    overflow-y: auto;
     z-index: 1001;
   }
   
@@ -77,3 +78,5 @@
     height: 100%;
     display: block;
   }
+
+  

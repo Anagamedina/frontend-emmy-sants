@@ -27,17 +27,6 @@ function UserPlantasDetailsPage() {
       carrito = JSON.parse(cardLS)
     } 
 
-  //   const existingProduct = carrito.find((p) => p._id === prod._id); 
-  //   if (existingProduct) {
-  //     // Si el producto ya está en el carrito, lo eliminamos
-  //     carrito = carrito.filter((p) => p._id !== prod._id);
-  //   } else {
-  //     // Si el producto no está en el carrito, lo agregamos
-  //     carrito.push(prod);
-  //   } 
-  //   localStorage.setItem("cart", JSON.stringify(carrito));
-  //   isAddedToCart(); // Actualiza el estado del botón
-  // };
   prod.quantity = 1
   //comprobar si hay como minimo un prod, y comprobar si nohay  duplicados
     if( carrito.length === 0 || carrito.find(p=>p._id !== prod._id))  {
