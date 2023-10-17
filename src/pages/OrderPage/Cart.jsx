@@ -46,11 +46,11 @@ function Cart() {
   }
 
   async function createPaymentSession() {
-    const backendUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
+    const backendUrl = process.env.REACT_APP_SERVER_URL;
     
     try {
       const orderResponse = await authService.api.post(
-        `${backendUrl}/api/orders/create/` ,
+        `${backendUrl}/api/orders/create` ,
         {
           products: productsCart.map((prod) => ({
             product: prod._id,

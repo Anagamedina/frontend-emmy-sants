@@ -10,7 +10,6 @@ import plantas from '../../img/plantas.png';
 
 function UserPlantasDetailsPage() {
   const { id } = useParams();
-  
 
   const { setCartVisibility } = useContext(AuthContext);
 
@@ -20,13 +19,49 @@ function UserPlantasDetailsPage() {
   const [plantInfoLoaded, setPlantInfoLoaded] = useState(false);
   const [isAddedToCardVal, setIsAddedToCardVal] = useState(false);
 
-  const addToCart = (prod) => {
-    // Resto del código para agregar al carrito
-  };
+  const addToCart=(prod)=>{
+    let carrito = [] 
 
-  const isAddedToCard = (prod) => {
-    // Resto del código para verificar si está en el carrito
-  };
+    let cardLS = localStorage.getItem("cart")
+    if(cardLS != null){
+      carrito = JSON.parse(cardLS)
+    } 
+
+  //   const existingProduct = carrito.find((p) => p._id === prod._id); 
+  //   if (existingProduct) {
+  //     // Si el producto ya está en el carrito, lo eliminamos
+  //     carrito = carrito.filter((p) => p._id !== prod._id);
+  //   } else {
+  //     // Si el producto no está en el carrito, lo agregamos
+  //     carrito.push(prod);
+  //   } 
+  //   localStorage.setItem("cart", JSON.stringify(carrito));
+  //   isAddedToCart(); // Actualiza el estado del botón
+  // };
+  prod.quantity = 1
+  //comprobar si hay como minimo un prod, y comprobar si nohay  duplicados
+    if( carrito.length === 0 || carrito.find(p=>p._id !== prod._id))  {
+      carrito.push(prod) 
+    } 
+    
+    localStorage.setItem("cart", JSON.stringify(carrito))
+    // isAddedToCard()
+    setCartVisibility(true)
+    setIsAddedToCardVal(true)
+  }
+
+
+
+  ///verifique si el producto actual está en el carrito:
+  const isAddedToCard=(prod)=>{
+    let carrito = [] 
+
+    let cardLS = localStorage.getItem("cart")
+    if(cardLS != null){
+      carrito = JSON.parse(cardLS)
+    } 
+    setIsAddedToCardVal(carrito.find(p=>p._id === id))  //setIsAddedToCardVal(carrito.some((p) => p._id === id));
+  }
 
   const checkStock = () => {
     const backendUrl = 'http://localhost:5005';
@@ -110,7 +145,7 @@ function UserPlantasDetailsPage() {
               </Button>
               <Button
                 className='btn btn-success m-2 text-light'
-                disabled={isAddedToCardVal || !hasStock}
+                disabled={isAddedToCardVal}
                 onClick={() => addToCart(selectedProduct)}
                 variant="info"
               >

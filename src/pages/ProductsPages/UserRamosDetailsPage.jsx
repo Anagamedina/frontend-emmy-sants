@@ -14,9 +14,7 @@ function UserRamosDetailsPage() {
 
   const [selectedProduct, setSelectedProduct] = useState({});
   const [isAddedToCardVal, setIsAddedToCardVal] = useState(false);
-  const [hasStock, setHasStock] = useState(false);
 
-  //Esta función verifica si el producto actual ya está en el carrito.
   const addToCart=(prod)=>{
     let carrito = [] 
 
@@ -63,21 +61,16 @@ function UserRamosDetailsPage() {
 
 
   const checkStock = () => {
-    const backendUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
+    const backendUrl = 'http://localhost:5005';
     axios
       .get(`${backendUrl}/api/products/${id}/storage`)
       .then((response) => {
         const stockAmount = response.data.amount;
         if (stockAmount <= 0) {
-          setHasStock(false);
+          setIsAddedToCardVal(true);
         } else {
-          setHasStock(true);
+          setIsAddedToCardVal(false);
         }
-        // if (stockAmount === 0) {
-        //   setIsAddedToCardVal(true);
-        // } else {
-        //   setIsAddedToCardVal(false);
-        // }
       })
       .catch((error) => {
         console.error('Error al obtener información de stock:', error);
@@ -86,7 +79,7 @@ function UserRamosDetailsPage() {
 
   useEffect(() => {
     checkStock();
-    const backendUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
+    const backendUrl = 'http://localhost:5005';
     authService.api
       .get(`${backendUrl}/api/products/${id}`)
       .then((response) => {
@@ -122,13 +115,13 @@ function UserRamosDetailsPage() {
               </Button>
               <Button
                 className='btn btn-success m-2 text-light'
-                disabled={isAddedToCardVal || !hasStock}
+                disabled={isAddedToCardVal}
                 onClick={() => addToCart(selectedProduct)}
                 variant="info"
               >
                 Añadir al carrito
               </Button>
-              {!hasStock && (
+              {isAddedToCardVal && (
                 <span style={{ color: 'red' }}>Sin Stock</span>
               )}
             </Card.Body>
