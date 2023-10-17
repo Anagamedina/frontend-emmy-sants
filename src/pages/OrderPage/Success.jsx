@@ -1,5 +1,5 @@
+/* eslint-disable*/
 import React, { useState, useEffect } from "react";
-import authService from "../../services/auth.service";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -82,7 +82,7 @@ function Success() {
           <p>{error}</p>
         ) : (
           <div>
-            <h2 className="text-center">Su transacción ha sido exitosa</h2>
+            <h2 className="text-center">¡Su transacción ha sido exitosa!</h2>
             <h4 className="text-center">Detalles de la orden</h4>
             <p className="text-center">Estado: {order.state}</p>
             <p className="text-center">ID de la orden: {order._id}</p>
