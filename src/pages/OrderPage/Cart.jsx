@@ -51,12 +51,12 @@ function Cart() {
 
     try {
       const orderResponse = await authService.api.post(
-        // `${backendUrl}/api/orders/create/` ,
         `${backendUrl}/api/orders/create` ,
         {
           products: productsCart.map((prod) => ({
             product: prod._id,
-            amount: prod.quantity || 0,
+            // amount: prod.quantity || 0,
+            amount: prod.quantity,
           })),
           totalAmount: totalAmount,
         }
@@ -68,7 +68,7 @@ function Cart() {
           "pk_test_51NworTIamvwN9XVUOROW2KekjqXq8JjSZENPuI9WKEuJ4HWyscjw1G6ZXh8MAPKy9nVXQlFlgak49n8XXJcb5G2F00ucmpwsQE"
         );
 
-        localStorage.setItem("cart","[]")
+        localStorage.setItem("cart", "[]");
         const result = await stripe.redirectToCheckout({
           sessionId: orderResponse.data.strapiID,
         });
@@ -111,24 +111,18 @@ function Cart() {
             <p>Precio: {prod.precio}</p>
             <div className="separated">
             <input
-              type="number"
-              placeholder="Cantidad"
-              value={prod.quantity || 0}
-              onChange={(e) => handleQuantityChange(prod._id, e.target.value)}
-              style={{ width: "60px" }}
-            />
-            <button
-              className="btn   mas"
-              onClick={() => incrementQuantity(prod._id)}
-            >
-              +
-            </button>
-            <button
-              className="btn   menos"
-              onClick={() => decrementQuantity(prod._id)}
-            >
-              -
-            </button>
+                type="number"
+                placeholder="Cantidad"
+                value={prod.quantity || 0}
+                onChange={(e) => handleQuantityChange(prod._id, e.target.value)}
+                style={{ width: "60px" }}
+              />
+              <button className="btn mas" onClick={() => incrementQuantity(prod._id)}>
+                +
+              </button>
+              <button className="btn menos" onClick={() => decrementQuantity(prod._id)}>
+                -
+              </button>
             </div>
           </li>
         ))}
@@ -136,7 +130,13 @@ function Cart() {
       <br />
       <p>Total a pagar: {totalAmount || 0} €</p>
       <br />
-      <Link className="btn btn-secondary " to="/">Seguir comprando</Link>
+      <Link
+        className="btn btn-secondary"
+        to="/"
+        onClick={() => setCartVisibility(false)} // Cierra la barra del carrito al hacer clic en "Seguir comprando"
+      >
+        Seguir comprando
+      </Link>
       <br />
       <br />
 
@@ -147,7 +147,7 @@ function Cart() {
           value="Pagar"
         />
       )}
-      {!user && <p> Por favor, registrate o inicia sesión para realizar tu pedido.</p>}
+      {!user && <p> Por favor, regístrate o inicia sesión para realizar tu pedido.</p>}
     </div>
   );
 }
