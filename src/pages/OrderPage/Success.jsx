@@ -235,9 +235,9 @@ function Success() {
                       <Card.Text>
                         Cantidad: {product.amount}
                         <br />
-                        Precio Unitario: ${productsInfo[index].precio}
+                        Precio Unitario: {productsInfo[index].precio}€
                         <br />
-                        Total del Producto: ${calculateProductTotal(product, productsInfo[index])}
+                        Total del Producto: {calculateProductTotal(product, productsInfo[index])}€
                       </Card.Text>
                     </Card.Body>
                   </Card>
