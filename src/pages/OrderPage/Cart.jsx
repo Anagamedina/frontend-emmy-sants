@@ -108,7 +108,7 @@ function Cart() {
               x
             </span>
             <p>Nombre: {prod.nombre}</p>
-            <p>Precio: {prod.precio}</p>
+            <p>Precio: {prod.precio}€</p>
             <div className="separated">
             <input
                 type="number"

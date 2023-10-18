@@ -245,7 +245,7 @@ function Success() {
               ))}
             </Row>
             <br />
-            <h3 className="text-center">Precio Total de la Orden: ${calculateTotalPrice(order.products, productsInfo)}</h3>
+            <h3 className="text-center">Precio Total de la Orden: {calculateTotalPrice(order.products, productsInfo)}€</h3>
           </div>
         )}
       </Container>
