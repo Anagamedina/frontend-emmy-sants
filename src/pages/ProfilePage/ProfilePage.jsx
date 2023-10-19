@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 import React, { useState, useEffect } from 'react';
 import authService from "../../services/auth.service";
 import { Link } from "react-router-dom"; // Agrega el import para el componente Link
@@ -39,41 +41,62 @@ function ProfilePage() {
       <h1>Profile Page</h1>
 
       {loading ? (
-  <p>Loading...</p>
-) : (
-  <Row className="justify-content-center">
-    {/* Mapear a través de la lista de pedidos */}
-    {orders.map((order) => (
-      <Col key={order._id} sm={12} md={4} lg={3} xl={3} className="mb-3">
-        <Card className="card h-100 bg-white rounded">
-          <Card.Header className='cardHeader' >
-            {/* Mostrar la fecha del pedido */}
-          </Card.Header>
-          <Card.Body className='cardBody' >
-            <Card.Title className='cardTitle' >Pedido</Card.Title>
-            <ul>
-              {/* Mapear a través de los productos en el pedido */}
-              {order.products.map((productInfo, index) => (
-                <li key={index}>
-                  <div className="product-info">
-                    {/* Mostrar información del producto */}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </Card.Body>
-          <Card.Footer className='cardFooter' >
-            {/* Mostrar el total del pedido y el estado del pedido */}
-          </Card.Footer>
-        </Card>
-      </Col>
-    ))}
-  </Row>
-)}
+        <p>Loading...</p>
+      ) : (
+        <Row className="justify-content-center">
+          {orders.map((order) => (
+            <Col key={order._id} sm={12} md={4} lg={3} xl={3} className="mb-3">
+              <Card className="card h-100 bg-white rounded">
+                <Card.Header className='cardHeader' >
+                  <strong>Fecha del Pedido:<br/></strong> {order.createdAt ? new Date(order.createdAt).toLocaleString() : 'N/A'}
+                </Card.Header>
+                <Card.Body className='cardBody' >
+                  <Card.Title className='cardTitle' >Pedido</Card.Title>
+                  <ul>
+                    {order.products.map((productInfo, index) => (
+                      <li key={index}>
+                        <div className="product-info">
+                          {productInfo.product && (
+                            <Link to={`/product/plantas/${productInfo.product._id}`}> 
+                              <img
+                                className="product-image"
+                                src={productInfo.product.imagen}
+                                alt={productInfo.product.nombre}
+                              />
+                            </Link>
+                          )}
+                          <div className="product-name">
+                            {productInfo.amount} x{' '}
+                            {productInfo.product && (
+                              <Link to={`/product/plantas/${productInfo.product._id}`}>
+                                <span style={{ textDecoration: 'none', color: '#4abcf1' }}>{productInfo.product.nombre}</span>
+                              </Link>
+                            ) || 'N/A'} 
+                          </div>
+                          <div className="product-price">
+                            Precio por unidad: {productInfo.product && productInfo.product.precio || 0}€
+                          </div>
+                          <div className="product-total">
+                            Total: {productInfo.amount * (productInfo.product && productInfo.product.precio || 0)}€
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </Card.Body>
+                <Card.Footer className='cardFooter' >
+                  <strong>Total Pedido:</strong> {order.totalAmount || 0}€
+                  <br />
+                  <strong>Estado del Pedido:</strong> {order.state || 'N/A'}
+                </Card.Footer>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
     </div>
   );
 }
 
 export default ProfilePage;
-
 
