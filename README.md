@@ -24,7 +24,7 @@ We've implemented a robust and user-friendly control panel for the florist owner
 
 ## Deployment
 
-You can check the app fully deployed [here]([(https://floristeriaemmysants.netlify.app)]). If you wish to view the API deployment instead, check [here](link-to-api-deployment).
+You can check the app fully deployed [here](https://floristeriaemmysants.netlify.app). If you wish to view the API deployment instead, check [here](link-to-api-deployment).
 
 ## Work Structure
 
