@@ -1,4 +1,4 @@
-/* eslint-disable*/
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
@@ -54,7 +54,11 @@ function Success() {
 
         setOrder(orderData);
         setLoading(false);
-        setShowConfetti(true); // Mostrar el efecto de confeti al cargar los detalles de la orden
+        setShowConfetti(true); 
+
+        setTimeout(() => {
+          setShowConfetti(false); 
+        }, 11000); 
       } catch (error) {
         setError(error.message);
         setLoading(false);

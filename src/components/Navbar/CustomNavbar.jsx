@@ -19,8 +19,10 @@ function CustomNavbar() {
     <div className="content">
       <Navbar bg="rgb(206, 139, 189)" expand="lg" expanded={expanded} className={`nav ${expanded ? 'expanded' : ''}`}>
         <Navbar.Brand className="logo">
-          <img src={logo} alt="Logo Emmy Sants" />
-        </Navbar.Brand>
+          <Link to="/"> {/* Esto hace que el logo sea un enlace a la ruta / */}
+            <img src={logo} alt="Logo Emmy Sants" />
+         </Link>
+      </Navbar.Brand>
         <Navbar.Toggle
           className="navToggle"
           aria-controls="basic-navbar-nav"
