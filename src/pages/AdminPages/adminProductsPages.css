@@ -1,0 +1,23 @@
+.contentProducts {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+
+.modal-content{
+    align-items: center;
+    justify-content: center;
+    width: 900px !important;
+}
+.modal-dialog {
+    margin-right: 40% !important;
+
+}
+
+.message-container {
+    margin-top: 300px;
+}
+input.form-control::placeholder {
+    color: #c7c2c2; 
+    font-style: italic;
+  }

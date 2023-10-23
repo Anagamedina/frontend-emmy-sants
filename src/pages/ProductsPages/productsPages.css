@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
+
+
+.contentProducts {
+    margin-bottom: 30px;
+}
+
+.contentProducts h1 {
+    font-family: 'Playball', cursive;
+    font-size: 5rem;
+}
+.modal-content{
+    align-items: center;
+    justify-content: center;
+    width: 900px !important;
+}
+.modal-dialog {
+    margin-right: 40% !important;
+
+}
+
+.botonInfoAdicional {
+    color: white;
+
+}
+
+a:link, a:visited, a:active {
+    color: white;
+    text-decoration:none;
+  }
+
+.plantaInfo {
+    padding: 15px;
+    text-align: justify;
+    margin-top: 10px;
+}
+
+.nameProduct {
+    font-size: 2rem;
+
+}

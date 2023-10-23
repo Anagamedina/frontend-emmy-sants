@@ -1,0 +1,50 @@
+.loginText {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.buttonSignup {
+  background-color:rgb(206, 139, 189); ;
+  margin-top: 20px;
+}
+::placeholder {
+  color: #d8d5d5; 
+}
+
+
+#formBasicName::placeholder {
+  color: #d8d5d5; 
+}
+
+#formBasicEmail::placeholder {
+  color: #d8d5d5;
+}
+
+#formBasicPassword::placeholder {
+  color: #d8d5d5;
+}
+
+#formBasicConfirmPassword::placeholder {
+  color: #d8d5d5; 
+}
+
+.cardLoginForm {
+  background-color: white;
+  padding: 20px 50px 20px 50px;
+  box-shadow: 3px 3px 35px rgb(212, 210, 210);
+  margin-bottom: 20px;
+
+}
+
+.linkSignup:hover {
+  color: #0056b3;
+  
+}
+
+
+.linkSignupText {
+  margin-top: 20px;
+}
+
+#linkSignup {
+  color:#49a6ed;
+}
