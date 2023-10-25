@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useState } from 'react';
 import { Container, Row, Col, Alert } from 'react-bootstrap';
 import authService from '../../services/auth.service.js'; 

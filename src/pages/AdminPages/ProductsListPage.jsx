@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom'; 
@@ -28,7 +29,7 @@ function ProductsListPage() {
           response.data.map(prod =>  
             prod.imagen = prod.imagen.replace("/upload","/upload/w_250")
            )
-        setProducts(response.data);
+           setProducts([...response.data, ...products]);
       })
       .catch((error) => {
         console.error('Error:', error);

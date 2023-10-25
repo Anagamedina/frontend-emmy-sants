@@ -10,14 +10,11 @@ function PlantasPage() {
 
   useEffect(() => {
     const axiosProducts = () => {
-      const backendUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
+      const backendUrl = 'http://localhost:5005';
 
       axios
         .get(`${backendUrl}/api/products`)
         .then((response) => {
-          response.data.map(prod =>  
-            prod.imagen = prod.imagen.replace("/upload","/upload/w_250")
-           )
           const allProducts = response.data;
           const plantProducts = getPlantProducts(allProducts);
           setPlantProducts(plantProducts);
@@ -72,7 +69,7 @@ function PlantasPage() {
                   <div className='m-2'>
                   
                   <h6
-                    className={`text-lightx btn btn-outline-${stockInfo[product._id] > 0 ? 'success' : 'secondary'} d-inline p-1 m-2 bgx-${stockInfo[product._id] > 0 ? 'success' : 'secondary'}`}
+                    className={`text-lightx btn btn-outline-${stockInfo[product._id] > 0 ? 'success' : 'btn btn-danger'} d-inline p-1 m-2 bgx-${stockInfo[product._id] > 0 ? 'success' : 'secondary'}`}
                   >
                     {stockInfo[product._id] > 0 ? 'En Stock' : 'Sin Stock'}
                   </h6>

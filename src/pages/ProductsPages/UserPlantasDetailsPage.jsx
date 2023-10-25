@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, Card, Button, Row, Col, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -10,18 +11,15 @@ import plantas from '../../img/plantas.png';
 
 function UserPlantasDetailsPage() {
   const { id } = useParams();
-  
 
-  const { showCart, setCartVisibility } = useContext(AuthContext);
+  const { setCartVisibility } = useContext(AuthContext);
 
   const [selectedProduct, setSelectedProduct] = useState({});
   const [plantInfo, setPlantInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [plantInfoLoaded, setPlantInfoLoaded] = useState(false);
   const [isAddedToCardVal, setIsAddedToCardVal] = useState(false);
-  const [hasStock, setHasStock] = useState(false);
 
-  //Esta función verifica si el producto actual ya está en el carrito.
   const addToCart=(prod)=>{
     let carrito = [] 
 
@@ -30,17 +28,6 @@ function UserPlantasDetailsPage() {
       carrito = JSON.parse(cardLS)
     } 
 
-  //   const existingProduct = carrito.find((p) => p._id === prod._id); 
-  //   if (existingProduct) {
-  //     // Si el producto ya está en el carrito, lo eliminamos
-  //     carrito = carrito.filter((p) => p._id !== prod._id);
-  //   } else {
-  //     // Si el producto no está en el carrito, lo agregamos
-  //     carrito.push(prod);
-  //   } 
-  //   localStorage.setItem("cart", JSON.stringify(carrito));
-  //   isAddedToCart(); // Actualiza el estado del botón
-  // };
   prod.quantity = 1
   //comprobar si hay como minimo un prod, y comprobar si nohay  duplicados
     if( carrito.length === 0 || carrito.find(p=>p._id !== prod._id))  {
@@ -66,18 +53,16 @@ function UserPlantasDetailsPage() {
     setIsAddedToCardVal(carrito.find(p=>p._id === id))  //setIsAddedToCardVal(carrito.some((p) => p._id === id));
   }
 
-
   const checkStock = () => {
-    const backendUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
+    const backendUrl = 'http://localhost:5005';
     axios
       .get(`${backendUrl}/api/products/${id}/storage`)
       .then((response) => {
         const stockAmount = response.data.amount;
-        console.log("stockis",stockAmount);
         if (stockAmount <= 0) {
-          setHasStock(false);
+          setIsAddedToCardVal(true);
         } else {
-          setHasStock(true);
+          setIsAddedToCardVal(false);
         }
       })
       .catch((error) => {
@@ -86,7 +71,7 @@ function UserPlantasDetailsPage() {
   };
 
   const plantInfoInApi = (productName) => {
-    const backendUrl =process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
+    const backendUrl = 'http://localhost:5005';
 
     const prompt = `Dame sobre la siguiente planta: ${selectedProduct.nombre}. Dame la siguiente información: Nombre común. Punto. Nombre cientifico. Características, listado de cuidados que debe tener, cantidad de agua que debe darsele en determinado periodo de tiempo, si es de sol o sombra.`;
 
@@ -114,7 +99,7 @@ function UserPlantasDetailsPage() {
   useEffect(() => {
     isAddedToCard();
     checkStock();
-    const backendUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
+    const backendUrl = 'http://localhost:5005';
     authService.api
       .get(`${backendUrl}/api/products/${id}`)
       .then((response) => {
@@ -124,10 +109,6 @@ function UserPlantasDetailsPage() {
         console.error('Error:', error);
       });
   }, [id]);
-
-  useEffect(() => {
-    isAddedToCard(selectedProduct)
-  }, [showCart]);
 
   return (
     <Container className="contentProducts">
@@ -153,16 +134,14 @@ function UserPlantasDetailsPage() {
                 <Link to={`/plantas`}>volver</Link>
               </Button>
               <Button
-                className='btn btn-success m-2 text-light'
-                disabled={isAddedToCardVal || !hasStock}
+                className={`btn m-2 text-light ${isAddedToCardVal ? 'btn-secondary disabled' : 'btn-info'}`}
+                disabled={isAddedToCardVal}
                 onClick={() => addToCart(selectedProduct)}
-                variant="info"
               >
-                Añadir al carrito
+                {isAddedToCardVal ? 'Sin Stock' : 'Añadir al carrito'}
               </Button>
-              {!hasStock && (
-                <span style={{ color: 'red' }}>Sin Stock</span>
-              )}
+
+
             </Card.Body>
           </Card>
 
