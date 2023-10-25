@@ -70,8 +70,6 @@ function ProfilePage() {
                   </ul>
                 </Card.Body>
                 <Card.Footer className="cardFooter">
-                  <strong>Total Pedido:</strong> {order.totalAmount || 0}€
-                  <br />
                   <strong>Estado del Pedido:</strong> {order.state || 'N/A'}
                 </Card.Footer>
               </Card>
