@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, Card, Button, Row, Col, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -29,7 +28,7 @@ function UserPlantasDetailsPage() {
     } 
 
   prod.quantity = 1
-  //comprobar si hay como minimo un prod, y comprobar si nohay  duplicados
+  
     if( carrito.length === 0 || carrito.find(p=>p._id !== prod._id))  {
       carrito.push(prod) 
     } 
