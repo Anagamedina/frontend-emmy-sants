@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
@@ -10,7 +11,7 @@ function RamosPage() {
 
   useEffect(() => {
     const axiosProducts = () => {
-      const backendUrl = 'http://localhost:5005';
+      const backendUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
       axios
         .get(`${backendUrl}/api/products`)
