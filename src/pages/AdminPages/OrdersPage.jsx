@@ -13,8 +13,9 @@ function OrdersPage() {
       .get(`${backendUrl}/api/orders`)
       .then((response) => {
         console.log(response);
-        setOrders(response.data);
-        setTotalOrders(response.data.length);
+        const sortedOrders = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setOrders(sortedOrders);
+        setTotalOrders(sortedOrders.length);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -32,7 +33,7 @@ function OrdersPage() {
       <h2 className='titleOrders'>Número de Pedidos: {totalOrders}</h2>
       <Row>
         {orders.map((order, i) => (
-          <Col key={i} xs={12} lg={3}>
+          <Col key={i} xs={12} lg={2}>
             <Card style={{ width: '100%' }}>
               <Card.Body className='cardBodyOrder'>
                 <Card.Title>
@@ -46,8 +47,8 @@ function OrdersPage() {
                   <hr></hr>
                   Fecha de Creación: <br />{order.createdAt ? new Date(order.createdAt).toLocaleString() : "Fecha no disponible"}
                   <hr></hr>
-                  StrapiID: <p className='strapiFont' >{order.strapiID ? order.strapiID : "Nombre no disponible"}</p>
-                  <hr></hr>
+                  {/* StrapiID: <p className='strapiFont' >{order.strapiID ? order.strapiID : "Nombre no disponible"}</p>
+                  <hr></hr> */}
                   Total Compra: {calculateTotalPrice(order.products)}€
                 </Card.Text>
                 <ul className="list-group list-group-flush">
@@ -67,6 +68,7 @@ function OrdersPage() {
                         src={productInfo.product ? productInfo.product.imagen : ""}
                         alt={productInfo.product ? productInfo.product.nombre : "Imagen no disponible"}
                         className="img-fluid"
+                        style={{ width: '50%' }} // Reducir el tamaño de la imagen
                       />
                     </li>
                   ))}
