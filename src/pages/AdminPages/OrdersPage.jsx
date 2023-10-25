@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Card } from 'react-bootstrap';
@@ -8,7 +9,7 @@ function OrdersPage() {
   const [totalOrders, setTotalOrders] = useState(0);
 
   const axiosOrders = () => {
-    const backendUrl = 'http://localhost:5005';
+    const backendUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
     axios
       .get(`${backendUrl}/api/orders`)
       .then((response) => {
