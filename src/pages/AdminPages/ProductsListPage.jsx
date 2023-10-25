@@ -29,7 +29,7 @@ function ProductsListPage() {
           response.data.map(prod =>  
             prod.imagen = prod.imagen.replace("/upload","/upload/w_250")
            )
-           setProducts([...response.data, ...products]);
+           setProducts(response.data.reverse());
       })
       .catch((error) => {
         console.error('Error:', error);
