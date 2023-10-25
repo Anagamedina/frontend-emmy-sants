@@ -69,7 +69,7 @@ function PlantasPage() {
                   <div className='m-2'>
                   
                   <h6
-                    className={`text-lightx btn btn-outline-${stockInfo[product._id] > 0 ? 'success' : 'secondary'} d-inline p-1 m-2 bgx-${stockInfo[product._id] > 0 ? 'success' : 'secondary'}`}
+                    className={`text-lightx btn btn-outline-${stockInfo[product._id] > 0 ? 'success' : 'btn btn-danger'} d-inline p-1 m-2 bgx-${stockInfo[product._id] > 0 ? 'success' : 'secondary'}`}
                   >
                     {stockInfo[product._id] > 0 ? 'En Stock' : 'Sin Stock'}
                   </h6>

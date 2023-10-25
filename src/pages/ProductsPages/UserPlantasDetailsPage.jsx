@@ -133,16 +133,14 @@ function UserPlantasDetailsPage() {
                 <Link to={`/plantas`}>volver</Link>
               </Button>
               <Button
-                className='btn btn-success m-2 text-light'
+                className={`btn m-2 text-light ${isAddedToCardVal ? 'btn-secondary disabled' : 'btn-info'}`}
                 disabled={isAddedToCardVal}
                 onClick={() => addToCart(selectedProduct)}
-                variant="info"
               >
-                Añadir al carrito
+                {isAddedToCardVal ? 'Sin Stock' : 'Añadir al carrito'}
               </Button>
-              {isAddedToCardVal && (
-                <span style={{ color: 'red' }}>Sin Stock</span>
-              )}
+
+
             </Card.Body>
           </Card>
 
